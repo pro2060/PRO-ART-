@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>منتجات أخرى - PRO ART</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background-color: #42EBCB;
+      color: #333;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 15px;
+      background: #B3FFF0;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #5d4037;
+      font-size: 32px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .product {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .product:hover {
+      transform: translateY(-5px);
+    }
+    .product img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 15px;
+    }
+    .product h3 {
+      margin-bottom: 10px;
+      color: #5d4037;
+    }
+    .description {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    select, input {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+    .price {
+      font-weight: bold;
+      color: #e67e22;
+      margin: 8px 0;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #EDEDED;
+      color: #000000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #00FFF8;
+    }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background: #4CAF50;
+      color: white;
+      text-decoration: none;
+      width: fit-content;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>منتجات أخرى - PRO ART</h1>
+  <p>عرض مميز لأول منتجين من مجموعتنا</p>
+</header>
+
+<div class="products" id="productsContainer">
+  <!-- سيتم ملؤه بالجافاسكريبت -->
+</div>
+
+<a href="index.html" class="back-link">العودة إلى الصفحة الرئيسية</a>
+
+<script>
+  // نفس بيانات المنتجات (يمكنك استيرادها لاحقًا من ملف منفصل)
+  const products = [
+    {
+      id: 29,
+      name: "تابلوه مودرن فرووعوفازات بالوان روعه ",
+      description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
+      image: "./29.jpg",
+      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+    },
+
+ {
+      id: 31,
+      name: "تابلوه اسلامى مودرن وظنى فيك ياربى جميل  ",
+      description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
+      image: "./31.jpg",
+      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+    },
+
+ {
+      id: 32,
+      name: "تابلوه اسلامى مودرن اية الكرسى  ",
+      description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
+      image: "./32.jpg",
+      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+    },
+
+
+    
+    {
+        
+      id: 30,
+      name: "تابلوه مودرن ورده بيضاء مميزه ",
+      description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
+      image: "./30.jpg",
+      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+    }
+  ];
+
+  function renderProducts() {
+    const container = document.getElementById('productsContainer');
+    container.innerHTML = products.map(p => `
+      <div class="product">
+        <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/280x220?text=No+Image'">
+        <div class="product-info">
+          <h3>${p.name}</h3>
+          <p class="description">${p.description}</p>
+          <select class="size" id="size-${p.id}">
+            <option value="30x40">30×40 سم - ${p.prices["30x40"]} ج</option>
+            <option value="60x80">60×80 سم - ${p.prices["60x80"]} ج</option>
+            <option value="60x40">60×40 سم - ${p.prices["60x40"]} ج</option>
+          </select>
+          <select class="frame" id="frame-${p.id}">
+            <option value="بني طبيعي">إطار بني طبيعي</option>
+            <option value="أسود">إطار أسود</option>
+            <option value="أبيض">إطار أبيض</option>
+          </select>
+          <div class="price">السعر: <span id="price-${p.id}">${p.prices["30x40"]}</span> جنيه</div>
+          <button onclick="alert('هذه الميزة متاحة فقط في الصفحة الرئيسية حالياً')">إضافة للسلة</button>
+        </div>
+      </div>
+    `).join('');
+
+    // تحديث السعر عند تغيير المقاس
+    products.forEach(p => {
+      const sizeSelect = document.getElementById(`size-${p.id}`);
+      const priceSpan = document.getElementById(`price-${p.id}`);
+      sizeSelect.addEventListener('change', () => {
+        const size = sizeSelect.value;
+        priceSpan.textContent = p.prices[size];
+      });
+    });
+  }
+
+  window.onload = renderProducts;
+</script>
+
+</body>
+</html>

@@ -28,6 +28,8 @@
       color: #5d4037;
       font-size: 32px;
     }
+
+    
     .cart-icon {
       position: fixed;
       top: 50px;
@@ -167,7 +169,7 @@
 
 <header>
  <h1>PRO ART FOR DECOR</h1>
-  <p>متجر تابلوهات فنية 012 </p>
+  <p>متجر تابلوهات فنية 01276593304 </p>
 </header>
 
 <div class="products" id="productsContainer">
@@ -528,5 +530,64 @@
   };
 </script>
 
+
+<!-- قسم المعلومات والروابط -->
+<div style="text-align: center; margin-top: 40px; padding: 20px; background: #f0f0f0; border-radius: 12px; max-width: 800px; margin-left: auto; margin-right: auto;">
+  <h3>تواصل معنا</h3>
+  <p>البريد الإلكتروني: <a href="mailto:proart4decor@gmail.com">proart4decor@gmail.com</a></p>
+  <p>رقم الهاتف: 01276593304</p>
+  
+  <button onclick="window.open('https://wa.me/201276593304', '_blank')" 
+          style="margin: 10px; padding: 10px 20px; background: #25D366; color: white; border: none; border-radius: 6px; cursor: pointer;">
+    اتصل الآن
+  </button>
+
+  <button onclick="openAbout()" 
+          style="margin: 10px; padding: 10px 20px; background: #5d4037; color: white; border: none; border-radius: 6px; cursor: pointer;">
+    من نحن
+  </button>
+
+  <a href="products2.html" 
+     style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #4CAF50; color: white; text-decoration: none; border-radius: 6px;">
+    انتقل إلى صفحة منتجات أخرى
+  </a>
+</div>
+
+<!-- Modal "من نحن" -->
+<div id="aboutModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 3000;">
+  <div style="background: white; width: 90%; max-width: 600px; margin: 100px auto; padding: 30px; border-radius: 12px; text-align: right; direction: rtl;">
+    <h3>من نحن</h3>
+    <p style="font-size: 16px; line-height: 1.6; margin-top: 15px;">
+      شركة برو أرت هى شركة تقوم بتصنيع التابلوهات المودرن بجميع اشكالها واحجامها ونقوم بالتوريد لجميع شركات المقاولات والمكاتب الهندسيه وايضا المدن العمرانيه الجديده
+    </p>
+    <button onclick="closeAbout()" 
+            style="margin-top: 20px; padding: 8px 16px; background: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">
+      إغلاق
+    </button>
+  </div>
+</div>
+
+<script>
+  // فتح وإغلاق نافذة "من نحن"
+  function openAbout() {
+    document.getElementById('aboutModal').style.display = 'block';
+  }
+  function closeAbout() {
+    document.getElementById('aboutModal').style.display = 'none';
+  }
+
+  // إغلاق النافذة عند النقر خارج المحتوى
+  window.onclick = function(event) {
+    const modal = document.getElementById('aboutModal');
+    if (event.target === modal) {
+      closeAbout();
+    }
+    // الحفاظ على وظيفة السلة السابقة
+    const cartModal = document.getElementById('cartModal');
+    if (cartModal && event.target === cartModal) {
+      closeCart();
+    }
+  };
+</script>
 </body>
 </html>
