@@ -189,7 +189,7 @@
   cursor: pointer;
   z-index: 3001;
 }
-  </style>
+  .cart-modal{display:none;position:fixed;inset:0;z-index:2000;background:#0009;padding:18px;overflow:auto}.cart-content{background:white;width:min(100%,540px);margin:5vh auto;padding:20px;border-radius:14px;max-height:90vh;overflow:auto}.cart-item{padding:12px 0;border-bottom:1px solid #ddd;line-height:1.8}.cart-item-controls{display:flex;align-items:center;gap:8px}.cart-item-controls button{width:auto}.close-cart{width:auto;float:inline-start;background:#5d4037;color:white}.total{margin:16px 0;font-weight:bold}#checkoutBtn{background:#25D366;color:white}.product img{height:auto;aspect-ratio:1/1;object-fit:cover}@media(max-width:600px){body{padding:12px}header{margin-top:55px}.cart-icon{top:12px;left:12px}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product-info{padding:10px}.product h3{font-size:16px}.description{font-size:13px}}@media(max-width:360px){.products{grid-template-columns:1fr}}</style>
 </head>
 <body>
 
@@ -433,7 +433,7 @@
     const container = document.getElementById('productsContainer');
     container.innerHTML = products.map(p => `
       <div class="product">
-        <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/280x220?text=No+Image'">
+        <img src="${p.image}" alt="${p.name}" loading="lazy" decoding="async" width="600" height="600">
         <div class="product-info">
           <h3>${p.name}</h3>
           <p class="description">${p.description}</p>
@@ -465,97 +465,7 @@
   }
 
   // إضافة للسلة
-  function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    const size = document.getElementById(`size-${productId}`).value;
-    const frame = document.getElementById(`frame-${productId}`).value;
-    const price = product.prices[size];
-
-    cart.push({ product, size, frame, price, quantity: 1 });
-    updateCartUI();
-    alert('تمت إضافة المنتج إلى السلة!');
-  }
-
-  // تحديث واجهة السلة
-  function updateCartUI() {
-    document.getElementById('cartCount').textContent = cart.length;
-  }
-
-  // فتح سلة التسوق
-  function openCart() {
-    const cartItemsDiv = document.getElementById('cartItems');
-    if (cart.length === 0) {
-      cartItemsDiv.innerHTML = '<p>سلة فارغة</p>';
-      document.getElementById('totalPrice').textContent = '0';
-    } else {
-      let html = '';
-      let total = 0;
-      cart.forEach((item, index) => {
-        const subtotal = item.price * item.quantity;
-        total += subtotal;
-        html += `
-          <div class="cart-item">
-            <strong>${item.product.name}</strong><br>
-            المقاس: ${item.size} | الإطار: ${item.frame}<br>
-            الكمية: ${item.quantity} | السعر: ${item.price} ج<br>
-            الإجمالي الجزئي: ${subtotal} ج
-          </div>
-        `;
-      });
-      cartItemsDiv.innerHTML = html;
-      document.getElementById('totalPrice').textContent = total;
-    }
-    document.getElementById('cartModal').style.display = 'block';
-  }
-
-  // إغلاق السلة
-  function closeCart() {
-    document.getElementById('cartModal').style.display = 'none';
-  }
-
-  // إكمال الطلب عبر واتساب
-  function checkout() {
-    if (cart.length === 0) {
-      alert('السلة فارغة!');
-      return;
-    }
-
-    let message = 'مرحباً، أريد طلب التالي:\n\n';
-    let total = 0;
-
-    cart.forEach(item => {
-      const subtotal = item.price * item.quantity;
-      total += subtotal;
-      message += `• ${item.product.name}\n`;
-      message += `  المقاس: ${item.size} | الإطار: ${item.frame}\n`;
-      message += `  الكمية: ${item.quantity} | سعر الوحدة: ${item.price} ج\n`;
-      message += `  الإجمالي: ${subtotal} ج\n\n`;
-    });
-
-    message += `الإجمالي الكلي: ${total} ج\n`;
-    message += 'شكراً لكم!';
-
-    // تشفير الرسالة لرابط واتساب
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/201276593304?text=${encodedMessage}`;
-    
-    window.open(whatsappUrl, '_blank');
-    closeCart();
-  }
-
-  // إغلاق السلة عند النقر خارجها
-  window.onclick = function(event) {
-    const modal = document.getElementById('cartModal');
-    if (event.target === modal) {
-      closeCart();
-    }
-  }
-
-  // تشغيل عند تحميل الصفحة
-  window.onload = function() {
-    renderProducts();
-    updateCartUI();
-  };
+  window.addEventListener("DOMContentLoaded", renderProducts);
 </script>
 
 
@@ -565,7 +475,7 @@
   <p>البريد الإلكتروني: <a href="mailto:proart4decor@gmail.com">proart4decor@gmail.com</a></p>
   <p>رقم الهاتف: 01276593304</p>
   
-  <button onclick="window.open('https//wa.me/201276593304', '_blank')" 
+  <button onclick="window.open('https://wa.me/201276593304', '_blank')" 
           style="margin: 10px; padding: 10px 20px; background: #25D366; color: white; border: none; border-radius: 6px; cursor: pointer;">
     اتصل الآن
   </button>
@@ -617,5 +527,5 @@
     }
   };
 </script>
-</body>
+<script src="./cart.js"></script></body>
 </html>

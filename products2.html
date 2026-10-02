@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>مجموعة جديدة - PRO ART</title>
+  <title>منتجات أخرى - PRO ART</title>
   <style>
     * {
       box-sizing: border-box;
@@ -101,17 +101,14 @@
       border-radius: 6px;
     }
     
-  </style>
+  .cart-modal{display:none;position:fixed;inset:0;z-index:2000;background:#0009;padding:18px;overflow:auto}.cart-content{background:white;width:min(100%,540px);margin:5vh auto;padding:20px;border-radius:14px;max-height:90vh;overflow:auto}.cart-item{padding:12px 0;border-bottom:1px solid #ddd;line-height:1.8}.cart-item-controls{display:flex;align-items:center;gap:8px}.cart-item-controls button{width:auto}.close-cart{width:auto;float:inline-start;background:#5d4037;color:white}.total{margin:16px 0;font-weight:bold}#checkoutBtn{background:#25D366;color:white}.product img{height:auto;aspect-ratio:1/1;object-fit:cover}@media(max-width:600px){body{padding:12px}header{margin-top:55px}.cart-icon{top:12px;left:12px}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product-info{padding:10px}.product h3{font-size:16px}.description{font-size:13px}}@media(max-width:360px){.products{grid-template-columns:1fr}}</style>
 </head>
 <body>
 
+<div class="cart-icon" onclick="openCart()">🛒 <span id="cartCount">0</span></div><div id="cartModal" class="cart-modal"><section class="cart-content"><button class="close-cart" onclick="closeCart()">إغلاق</button><h2>سلة التسوق</h2><div id="cartItems"></div><p class="total">الإجمالي: <strong id="totalPrice">0</strong> جنيه</p><button id="checkoutBtn" onclick="checkout()">إكمال الطلب عبر واتساب</button></section></div>
 <header>
-  <a href="products3.html" 
-     style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #4CAF50; color: white; text-decoration: none; border-radius: 6px;">
-    انتقل إلى صفحة منتجات أخرى
-  </a>
   <h1>منتجات أخرى - PRO ART</h1>
-  <p> يمكنك الطلب مباشرة عبر واتس اب 01276593304</p>
+  <p>عرض مميز لأول منتجين من مجموعتنا</p>
 </header>
 
 <div class="products" id="productsContainer">
@@ -422,7 +419,7 @@
     const container = document.getElementById('productsContainer');
     container.innerHTML = products.map(p => `
       <div class="product">
-        <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/280x220?text=No+Image'">
+        <img src="${p.image}" alt="${p.name}" loading="lazy" decoding="async" width="600" height="600">
         <div class="product-info">
           <h3>${p.name}</h3>
           <p class="description">${p.description}</p>
@@ -437,7 +434,7 @@
             <option value="أبيض">إطار أبيض</option>
           </select>
           <div class="price">السعر: <span id="price-${p.id}">${p.prices["30x40"]}</span> جنيه</div>
-          <button onclick="alert('هذه الميزة متاحة فقط في الصفحة الرئيسية حالياً')">إضافة للسلة</button>
+          <button onclick="addToCart(${p.id})">إضافة للسلة</button>
         </div>
       </div>
     `).join('');
@@ -446,7 +443,6 @@
     products.forEach(p => {
       const sizeSelect = document.getElementById(`size-${p.id}`);
       const priceSpan = document.getElementById(`price-${p.id}`);
-      if (!sizeSelect || !priceSpan) return;
       sizeSelect.addEventListener('change', () => {
         const size = sizeSelect.value;
         priceSpan.textContent = p.prices[size];
@@ -457,5 +453,5 @@
   window.onload = renderProducts;
 </script>
 
-</body>
+<script src="./cart.js"></script></body>
 </html>
