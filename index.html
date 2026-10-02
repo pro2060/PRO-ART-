@@ -12,7 +12,7 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     body {
-      background-color: #42EBCB;
+      background-color: #f26844;
       color: #333;
       padding: 20px;
     }
@@ -189,11 +189,12 @@
   cursor: pointer;
   z-index: 3001;
 }
-  .cart-modal{display:none;position:fixed;inset:0;z-index:2000;background:#0009;padding:18px;overflow:auto}.cart-content{background:white;width:min(100%,540px);margin:5vh auto;padding:20px;border-radius:14px;max-height:90vh;overflow:auto}.cart-item{padding:12px 0;border-bottom:1px solid #ddd;line-height:1.8}.cart-item-controls{display:flex;align-items:center;gap:8px}.cart-item-controls button{width:auto}.close-cart{width:auto;float:inline-start;background:#5d4037;color:white}.total{margin:16px 0;font-weight:bold}#checkoutBtn{background:#25D366;color:white}.product img{height:auto;aspect-ratio:1/1;object-fit:cover}@media(max-width:600px){body{padding:12px}header{margin-top:55px}.cart-icon{top:12px;left:12px}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product-info{padding:10px}.product h3{font-size:16px}.description{font-size:13px}}@media(max-width:360px){.products{grid-template-columns:1fr}}</style>
+  .cart-modal{display:none;position:fixed;inset:0;z-index:2000;background:#0009;padding:18px;overflow:auto}.cart-content{background:white;width:min(100%,540px);margin:5vh auto;padding:20px;border-radius:14px;max-height:90vh;overflow:auto}.cart-item{padding:12px 0;border-bottom:1px solid #ddd;line-height:1.8}.cart-item-controls{display:flex;align-items:center;gap:8px}.cart-item-controls button{width:auto}.close-cart{width:auto;float:inline-start;background:#5d4037;color:white}.total{margin:16px 0;font-weight:bold}#checkoutBtn{background:#25D366;color:white}.product img{height:auto;aspect-ratio:1/1;object-fit:cover;cursor:zoom-in}@media(max-width:600px){body{padding:12px}header{margin-top:55px}.cart-icon{top:12px;left:12px}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product-info{padding:10px}.product h3{font-size:16px}.description{font-size:13px}}@media(max-width:360px){.products{grid-template-columns:1fr}}</style>
 </head>
 <body>
 
 <div class="cart-icon" onclick="openCart()">🛒 <span id="cartCount">0</span></div>
+
 
 <header>
  <h1>PRO ART FOR DECOR</h1>
@@ -433,7 +434,7 @@
     const container = document.getElementById('productsContainer');
     container.innerHTML = products.map(p => `
       <div class="product">
-        <img src="${p.image}" alt="${p.name}" loading="lazy" decoding="async" width="600" height="600">
+        <img src="${p.image}" alt="${p.name}" loading="lazy" decoding="async" width="600" height="600" tabindex="0" role="button" aria-label="تكبير الصورة" style="cursor: zoom-in">
         <div class="product-info">
           <h3>${p.name}</h3>
           <p class="description">${p.description}</p>
