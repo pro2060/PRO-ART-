@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f26844">
+  <title>إتمام الطلب | PRO ART</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;padding:24px;background:#f26844;color:#342a27;font-family:"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.65}
+    .page{max-width:1050px;margin:0 auto}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px;padding:16px 22px;border-radius:16px;background:#fff8f1;box-shadow:0 4px 16px #5b2e201c}
+    .brand{color:#5d4037;font-size:23px;font-weight:800;letter-spacing:.3px}
+    .back-link{color:#744b3e;font-weight:700;text-decoration:none}
+    h1{margin:0 0 5px;font-size:clamp(26px,4vw,36px);color:#4b3027}
+    .intro{margin:0 0 22px;color:#6e5148}
+    .layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:20px;align-items:start}
+    .card{padding:24px;border:1px solid #eadbd3;border-radius:16px;background:#fff;box-shadow:0 8px 24px #5b2e201c}
+    .card h2{margin:0 0 18px;color:#5d4037;font-size:21px}
+    .field{margin-bottom:16px}
+    label{display:block;margin-bottom:6px;font-weight:700;color:#493731}
+    input,textarea{display:block;width:100%;padding:12px 13px;border:1px solid #d8c8bf;border-radius:9px;background:#fffdfb;color:#302722;font:inherit}
+    input:focus,textarea:focus{outline:3px solid #f2684438;border-color:#f26844}
+    textarea{min-height:105px;resize:vertical}
+    .privacy-note{margin:4px 0 18px;padding:12px 14px;border-radius:9px;background:#fff3ed;color:#654d44;font-size:13px}
+    .order-list{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+    .order-item{padding:12px 0;border-bottom:1px solid #eee2dc}
+    .item-name{font-weight:800;color:#4f3931}
+    .item-detail{color:#705d55;font-size:14px}
+    .item-sum{margin-top:3px;color:#bb5a3c;font-size:14px;font-weight:700}
+    .total{display:flex;justify-content:space-between;gap:12px;margin-top:18px;padding-top:16px;border-top:2px solid #f1dfd6;font-size:19px;font-weight:800;color:#4b3027}
+    .actions{display:grid;gap:10px;margin-top:20px}
+    .send-button{width:100%;min-height:48px;padding:12px 16px;border:0;border-radius:9px;color:#fff;font:inherit;font-weight:800;cursor:pointer;transition:filter .15s ease,transform .15s ease}
+    .send-button:hover{filter:brightness(.94);transform:translateY(-1px)}
+    .send-button:focus-visible,.back-link:focus-visible{outline:3px solid #f26844;outline-offset:3px}
+    .send-whatsapp{background:#25a85a}.send-email{background:#5d4037}
+    .empty{padding:18px;border-radius:10px;background:#fff3ed;color:#674c42}
+    .status{min-height:24px;margin:12px 0 0;color:#526b48;font-size:14px}
+    @media(max-width:720px){body{padding:14px}.topbar{padding:13px 16px}.layout{grid-template-columns:1fr}.card{padding:19px}.brand{font-size:20px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="topbar" aria-label="التنقل">
+      <span class="brand">PRO ART</span>
+      <a class="back-link" href="./index.html#productsContainer">العودة للمتجر</a>
+    </nav>
+    <h1>إتمام الطلب</h1>
+    <p class="intro">اكتب بيانات التوصيل، ثم اختر الطريقة المناسبة لإرسال طلبك.</p>
+    <div class="layout">
+      <section class="card" aria-labelledby="customerTitle">
+        <h2 id="customerTitle">بيانات العميل والتوصيل</h2>
+        <form id="customerForm">
+          <div class="field">
+            <label for="customerName">الاسم بالكامل</label>
+            <input id="customerName" name="customerName" type="text" autocomplete="name" maxlength="100" required>
+          </div>
+          <div class="field">
+            <label for="customerPhone">رقم التليفون</label>
+            <input id="customerPhone" name="customerPhone" type="tel" inputmode="tel" autocomplete="tel" pattern="[+0-9\s()\-]{8,20}" maxlength="20" required>
+          </div>
+          <div class="field">
+            <label for="customerAddress">عنوان التوصيل بالتفصيل</label>
+            <textarea id="customerAddress" name="customerAddress" autocomplete="street-address" maxlength="300" required></textarea>
+          </div>
+          <p class="privacy-note">بياناتك هتُضاف إلى رسالة الطلب فقط. راجعها وأرسلها بنفسك من واتساب أو البريد الإلكتروني؛ الموقع لا يحفظها.</p>
+          <div class="actions">
+            <button class="send-button send-whatsapp" id="whatsappButton" type="button">إرسال الطلب عبر واتساب</button>
+            <button class="send-button send-email" id="emailButton" type="button">إرسال الطلب عبر البريد الإلكتروني</button>
+          </div>
+          <p class="status" id="statusMessage" aria-live="polite"></p>
+        </form>
+      </section>
+      <aside class="card" aria-labelledby="orderTitle">
+        <h2 id="orderTitle">ملخص الطلب</h2>
+        <div id="emptyCart" class="empty" hidden>السلة فارغة. ارجع للمتجر واختر المنتجات أولًا.</div>
+        <ul class="order-list" id="orderItems"></ul>
+        <div class="total"><span>الإجمالي</span><span id="orderTotal">0 جنيه</span></div>
+      </aside>
+    </div>
+  </main>
+  <script>
+    (() => {
+      const storageKey = 'proArtCart';
+      const form = document.getElementById('customerForm');
+      const itemsList = document.getElementById('orderItems');
+      const emptyMessage = document.getElementById('emptyCart');
+      const totalElement = document.getElementById('orderTotal');
+      const status = document.getElementById('statusMessage');
+      let cart = [];
+      try {
+        const saved = JSON.parse(localStorage.getItem(storageKey) || '[]');
+        if (Array.isArray(saved)) cart = saved.filter(item => item && item.product && Number(item.price) > 0);
+      } catch (error) {
+        cart = [];
+      }
+      const money = value => `${Number(value).toLocaleString('en-US')} جنيه`;
+      let total = 0;
+      cart.forEach(item => {
+        const quantity = Math.max(1, Number(item.quantity) || 1);
+        const subtotal = Number(item.price) * quantity;
+        total += subtotal;
+        const row = document.createElement('li');
+        row.className = 'order-item';
+        const name = document.createElement('div');
+        name.className = 'item-name';
+        name.textContent = item.product.name || 'لوحة فنية';
+        const detail = document.createElement('div');
+        detail.className = 'item-detail';
+        detail.textContent = `المقاس: ${item.size} سم | الإطار: ${item.frame} | الكمية: ${quantity}`;
+        const price = document.createElement('div');
+        price.className = 'item-sum';
+        price.textContent = money(subtotal);
+        row.append(name, detail, price);
+        itemsList.appendChild(row);
+      });
+      totalElement.textContent = money(total);
+      const hasItems = cart.length > 0;
+      emptyMessage.hidden = hasItems;
+      document.getElementById('whatsappButton').disabled = !hasItems;
+      document.getElementById('emailButton').disabled = !hasItems;
+      if (!hasItems) {
+        document.querySelectorAll('.send-button').forEach(button => { button.style.opacity = '.55'; button.style.cursor = 'not-allowed'; });
+      }
+      function makeMessage() {
+        if (!form.reportValidity() || !hasItems) return null;
+        const name = form.elements.customerName.value.trim();
+        const phone = form.elements.customerPhone.value.trim();
+        const address = form.elements.customerAddress.value.trim();
+        const lines = cart.map(item => {
+          const quantity = Math.max(1, Number(item.quantity) || 1);
+          return `• ${item.product.name}\nالمقاس: ${item.size} سم | الإطار: ${item.frame}\nالكمية: ${quantity} | السعر: ${money(Number(item.price) * quantity)}`;
+        });
+        return `مرحبًا، أريد تأكيد هذا الطلب من PRO ART:\n\nالاسم: ${name}\nرقم التليفون: ${phone}\nعنوان التوصيل: ${address}\n\nالمنتجات:\n${lines.join('\n\n')}\n\nالإجمالي: ${money(total)}`;
+      }
+      document.getElementById('whatsappButton').addEventListener('click', () => {
+        const message = makeMessage();
+        if (!message) return;
+        status.textContent = 'اتفتح واتساب. راجع تفاصيل الطلب واضغط إرسال لتأكيده.';
+        window.open(`https://wa.me/201276593304?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+      });
+      document.getElementById('emailButton').addEventListener('click', () => {
+        const message = makeMessage();
+        if (!message) return;
+        status.textContent = 'اتفتح تطبيق البريد. راجع الرسالة واضغط إرسال لتأكيد الطلب.';
+        const subject = encodeURIComponent('طلب جديد من موقع PRO ART');
+        window.location.href = `mailto:proart4decor@gmail.com?subject=${subject}&body=${encodeURIComponent(message)}`;
+      });
+    })();
+  </script>
+</body>
+</html>
