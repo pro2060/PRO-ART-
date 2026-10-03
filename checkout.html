@@ -28,6 +28,11 @@
     .item-name{font-weight:800;color:#4f3931}
     .item-detail{color:#705d55;font-size:14px}
     .item-sum{margin-top:3px;color:#bb5a3c;font-size:14px;font-weight:700}
+    .order-item-main{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;align-items:center}
+    .order-image{display:block;width:76px;height:76px;object-fit:cover;border-radius:9px;background:#f4eee9}
+    .order-item-copy{min-width:0}
+    .image-link{display:inline-block;margin-top:4px;color:#a34f34;font-size:13px;font-weight:700;text-decoration:underline}
+    @media(max-width:380px){.order-item-main{grid-template-columns:62px minmax(0,1fr);gap:9px}.order-image{width:62px;height:62px}}
     .total{display:flex;justify-content:space-between;gap:12px;margin-top:18px;padding-top:16px;border-top:2px solid #f1dfd6;font-size:19px;font-weight:800;color:#4b3027}
     .actions{display:grid;gap:10px;margin-top:20px}
     .send-button{width:100%;min-height:48px;padding:12px 16px;border:0;border-radius:9px;color:#fff;font:inherit;font-weight:800;cursor:pointer;transition:filter .15s ease,transform .15s ease}
@@ -109,10 +114,24 @@
         const detail = document.createElement('div');
         detail.className = 'item-detail';
         detail.textContent = `المقاس: ${item.size} سم | الإطار: ${item.frame} | الكمية: ${quantity}`;
+        const image = document.createElement('img');
+        image.className = 'order-image';
+        image.src = item.product.image || '';
+        image.alt = `صورة ${item.product.name || 'اللوحة'}`;
+        image.loading = 'lazy';
+        image.width = 76;
+        image.height = 76;
+        image.addEventListener('error', () => { image.hidden = true; }, { once: true });
+        const copy = document.createElement('div');
+        copy.className = 'order-item-copy';
+        copy.append(name, detail);
+        const main = document.createElement('div');
+        main.className = 'order-item-main';
+        main.append(image, copy);
         const price = document.createElement('div');
         price.className = 'item-sum';
         price.textContent = money(subtotal);
-        row.append(name, detail, price);
+        row.append(main, price);
         itemsList.appendChild(row);
       });
       totalElement.textContent = money(total);
@@ -130,7 +149,13 @@
         const address = form.elements.customerAddress.value.trim();
         const lines = cart.map(item => {
           const quantity = Math.max(1, Number(item.quantity) || 1);
-          return `• ${item.product.name}\nالمقاس: ${item.size} سم | الإطار: ${item.frame}\nالكمية: ${quantity} | السعر: ${money(Number(item.price) * quantity)}`;
+          let imageUrl = '';
+          try {
+            const candidate = new URL(item.product.image || '', window.location.href);
+            if (candidate.origin === window.location.origin) imageUrl = candidate.href;
+          } catch (error) {}
+          const productNumber = item.product.id ? `رقم اللوحة: ${item.product.id}` : 'رقم اللوحة غير متاح';
+          return `• ${item.product.name}\n${productNumber}\nالمقاس: ${item.size} سم | الإطار: ${item.frame}\nالكمية: ${quantity} | السعر: ${money(Number(item.price) * quantity)}\nرابط الصورة: ${imageUrl || 'افتح ملخص الطلب لمشاهدة الصورة'}`;
         });
         return `مرحبًا، أريد تأكيد هذا الطلب من PRO ART:\n\nالاسم: ${name}\nرقم التليفون: ${phone}\nعنوان التوصيل: ${address}\n\nالمنتجات:\n${lines.join('\n\n')}\n\nالإجمالي: ${money(total)}`;
       }
