@@ -101,21 +101,38 @@
       border-radius: 6px;
     }
     
-  .cart-modal{display:none;position:fixed;inset:0;z-index:2000;background:#0009;padding:18px;overflow:auto}.cart-content{background:white;width:min(100%,540px);margin:5vh auto;padding:20px;border-radius:14px;max-height:90vh;overflow:auto}.cart-item{padding:12px 0;border-bottom:1px solid #ddd;line-height:1.8}.cart-item-controls{display:flex;align-items:center;gap:8px}.cart-item-controls button{width:auto}.close-cart{width:auto;float:inline-start;background:#5d4037;color:white}.total{margin:16px 0;font-weight:bold}#checkoutBtn{background:#25D366;color:white}.product img{height:auto;aspect-ratio:1/1;object-fit:cover;cursor:zoom-in}@media(max-width:600px){body{padding:12px}header{margin-top:55px}.cart-icon{top:12px;left:12px}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product-info{padding:10px}.product h3{font-size:16px}.description{font-size:13px}}@media(max-width:360px){.products{grid-template-columns:1fr}}</style>
+  .cart-modal{display:none;position:fixed;inset:0;z-index:2000;background:#0009;padding:18px;overflow:auto}.cart-content{background:white;width:min(100%,540px);margin:5vh auto;padding:20px;border-radius:14px;max-height:90vh;overflow:auto}.cart-item{padding:12px 0;border-bottom:1px solid #ddd;line-height:1.8}.cart-item-controls{display:flex;align-items:center;gap:8px}.cart-item-controls button{width:auto}.close-cart{width:auto;float:inline-start;background:#5d4037;color:white}.total{margin:16px 0;font-weight:bold}#checkoutBtn{background:#25D366;color:white}.product img{height:auto;aspect-ratio:1/1;object-fit:cover;cursor:zoom-in}@media(max-width:600px){body{padding:12px}header{margin-top:55px}.cart-icon{top:12px;left:12px}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product-info{padding:10px}.product h3{font-size:16px}.description{font-size:13px}}@media(max-width:360px){.products{grid-template-columns:1fr}}    .product-image-wrap{position:relative;overflow:hidden;background:#f3eee9}
+    .product-image-wrap img{display:block}
+    .zoom-hint{position:absolute;right:12px;bottom:12px;display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border:1px solid rgba(255,255,255,.58);border-radius:999px;background:rgba(45,31,26,.78);color:#fff;font-size:13px;font-weight:700;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,.16)}
+    .catalog-navigation{max-width:1400px;margin:28px auto;padding:14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;border:1px solid rgba(93,64,55,.12);border-radius:14px;background:rgba(255,248,241,.88);box-shadow:0 4px 14px rgba(50,30,22,.08)}
+    .catalog-navigation a{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:9px 16px;border:1px solid #e4d1c6;border-radius:9px;background:#fff;color:#5d4037;text-decoration:none;font-weight:700;transition:background .15s ease,color .15s ease}
+    .catalog-navigation a:hover{background:#fff0e8}
+    .catalog-navigation a[aria-current="page"]{border-color:#5d4037;background:#5d4037;color:#fff}
+    .catalog-navigation .catalog-next{border-color:#f26844;background:#f26844;color:#fff}
+    @media(max-width:600px){.catalog-navigation{gap:7px;padding:10px}.catalog-navigation a{min-height:40px;padding:8px 12px;font-size:14px}.zoom-hint{right:8px;bottom:8px;padding:6px 9px;font-size:12px}}
+  </style>
 </head>
 <body>
 
 <div class="cart-icon" onclick="openCart()">🛒 <span id="cartCount">0</span></div><div id="cartModal" class="cart-modal"><section class="cart-content"><button class="close-cart" onclick="closeCart()">إغلاق</button><h2>سلة التسوق</h2><div id="cartItems"></div><p class="total">الإجمالي: <strong id="totalPrice">0</strong> جنيه</p><button id="checkoutBtn" onclick="checkout()">إكمال الطلب</button></section></div>
 <header>
   <h1>منتجات أخرى - PRO ART</h1>
-  <p>عرض مميز لأول منتجين من مجموعتنا</p>
+  <p>اكتشف المزيد من لوحاتنا الفنية واختر المقاس والإطار المناسب.</p>
 </header>
 
 <div class="products" id="productsContainer">
   <!-- سيتم ملؤه بالجافاسكريبت -->
 </div>
 
-<a href="index.html" class="back-link">العودة إلى الصفحة الرئيسية</a>
+<nav class="catalog-navigation" aria-label="التنقل بين صفحات المنتجات">
+  <a class="catalog-home" href="./index.html#productsContainer">⌂ الرئيسية</a>
+  <a href="./index.html#productsContainer">صفحة 1</a>
+  <a href="./products2.html#productsContainer" aria-current="page">صفحة 2</a>
+  <a href="./products3.html#productsContainer">صفحة 3</a>
+  <a href="./products4.html#productsContainer">صفحة 4</a>
+  <a href="./index.html#productsContainer">← السابقة</a>
+  <a class="catalog-next" href="./products3.html#productsContainer">الصفحة التالية ←</a>
+</nav>
 
 <script>
   // نفس بيانات المنتجات (يمكنك استيرادها لاحقًا من ملف منفصل)
@@ -419,7 +436,10 @@
     const container = document.getElementById('productsContainer');
     container.innerHTML = products.map(p => `
       <div class="product">
-        <img src="${p.image}" alt="${p.name}" loading="lazy" decoding="async" width="600" height="600" tabindex="0" role="button" aria-label="تكبير الصورة" style="cursor: zoom-in">
+        <div class="product-image-wrap">
+          <img src="${p.image}" alt="${p.name}" loading="lazy" decoding="async" width="600" height="600" tabindex="0" role="button" aria-label="تكبير الصورة" style="cursor: zoom-in">
+          <span class="zoom-hint" aria-hidden="true">🔍 اضغط للتكبير</span>
+        </div>
         <div class="product-info">
           <h3>${p.name}</h3>
           <p class="description">${p.description}</p>
