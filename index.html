@@ -20,7 +20,7 @@
       text-align: center;
       margin-bottom: 30px;
       padding: 15px;
-      background: #B3FFF0;
+      background: linear-gradient(135deg, #fff8f1, #ffe1d2);
       border-radius: 12px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
@@ -189,7 +189,36 @@
   cursor: pointer;
   z-index: 3001;
 }
-  .cart-modal{display:none;position:fixed;inset:0;z-index:2000;background:#0009;padding:18px;overflow:auto}.cart-content{background:white;width:min(100%,540px);margin:5vh auto;padding:20px;border-radius:14px;max-height:90vh;overflow:auto}.cart-item{padding:12px 0;border-bottom:1px solid #ddd;line-height:1.8}.cart-item-controls{display:flex;align-items:center;gap:8px}.cart-item-controls button{width:auto}.close-cart{width:auto;float:inline-start;background:#5d4037;color:white}.total{margin:16px 0;font-weight:bold}#checkoutBtn{background:#25D366;color:white}.product img{height:auto;aspect-ratio:1/1;object-fit:cover;cursor:zoom-in}@media(max-width:600px){body{padding:12px}header{margin-top:55px}.cart-icon{top:12px;left:12px}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product-info{padding:10px}.product h3{font-size:16px}.description{font-size:13px}}@media(max-width:360px){.products{grid-template-columns:1fr}}</style>
+  .cart-modal{display:none;position:fixed;inset:0;z-index:2000;background:#0009;padding:18px;overflow:auto}.cart-content{background:white;width:min(100%,540px);margin:5vh auto;padding:20px;border-radius:14px;max-height:90vh;overflow:auto}.cart-item{padding:12px 0;border-bottom:1px solid #ddd;line-height:1.8}.cart-item-controls{display:flex;align-items:center;gap:8px}.cart-item-controls button{width:auto}.close-cart{width:auto;float:inline-start;background:#5d4037;color:white}.total{margin:16px 0;font-weight:bold}#checkoutBtn{background:#25D366;color:white}.product img{height:auto;aspect-ratio:1/1;object-fit:cover;cursor:zoom-in}@media(max-width:600px){body{padding:12px}header{margin-top:55px}.cart-icon{top:12px;left:12px}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product-info{padding:10px}.product h3{font-size:16px}.description{font-size:13px}}@media(max-width:360px){.products{grid-template-columns:1fr}}    header{max-width:1400px;margin-left:auto;margin-right:auto}
+    .hero-banner{position:relative;isolation:isolate;overflow:hidden;max-width:1400px;min-height:clamp(360px,43vw,520px);margin:0 auto 30px;border-radius:20px;background:#3b2924;box-shadow:0 12px 34px rgba(54,31,24,.24);color:#fff}
+    .hero-slides,.hero-overlay{position:absolute;inset:0}
+    .hero-slides{z-index:0}
+    .hero-slide{position:absolute;inset:0;opacity:0;transform:scale(1.045);transition:opacity 850ms ease,transform 6s ease}
+    .hero-slide.is-active{opacity:1;transform:scale(1)}
+    .hero-slide img{display:block;width:100%;height:100%;object-fit:cover}
+    .hero-overlay{z-index:1;background:linear-gradient(to left,rgba(35,24,20,.88) 0%,rgba(35,24,20,.66) 46%,rgba(35,24,20,.20) 100%),linear-gradient(0deg,rgba(35,24,20,.23),transparent 45%)}
+    .hero-content{position:relative;z-index:2;max-width:720px;padding:clamp(28px,6vw,76px);text-align:right}
+    .hero-kicker{display:inline-flex;align-items:center;gap:8px;margin-bottom:16px;padding:8px 14px;border:1px solid rgba(255,255,255,.42);border-radius:999px;background:rgba(255,255,255,.12);color:#fff4eb;font-size:14px;font-weight:700;backdrop-filter:blur(6px)}
+    .hero-content h2{max-width:650px;margin:0 0 14px;color:#fff;font-size:clamp(30px,4.5vw,54px);line-height:1.25;text-shadow:0 2px 14px rgba(0,0,0,.18)}
+    .hero-content p{max-width:560px;margin:0 0 25px;color:#fff5ee;font-size:clamp(16px,2vw,19px);line-height:1.8}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+    .hero-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:800;transition:transform .2s ease,background .2s ease}
+    .hero-actions a:hover{transform:translateY(-2px)}
+    .hero-primary{background:#f26844;color:#fff;box-shadow:0 6px 18px rgba(242,104,68,.3)}
+    .hero-primary:hover{background:#df5534}
+    .hero-secondary{border:1px solid rgba(255,255,255,.7);background:rgba(255,255,255,.10);color:#fff}
+    .hero-secondary:hover{background:rgba(255,255,255,.2)}
+    .hero-arrow{position:absolute;z-index:3;top:50%;display:grid;place-items:center;width:44px;height:44px;margin:0;padding:0;transform:translateY(-50%);border:1px solid rgba(255,255,255,.55);border-radius:50%;background:rgba(41,29,25,.35);color:#fff;font-size:24px;line-height:1;backdrop-filter:blur(5px)}
+    .hero-arrow:hover{background:#f26844}
+    .hero-arrow-prev{right:18px}.hero-arrow-next{left:18px}
+    .hero-dots{position:absolute;z-index:3;right:clamp(28px,6vw,76px);bottom:22px;display:flex;gap:9px}
+    .hero-dot{width:10px;height:10px;margin:0;padding:0;border:1px solid #fff;border-radius:50%;background:rgba(255,255,255,.45);transition:width .2s ease,background .2s ease}
+    .hero-dot[aria-pressed="true"]{width:28px;border-radius:999px;background:#f26844}
+    .hero-arrow:focus-visible,.hero-dot:focus-visible,.hero-actions a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+    @media(max-width:600px){header{margin-bottom:14px}.hero-banner{min-height:390px;margin-bottom:22px;border-radius:15px}.hero-content{padding:32px 25px 72px}.hero-content h2{font-size:34px}.hero-content p{font-size:16px;line-height:1.65}.hero-actions{gap:9px}.hero-actions a{min-height:44px;padding:10px 15px;font-size:14px}.hero-arrow{top:auto;bottom:16px;width:38px;height:38px;transform:none}.hero-arrow-prev{right:18px}.hero-arrow-next{left:18px}.hero-dots{right:50%;bottom:29px;transform:translateX(50%)}}
+    @media(max-width:380px){.hero-banner{min-height:360px}.hero-content{padding-right:18px;padding-left:18px}.hero-content h2{font-size:30px}.hero-actions a{padding:9px 11px}}
+    @media(prefers-reduced-motion:reduce){.hero-slide,.hero-actions a,.hero-dot{transition:none!important}}
+  </style>
 </head>
 <body>
 
@@ -200,6 +229,31 @@
  <h1>PRO ART FOR DECOR</h1>
   <p>متجر تابلوهات فنية 01276593304 </p>
 </header>
+
+<section class="hero-banner" id="heroBanner" aria-label="لوحات PRO ART الفنية" tabindex="0">
+  <div class="hero-slides" aria-hidden="true">
+    <div class="hero-slide is-active"><img src="./24.jpg" alt="" fetchpriority="high"></div>
+    <div class="hero-slide"><img src="./34.jpg" alt="" loading="lazy"></div>
+    <div class="hero-slide"><img src="./44.jpg" alt="" loading="lazy"></div>
+  </div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-content">
+    <span class="hero-kicker">✦ لمسة فنية لبيتك</span>
+    <h2>خلّي حيطانك تحكي ذوقك</h2>
+    <p>اختار من تشكيلتنا لوحات كانفس أنيقة تضيف دفء وجمال لكل ركن في بيتك.</p>
+    <div class="hero-actions">
+      <a class="hero-primary" href="#productsContainer">تصفح اللوحات</a>
+      <a class="hero-secondary" href="https://wa.me/201276593304" target="_blank" rel="noopener">اطلب عبر واتساب</a>
+    </div>
+  </div>
+  <button class="hero-arrow hero-arrow-prev" type="button" aria-label="الصورة السابقة">›</button>
+  <button class="hero-arrow hero-arrow-next" type="button" aria-label="الصورة التالية">‹</button>
+  <div class="hero-dots" role="group" aria-label="اختيار صورة الهيد بار">
+    <button class="hero-dot" type="button" aria-label="الصورة 1" aria-pressed="true"></button>
+    <button class="hero-dot" type="button" aria-label="الصورة 2" aria-pressed="false"></button>
+    <button class="hero-dot" type="button" aria-label="الصورة 3" aria-pressed="false"></button>
+  </div>
+</section>
 
 <div class="products" id="productsContainer">
   <!-- سيتم ملؤه تلقائيًا بالجافاسكريبت -->
@@ -216,6 +270,40 @@
 </div>
 
 <script>
+<script>
+(() => {
+  const banner = document.getElementById('heroBanner');
+  if (!banner) return;
+  const slides = Array.from(banner.querySelectorAll('.hero-slide'));
+  const dots = Array.from(banner.querySelectorAll('.hero-dot'));
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let current = 0;
+  let timer;
+  function showSlide(index) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => slide.classList.toggle('is-active', i === current));
+    dots.forEach((dot, i) => dot.setAttribute('aria-pressed', String(i === current)));
+  }
+  function stopRotation() { window.clearInterval(timer); }
+  function startRotation() {
+    stopRotation();
+    if (!reducedMotion && !document.hidden) timer = window.setInterval(() => showSlide(current + 1), 6000);
+  }
+  banner.querySelector('.hero-arrow-prev').addEventListener('click', () => { showSlide(current - 1); startRotation(); });
+  banner.querySelector('.hero-arrow-next').addEventListener('click', () => { showSlide(current + 1); startRotation(); });
+  dots.forEach((dot, i) => dot.addEventListener('click', () => { showSlide(i); startRotation(); }));
+  banner.addEventListener('mouseenter', stopRotation);
+  banner.addEventListener('mouseleave', startRotation);
+  banner.addEventListener('focusin', stopRotation);
+  banner.addEventListener('focusout', event => { if (!banner.contains(event.relatedTarget)) startRotation(); });
+  banner.addEventListener('keydown', event => {
+    if (event.key === 'ArrowLeft') { showSlide(current + 1); startRotation(); }
+    if (event.key === 'ArrowRight') { showSlide(current - 1); startRotation(); }
+  });
+  document.addEventListener('visibilitychange', startRotation);
+  startRotation();
+})();
+</script>
   // بيانات المنتجات
   const products = [
    
@@ -230,7 +318,7 @@
       name: "تابلوه مودرن فرووع وخطوط هندسيه ",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./28.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
 
 {
@@ -238,7 +326,7 @@
       name: "تابلوه مودرن فروع وخطوط هندسيه ",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./27.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
 
 {
@@ -246,28 +334,28 @@
       name: "تابلوه مودرن ابستراكت بالوان روز وكافيه ",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./26.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
 {
       id: 25,
       name: "تابلوه مودرن ورد روز وبيج أنيق وساخر ",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./25.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
 {
       id: 24,
       name: "تابلوه مودرن طبيعه جبليه  بالوان بنى وبيج ",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./24.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
 {
       id: 23,
       name: "تابلوه مودرن مركب شاعريه بالوان بنى ولبنى ",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./23.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
 
 {
@@ -275,21 +363,21 @@
       name: "تابلوه مودرن الشمس الذهبيه مع شجر الخريف رائع",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./22.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
 {
       id: 21,
       name: "تابلوه شجر اسطورى بالوان رائعه ساحرة",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./21.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
   {
       id: 1,
       name: "تابلوه فروع الخريف",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم بنى أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./1.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
 
     {
@@ -297,133 +385,133 @@
       name: "تابلوه وردة ساحرة بلون ازرق ولبنى وذهبى ",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم بنى أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./13.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
     {
       id: 14,
       name: "تابلوه مجموعه ورد بالوان رمادى وازرق غامق  عميقه وقيمة ",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم بنى أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./14.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
     {
       id: 15,
       name: "لوحة أبستراكت بيج فى دهبى  تضفى رونقا رائعا لحائطك ",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم بنى أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./15.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
     {
       id: 16,
       name: "لوحة طبيعه وبحر ومركب رائعة تثير فى النفوس اجواء بديعة ",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم بنى أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./16.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
     {
       id: 17,
       name: "لوحة طبيعه مجموعه زهور بالوان البنى والبيج وكانها حقيقية تماما ",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم بنى أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./17.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
     {
       id: 18,
       name: "لوحة لحصانين بلون الابيض والاسود مفعمة بالحيويه والجمال المذهل ",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم بنى أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./18.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
     {
       id: 19,
       name: "تابلوة لحروفيات كاليجرافى عربية أنيقه وإبداعية بالوات البيج والبنى ",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم بنى أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./19.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
     {
       id: 20,
       name: "تابلوة لمركب ساحر الجمال مطعم بلمسات فنية من الذهب تاخذك بعيدا عند رؤيتها ",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم بنى أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./20.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
     {
       id: 10,
       name: "تابلوه  ابستراكت برتقالى   ",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم بنى أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./8.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
      {
       id: 11,
       name: "تابلوه ريشة رقيق ",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم بنى أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./11.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
      {
       id: 12,
       name: "تابلوه اسلامى اسم الرحمن ",
       description: ".لوحة فنية مطبوعة على قماش الكانفس، تصميم بنى أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي...",
       image: "./12.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
     {
       id: 2,
       name: "من كثر شكره كثر خيره",
       description: "لوحة فنية مطبوعة على قماش الكانفس، تصميم بنى أنيق بألوان هادئة خلابه عميقه، بإطار خشبي بلون قشرة الخشب الطبيعي.",
       image: "./2.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
     {
       id: 3,
       name: "فينيسيا الأنيقة",
       description: "لوحة فنية مطبوعة على قماش الكانفس، تصميم أنيق بالأسود والأبيض يُظهر جسر ريو ديلا كاريتا في فينيسيا، بإطار خشبي بلون قشرة الخشب الطبيعي.",
       image: "./4.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
     {
       id: 4,
       name: "الخط العربي الذهبي",
       description: "لوحة فنية مطبوعة على قماش الكانفس، تصميم فني بالخط العربي الأسود على خلفية ذهبية وأشكال هندسية إسلامية، بإطار خشبي بلون قشرة الخشب الطبيعي.",
       image: "./3.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
     {
       id: 5,
       name: "أحجار التوازن",
       description: "لوحة فنية مطبوعة على قماش الكانفس، تصميم أبستراكت يُظهر أكوامًا من الحجارة المتوازنة بألوان ذهبية ورمادية، بإطار خشبي بلون قشرة الخشب الطبيعي.",
       image: "./9.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
     {
       id: 6,
       name: "أبستراكت أزرق",
       description: "لوحة فنية مطبوعة على قماش الكانفس، تصميم أبستراكت بألوان زرقاء عميقة وتفاصيل فنية مميزة، بإطار خشبي بلون قشرة الخشب الطبيعي.",
       image: "./6.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
     {
       id: 7,
       name: "طبيعة هادئة",
       description: "لوحة فنية مطبوعة على قماش الكانفس، تصميم طبيعي هادئ بألوان ترابية وتفاصيل ناعمة، بإطار خشبي بلون قشرة الخشب الطبيعي.",
       image: "./7.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
     {
       id: 8,
       name: "أبستراكت ذهبي",
       description: "لوحة فنية مطبوعة على قماش الكانفس، تصميم أبستراكت فاخر بألوان ذهبية وبنية، يضفي لمسة فخمة على أي مكان.",
       image: "./10.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450 }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580 }
     },
     {
       id: 9,
       name: "أنوثة وردي",
       description: "لوحة فنية مطبوعة على قماش الكانفس، تصميم أنثوي بألوان وردية ناعمة وزخارف رقيقة، مثالية لديكور غرف النوم.",
       image: "./5.jpg",
-      prices: { "30x40": 380, "60x80": 890, "60x40": 450, }
+      prices: { "30x40": 430, "60x80": 980, "60x40": 580, }
     }
   ];
 
@@ -446,7 +534,7 @@
           <select class="frame" id="frame-${p.id}">
             <option value="بني طبيعي">إطار بني طبيعي</option>
             <option value="أسود">إطار أسود</option>
-            <option value="أبيض">إطار أبيض</option>
+            <option value="خشبي">إطار خشبي</option>
           </select>
           <div class="price">السعر: <span id="price-${p.id}">${p.prices["30x40"]}</span> جنيه</div>
           <button onclick="addToCart(${p.id})">إضافة للسلة</button>
