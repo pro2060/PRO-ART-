@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>لوحات 120×80 | PRO ART - الصفحة 5</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background-color: #f26844;
+      color: #333;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 15px;
+      background: #B3FFF0;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #5d4037;
+      font-size: 32px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .product {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .product:hover {
+      transform: translateY(-5px);
+    }
+    .product img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 15px;
+    }
+    .product h3 {
+      margin-bottom: 10px;
+      color: #5d4037;
+    }
+    .description {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    select, input {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+    .price {
+      font-weight: bold;
+      color: #e67e22;
+      margin: 8px 0;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #EDEDED;
+      color: #000000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #00FFF8;
+    }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background: #4CAF50;
+      color: white;
+      text-decoration: none;
+      width: fit-content;
+      border-radius: 6px;
+    }
+    
+  .cart-modal{display:none;position:fixed;inset:0;z-index:2000;background:#0009;padding:18px;overflow:auto}.cart-content{background:white;width:min(100%,540px);margin:5vh auto;padding:20px;border-radius:14px;max-height:90vh;overflow:auto}.cart-item{padding:12px 0;border-bottom:1px solid #ddd;line-height:1.8}.cart-item-controls{display:flex;align-items:center;gap:8px}.cart-item-controls button{width:auto}.close-cart{width:auto;float:inline-start;background:#5d4037;color:white}.total{margin:16px 0;font-weight:bold}#checkoutBtn{background:#25D366;color:white}.product img{height:auto;aspect-ratio:1/1;object-fit:cover;cursor:zoom-in}@media(max-width:600px){body{padding:12px}header{margin-top:55px}.cart-icon{top:12px;left:12px}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product-info{padding:10px}.product h3{font-size:16px}.description{font-size:13px}}@media(max-width:360px){.products{grid-template-columns:1fr}}    .product-image-wrap{position:relative;overflow:hidden;background:#f3eee9}
+    .product-image-wrap img{display:block}
+    .zoom-hint{position:absolute;right:12px;bottom:12px;display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border:1px solid rgba(255,255,255,.58);border-radius:999px;background:rgba(45,31,26,.78);color:#fff;font-size:13px;font-weight:700;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,.16)}
+    .catalog-navigation{max-width:1400px;margin:28px auto;padding:14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;border:1px solid rgba(93,64,55,.12);border-radius:14px;background:rgba(255,248,241,.88);box-shadow:0 4px 14px rgba(50,30,22,.08)}
+    .catalog-navigation a{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:9px 16px;border:1px solid #e4d1c6;border-radius:9px;background:#fff;color:#5d4037;text-decoration:none;font-weight:700;transition:background .15s ease,color .15s ease}
+    .catalog-navigation a:hover{background:#fff0e8}
+    .catalog-navigation a[aria-current="page"]{border-color:#5d4037;background:#5d4037;color:#fff}
+    .catalog-navigation .catalog-next{border-color:#f26844;background:#f26844;color:#fff}
+    @media(max-width:600px){.catalog-navigation{gap:7px;padding:10px}.catalog-navigation a{min-height:40px;padding:8px 12px;font-size:14px}.zoom-hint{right:8px;bottom:8px;padding:6px 9px;font-size:12px}}
+  
+    /* حركة دخول بطاقات المنتجات عند ظهور الصف أثناء التمرير */
+    .products .product.product-reveal {
+      opacity: 0;
+      transition: opacity 720ms ease, transform 720ms cubic-bezier(.22,.72,.25,1);
+      transition-delay: var(--reveal-delay, 0ms);
+      will-change: opacity, transform;
+    }
+    .products .product.product-reveal.reveal-from-left { transform: translate3d(-64px, 0, 0); }
+    .products .product.product-reveal.reveal-from-right { transform: translate3d(64px, 0, 0); }
+    .products .product.product-reveal.is-visible { opacity: 1; transform: translate3d(0, 0, 0); }
+    .products .product.product-reveal.is-visible:hover { transform: translateY(-5px); }
+    @media (prefers-reduced-motion: reduce) {
+      .products .product.product-reveal,
+      .products .product.product-reveal.reveal-from-left,
+      .products .product.product-reveal.reveal-from-right {
+        opacity: 1; transform: none; transition: none; will-change: auto;
+      }
+    }    .cart-item-summary{display:flex;align-items:center;gap:12px;margin-bottom:8px}.cart-item-image{display:block;width:72px;height:72px;flex:0 0 72px;object-fit:cover;border-radius:8px;background:#f4eee9}.cart-item-summary>div{min-width:0}
+
+    /* صفحات اللوحات الكبيرة: صورتان على الكمبيوتر وصورة واحدة على الهاتف */
+    .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .product-image-wrap img { height: auto; aspect-ratio: 3 / 2; object-fit: contain; background: #f3eee9; }
+    .large-frame-note { margin: 8px 0; color: #6b5147; font-size: 13px; line-height: 1.6; }
+    @media (max-width: 600px) { .products { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="cart-icon" onclick="openCart()">🛒 <span id="cartCount">0</span></div><div id="cartModal" class="cart-modal"><section class="cart-content"><button class="close-cart" onclick="closeCart()">إغلاق</button><h2>سلة التسوق</h2><div id="cartItems"></div><p class="total">الإجمالي: <strong id="totalPrice">0</strong> جنيه</p><button id="checkoutBtn" onclick="checkout()">إكمال الطلب</button></section></div>
+<header>
+  <h1>لوحات كانفس كبيرة 120×80 سم - الصفحة 5</h1>
+  <p>لوحات كبيرة بمقاس 120×80 سم — اختر الإطار الخارجي إن رغبت.</p>
+</header>
+
+<div class="products" id="productsContainer">
+  <!-- سيتم ملؤه بالجافاسكريبت -->
+</div>
+
+<nav class="catalog-navigation" aria-label="التنقل بين صفحات المنتجات">
+  <a class="catalog-home" href="./index.html#productsContainer">⌂ الرئيسية</a>
+  <a href="./index.html#productsContainer">صفحة 1</a>
+  <a href="./products2.html#productsContainer">صفحة 2</a>
+  <a href="./products3.html#productsContainer">صفحة 3</a>
+  <a href="./products4.html#productsContainer">صفحة 4</a>
+  <a href="./products5.html#productsContainer" aria-current="page">صفحة 5</a>
+  <a href="./products6.html#productsContainer">صفحة 6</a>
+  <a href="./products4.html#productsContainer">← السابقة</a>
+  <a class="catalog-next" href="./products6.html#productsContainer">الصفحة التالية ←</a>
+</nav>
+
+<script>
+  // نفس بيانات المنتجات (يمكنك استيرادها لاحقًا من ملف منفصل)
+  const products = [
+    {"id": 105, "name": "لوحة كانفس كبيرة رقم 105", "description": "لوحة من قماش كانفس ثقيل مع طبقة جليز، مطبوعة بجودة 4K وألوان ثابتة. مشدودة على إطار خشبي داخلي ومدعمة بطبقة من خشب MDF لجودة الشد. الإطار الخارجي اختياري ويُضاف بسعر منفصل.", "image": "./105.jpg", "prices": {"120x80": 1700}},
+    {"id": 106, "name": "لوحة كانفس كبيرة رقم 106", "description": "لوحة من قماش كانفس ثقيل مع طبقة جليز، مطبوعة بجودة 4K وألوان ثابتة. مشدودة على إطار خشبي داخلي ومدعمة بطبقة من خشب MDF لجودة الشد. الإطار الخارجي اختياري ويُضاف بسعر منفصل.", "image": "./106.jpg", "prices": {"120x80": 1700}},
+    {"id": 107, "name": "لوحة كانفس كبيرة رقم 107", "description": "لوحة من قماش كانفس ثقيل مع طبقة جليز، مطبوعة بجودة 4K وألوان ثابتة. مشدودة على إطار خشبي داخلي ومدعمة بطبقة من خشب MDF لجودة الشد. الإطار الخارجي اختياري ويُضاف بسعر منفصل.", "image": "./107.jpg", "prices": {"120x80": 1700}},
+    {"id": 108, "name": "لوحة كانفس كبيرة رقم 108", "description": "لوحة من قماش كانفس ثقيل مع طبقة جليز، مطبوعة بجودة 4K وألوان ثابتة. مشدودة على إطار خشبي داخلي ومدعمة بطبقة من خشب MDF لجودة الشد. الإطار الخارجي اختياري ويُضاف بسعر منفصل.", "image": "./108.jpg", "prices": {"120x80": 1700}},
+    {"id": 109, "name": "لوحة كانفس كبيرة رقم 109", "description": "لوحة من قماش كانفس ثقيل مع طبقة جليز، مطبوعة بجودة 4K وألوان ثابتة. مشدودة على إطار خشبي داخلي ومدعمة بطبقة من خشب MDF لجودة الشد. الإطار الخارجي اختياري ويُضاف بسعر منفصل.", "image": "./109.jpg", "prices": {"120x80": 1700}},
+    {"id": 110, "name": "لوحة كانفس كبيرة رقم 110", "description": "لوحة من قماش كانفس ثقيل مع طبقة جليز، مطبوعة بجودة 4K وألوان ثابتة. مشدودة على إطار خشبي داخلي ومدعمة بطبقة من خشب MDF لجودة الشد. الإطار الخارجي اختياري ويُضاف بسعر منفصل.", "image": "./110.jpg", "prices": {"120x80": 1700}},
+    {"id": 111, "name": "لوحة كانفس كبيرة رقم 111", "description": "لوحة من قماش كانفس ثقيل مع طبقة جليز، مطبوعة بجودة 4K وألوان ثابتة. مشدودة على إطار خشبي داخلي ومدعمة بطبقة من خشب MDF لجودة الشد. الإطار الخارجي اختياري ويُضاف بسعر منفصل.", "image": "./111.jpg", "prices": {"120x80": 1700}},
+    {"id": 112, "name": "لوحة كانفس كبيرة رقم 112", "description": "لوحة من قماش كانفس ثقيل مع طبقة جليز، مطبوعة بجودة 4K وألوان ثابتة. مشدودة على إطار خشبي داخلي ومدعمة بطبقة من خشب MDF لجودة الشد. الإطار الخارجي اختياري ويُضاف بسعر منفصل.", "image": "./112.jpg", "prices": {"120x80": 1700}},
+    {"id": 113, "name": "لوحة كانفس كبيرة رقم 113", "description": "لوحة من قماش كانفس ثقيل مع طبقة جليز، مطبوعة بجودة 4K وألوان ثابتة. مشدودة على إطار خشبي داخلي ومدعمة بطبقة من خشب MDF لجودة الشد. الإطار الخارجي اختياري ويُضاف بسعر منفصل.", "image": "./113.jpg", "prices": {"120x80": 1700}},
+    {"id": 114, "name": "لوحة كانفس كبيرة رقم 114", "description": "لوحة من قماش كانفس ثقيل مع طبقة جليز، مطبوعة بجودة 4K وألوان ثابتة. مشدودة على إطار خشبي داخلي ومدعمة بطبقة من خشب MDF لجودة الشد. الإطار الخارجي اختياري ويُضاف بسعر منفصل.", "image": "./114.jpg", "prices": {"120x80": 1700}}
+  ];
+
+  function renderProducts() {
+    const container = document.getElementById('productsContainer');
+    container.innerHTML = products.map(p => `
+      <div class="product">
+        <div class="product-image-wrap">
+          <img src="${p.image}" alt="${p.name}" loading="lazy" decoding="async" width="600" height="600" tabindex="0" role="button" aria-label="تكبير الصورة" style="cursor: zoom-in">
+          <span class="zoom-hint" aria-hidden="true">🔍 اضغط للتكبير</span>
+        </div>
+        <div class="product-info">
+          <h3>${p.name}</h3>
+          <p class="description">${p.description}</p>
+          <select class="size" id="size-${p.id}" aria-label="مقاس اللوحة">
+            <option value="120x80">120×80 سم - ${p.prices["120x80"]} جنيه</option>
+          </select>
+          <select class="frame" id="frame-${p.id}" aria-label="إضافة إطار خارجي اختياري">
+            <option value="بدون إطار خارجي" data-extra="0">بدون إطار خارجي</option>
+            <option value="إطار بني طبيعي (+330 جنيه)" data-extra="330">إضافة إطار بني طبيعي (+330 جنيه)</option>
+            <option value="إطار أسود (+330 جنيه)" data-extra="330">إضافة إطار أسود (+330 جنيه)</option>
+            <option value="إطار خشبي (+330 جنيه)" data-extra="330">إضافة إطار خشبي (+330 جنيه)</option>
+          </select>
+          <div class="price">السعر: <span id="price-${p.id}">${p.prices["120x80"]}</span> جنيه</div>
+          <button onclick="addToCart(${p.id})">إضافة للسلة</button>
+        </div>
+      </div>
+    `).join('');
+
+    // تحديث السعر عند تغيير المقاس
+    products.forEach(p => {
+      const sizeSelect = document.getElementById(`size-${p.id}`);
+      const frameSelect = document.getElementById(`frame-${p.id}`);
+      const priceSpan = document.getElementById(`price-${p.id}`);
+      const updatePrice = () => {
+        const extra = Number(frameSelect.options[frameSelect.selectedIndex].dataset.extra || 0);
+        priceSpan.textContent = Number(p.prices[sizeSelect.value]) + extra;
+      };
+      sizeSelect.addEventListener('change', updatePrice);
+      frameSelect.addEventListener('change', updatePrice);
+    });
+  }
+
+  window.onload = renderProducts;
+</script>
+
+<script>
+(() => {
+  const container = document.getElementById('productsContainer');
+  if (!container) return;
+
+  const revealCards = () => {
+    const cards = Array.from(container.querySelectorAll('.product'));
+    if (!cards.length) return false;
+
+    const columns = Math.max(1, getComputedStyle(container).gridTemplateColumns.split(' ').length);
+    const leftSideCount = Math.ceil(columns / 2);
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    cards.forEach((card, index) => {
+      const column = index % columns;
+      const positionInRow = column < leftSideCount ? column : column - leftSideCount;
+      card.classList.add('product-reveal', column < leftSideCount ? 'reveal-from-left' : 'reveal-from-right');
+      card.style.setProperty('--reveal-delay', `${positionInRow * 75}ms`);
+
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        card.classList.add('is-visible');
+      }
+    });
+
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries, currentObserver) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          currentObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
+      cards.forEach(card => observer.observe(card));
+    }
+    return true;
+  };
+
+  if (!revealCards()) {
+    const renderObserver = new MutationObserver(() => {
+      if (revealCards()) renderObserver.disconnect();
+    });
+    renderObserver.observe(container, { childList: true });
+  }
+})();
+</script>
+<script src="./cart.js"></script></body>
+</html>
