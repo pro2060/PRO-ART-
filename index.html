@@ -284,17 +284,17 @@
 .quick-actions a:focus-visible{outline:3px solid #000;outline-offset:2px}
 @media(max-width:600px){.quick-actions{margin:12px 12px 16px;gap:7px}.quick-actions a{flex:1 1 calc(50% - 7px);padding:8px;font-size:14px}}
 /* شريط هوية PRO ART الثابت أعلى كل الصفحات */
-.global-brandbar{position:fixed;inset:0 0 auto 0;z-index:1500;direction:ltr;display:grid;grid-template-columns:500px minmax(0,1fr) 62px;align-items:center;gap:14px;width:100%;height:286px;min-height:286px;margin:0;padding:8px 18px;background:#f26844;box-shadow:none;overflow:hidden}
+.global-brandbar{position:fixed;inset:0 0 auto 0;z-index:1500;direction:ltr;display:grid;grid-template-columns:500px minmax(0,1fr) 62px;align-items:center;gap:14px;width:100%;height:200px;min-height:200px;margin:0;padding:5px 18px;background:#f26844;box-shadow:none;overflow:hidden}
 .global-brandbar.no-cart{grid-template-columns:500px minmax(0,1fr)}
-.global-brand-logo{display:block;width:270px;height:270px;object-fit:contain;justify-self:center}
+.global-brand-logo{display:block;width:189px;height:189px;object-fit:contain;justify-self:center;border:0;outline:none;box-shadow:none;filter:none}
 .brandbar-window{height:100%;min-width:0;display:flex;align-items:center;overflow:hidden;direction:ltr}
-.brandbar-text{display:block;width:max-content;color:#111;font-size:clamp(28px,3vw,48px);font-weight:900;line-height:1.35;white-space:nowrap;animation:brandbar-right-to-left 18s linear infinite}
+.brandbar-text{display:block;width:max-content;color:#111;font-family:'(A) Arslan Wessam B',sans-serif;font-size:clamp(28px,3vw,48px);font-weight:400;line-height:1.35;white-space:nowrap;animation:brandbar-right-to-left 18s linear infinite}
 @keyframes brandbar-right-to-left{0%{transform:translateX(100%);opacity:0}12%{opacity:1}100%{transform:translateX(-100%);opacity:1}}
 .brandbar-cart{display:flex;align-items:center;justify-content:center;width:52px;height:48px;border:1px solid rgba(0,0,0,.2);border-radius:10px;background:#4caf50;color:#fff;font-size:20px;font-weight:800;cursor:pointer}
 .brandbar-cart span{font-size:15px;margin-inline-start:3px}
-body{padding-top:306px!important}
+body{padding-top:220px!important}
 body>header,.works-header,.topbar{background:transparent!important;box-shadow:none!important;border-radius:0!important}
-@media(max-width:700px){.global-brandbar{grid-template-columns:82px minmax(0,1fr) 42px;gap:6px;height:96px;min-height:96px;margin:0;padding:5px 8px}.global-brandbar.no-cart{grid-template-columns:82px minmax(0,1fr)}.global-brand-logo{width:78px;height:78px}.brandbar-text{font-size:clamp(16px,4vw,23px)}.brandbar-cart{width:38px;height:38px}body{padding-top:108px!important}}
+@media(max-width:700px){.global-brandbar{grid-template-columns:60px minmax(0,1fr) 42px;gap:6px;height:67px;min-height:67px;margin:0;padding:4px 8px}.global-brandbar.no-cart{grid-template-columns:60px minmax(0,1fr)}.global-brand-logo{width:55px;height:55px}.brandbar-text{font-size:clamp(16px,4vw,23px)}.brandbar-cart{width:38px;height:38px}body{padding-top:79px!important}}
 @media(prefers-reduced-motion:reduce){.brandbar-text{animation:none;transform:none;opacity:1;width:auto;white-space:normal;text-align:center}}
 </style>
 </head>
