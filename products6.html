@@ -135,11 +135,43 @@
     .product-image-wrap img { height: auto; aspect-ratio: 3 / 2; object-fit: contain; background: #f3eee9; }
     .large-frame-note { margin: 8px 0; color: #6b5147; font-size: 13px; line-height: 1.6; }
     @media (max-width: 600px) { .products { grid-template-columns: 1fr; } }
+
+/* تذييل موحد بدرجات البني والبيج */
+.site-footer{max-width:1400px;margin:38px auto 0;padding:26px 28px 16px;border:1px solid #b79b7c;border-top:5px solid #5d4037;border-radius:18px 18px 0 0;background:#e9dcc9;color:#111;box-shadow:0 -5px 22px rgba(55,36,25,.12)}
+.footer-main{display:grid;grid-template-columns:minmax(240px,1fr) minmax(280px,1fr);gap:22px;align-items:start}
+.footer-brand{font-size:24px;font-weight:900;color:#4b3027;letter-spacing:.4px}
+.footer-tagline{margin:7px 0 16px;color:#171411;line-height:1.7}
+.footer-heading{margin:0 0 10px;font-size:18px;color:#4b3027}
+.footer-contact-list{display:grid;gap:7px;margin:0;padding:0;list-style:none;color:#111}
+.footer-contact-list a{color:#111;text-decoration:underline;text-underline-offset:3px}
+.footer-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}
+.footer-button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:9px 14px;border:1px solid #735740;border-radius:9px;background:#cfb99d;color:#111;text-decoration:none;font:inherit;font-weight:800;cursor:pointer;transition:background .15s ease,transform .15s ease}
+.footer-button:hover{background:#bea181;transform:translateY(-1px)}
+.footer-button:focus-visible,.footer-nav a:focus-visible,.works-bar a:focus-visible{outline:3px solid #111;outline-offset:3px}
+.footer-nav{display:flex;flex-wrap:wrap;gap:8px;align-content:start;padding:15px;border:1px solid #cbb89f;border-radius:13px;background:#f4eee5}
+.footer-nav-title{flex-basis:100%;margin:0 0 4px;color:#4b3027;font-size:17px;font-weight:900}
+.footer-nav a{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 11px;border:1px solid #d0bda4;border-radius:8px;background:#e7d8c3;color:#111;text-decoration:none;font-weight:700}
+.footer-nav a:hover{background:#d7c1a5}
+.footer-bottom{margin-top:18px;padding-top:12px;border-top:1px solid #bda88d;text-align:center;color:#171411;font-size:13px}
+.footer-about-backdrop{position:fixed;inset:0;z-index:6000;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(19,14,10,.72)}
+.footer-about-backdrop.is-open{display:flex}
+.footer-about-dialog{width:min(100%,600px);padding:26px;border:1px solid #b79b7c;border-radius:16px;background:#f4eee5;color:#111;box-shadow:0 16px 50px #0005}
+.footer-about-dialog h2{margin:0 0 12px;color:#4b3027}.footer-about-dialog p{line-height:1.9}.footer-about-dialog button{margin-top:16px}
+.works-bar{min-height:36px;margin:0 0 16px;padding:5px 14px;display:flex;align-items:center;justify-content:center;background:#7a7a7a;color:#000}
+.works-bar a{color:#000;text-decoration:none;font-size:14px;font-weight:800;letter-spacing:.2px}
+.works-bar a:hover{text-decoration:underline;text-underline-offset:3px}
+.cart-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0 6px;padding:9px 11px;border:1px solid #d8c5ad;border-radius:9px;background:#f4eee5;color:#111;font-size:13px}
+.cart-empty-button{width:auto;margin:0;padding:8px 12px;border:1px solid #6b4032;border-radius:8px;background:#5d4037;color:#fff;font-weight:800;cursor:pointer}
+.cart-empty-button:disabled{opacity:.48;cursor:not-allowed}
+.cart-item-controls .cart-remove{display:inline-grid;place-items:center;width:34px;height:34px;padding:0;border:1px solid #8b4638;border-radius:50%;background:#f2d9d1;color:#351c17;font-size:23px;line-height:1;cursor:pointer}
+.cart-item-controls .cart-remove:hover{background:#e9c2b5}
+@media(max-width:720px){.site-footer{margin-top:28px;padding:21px 16px 13px}.footer-main{grid-template-columns:1fr;gap:16px}.footer-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.footer-button{padding:9px 8px;font-size:14px}.footer-nav{gap:7px;padding:11px}.footer-nav a{min-height:34px;padding:6px 9px;font-size:13px}.cart-toolbar{align-items:flex-start;flex-direction:column}.works-bar{margin-bottom:12px}}
+
 </style>
 </head>
 <body>
 
-<div class="cart-icon" onclick="openCart()">🛒 <span id="cartCount">0</span></div><div id="cartModal" class="cart-modal"><section class="cart-content"><button class="close-cart" onclick="closeCart()">إغلاق</button><h2>سلة التسوق</h2><div id="cartItems"></div><p class="total">الإجمالي: <strong id="totalPrice">0</strong> جنيه</p><button id="checkoutBtn" onclick="checkout()">إكمال الطلب</button></section></div>
+<div class="cart-icon" onclick="openCart()">🛒 <span id="cartCount">0</span></div><div id="cartModal" class="cart-modal"><section class="cart-content"><button class="close-cart" onclick="closeCart()">إغلاق</button><h2>سلة التسوق</h2><div class="cart-toolbar"><span>إدارة محتويات السلة</span><button class="cart-empty-button" id="emptyCartBtn" type="button" onclick="emptyCart()">إفراغ السلة</button></div><div id="cartItems"></div><p class="total">الإجمالي: <strong id="totalPrice">0</strong> جنيه</p><button id="checkoutBtn" onclick="checkout()">إكمال الطلب</button></section></div>
 <header>
   <h1>لوحات كانفس كبيرة 120×80 سم - الصفحة 6</h1>
   <p>لوحات كبيرة بمقاس 120×80 سم — اختر الإطار الخارجي إن رغبت.</p>
@@ -263,5 +295,51 @@
   }
 })();
 </script>
-<script src="./cart.js"></script></body>
+<script src="./cart.js"></script>
+<footer class="site-footer">
+  <div class="footer-main">
+    <section>
+      <div class="footer-brand">PRO ART</div>
+      <p class="footer-tagline">لوحات فنية تضيف لمسة مميزة لبيتك أو مكتبك.</p>
+      <h2 class="footer-heading">تواصل معنا</h2>
+      <ul class="footer-contact-list">
+        <li>البريد الإلكتروني: <a href="mailto:proart4decor@gmail.com">proart4decor@gmail.com</a></li>
+        <li>رقم الهاتف: <a href="tel:01276593304">01276593304</a></li>
+      </ul>
+      <div class="footer-actions">
+        <a class="footer-button" href="https://wa.me/201276593304" target="_blank" rel="noopener">تواصل عبر واتساب</a>
+        <a class="footer-button" href="tel:01276593304">اتصل الآن</a>
+        <a class="footer-button" href="mailto:proart4decor@gmail.com">راسلنا بالبريد</a>
+        <button class="footer-button" type="button" onclick="openAbout()">من نحن</button>
+      </div>
+    </section>
+    <nav class="footer-nav" aria-label="روابط المتجر">
+      <h2 class="footer-nav-title">تصفح الموقع</h2>
+      <a href="./index.html#productsContainer">الرئيسية</a>
+      <a href="./index.html#productsContainer">صفحة 1</a>
+      <a href="./products2.html#productsContainer">صفحة 2</a>
+      <a href="./products3.html#productsContainer">صفحة 3</a>
+      <a href="./products4.html#productsContainer">صفحة 4</a>
+      <a href="./products5.html#productsContainer">صفحة 5</a>
+      <a href="./products6.html#productsContainer">صفحة 6</a>
+      <a href="./works.html">سابقة أعمالنا</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">PRO ART — شكرًا لزيارتكم</div>
+</footer>
+
+<div class="footer-about-backdrop" id="footerAboutModal" role="dialog" aria-modal="true" aria-labelledby="footerAboutTitle" onclick="if(event.target===this)closeAbout()">
+  <section class="footer-about-dialog">
+    <h2 id="footerAboutTitle">من نحن</h2>
+    <p>شركة برو أرت تقوم بتصنيع التابلوهات المودرن بمختلف الأشكال والأحجام، وتورد لشركات المقاولات والمكاتب الهندسية والمدن العمرانية الجديدة.</p>
+    <button class="footer-button" type="button" onclick="closeAbout()">إغلاق</button>
+  </section>
+</div>
+<script>
+function openAbout(){const modal=document.getElementById('footerAboutModal')||document.getElementById('aboutModal');if(modal){modal.classList.add('is-open');modal.style.display='flex';}}
+function closeAbout(){const modal=document.getElementById('footerAboutModal')||document.getElementById('aboutModal');if(modal){modal.classList.remove('is-open');modal.style.display='none';}}
+document.addEventListener('keydown',event=>{if(event.key==='Escape')closeAbout()});
+</script>
+
+</body>
 </html>
