@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#e9dcc9">
   <title>سابقة أعمالنا | PRO ART</title>
   <style>
-    *{box-sizing:border-box}body{margin:0;padding:20px;background:#f2e9dd;color:#111;font-family:"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.7}
+    *{box-sizing:border-box}body{margin:0;padding:20px;background:#f26844;color:#111;font-family:"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.7}
     .works-page{max-width:1200px;margin:0 auto}.works-header{margin:20px 0;padding:30px;border-radius:18px;background:#e2d0b9;border-top:5px solid #5d4037;text-align:center}
     .works-header h1{margin:0 0 8px;color:#4b3027}.works-placeholder{min-height:260px;display:grid;place-items:center;padding:30px;border:2px dashed #a98b69;border-radius:16px;background:#f8f4ed;text-align:center}
     .works-placeholder p{max-width:560px;margin:0;color:#222;font-size:18px}.works-back{display:inline-flex;margin-top:22px;padding:10px 18px;border:1px solid #735740;border-radius:9px;background:#cfb99d;color:#111;text-decoration:none;font-weight:800}
@@ -42,9 +42,22 @@
 .cart-item-controls .cart-remove:hover{background:#e9c2b5}
 @media(max-width:720px){.site-footer{margin-top:28px;padding:21px 16px 13px}.footer-main{grid-template-columns:1fr;gap:16px}.footer-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.footer-button{padding:9px 8px;font-size:14px}.footer-nav{gap:7px;padding:11px}.footer-nav a{min-height:34px;padding:6px 9px;font-size:13px}.cart-toolbar{align-items:flex-start;flex-direction:column}.works-bar{margin-bottom:12px}}
 
-  </style>
+  .global-brandbar{position:sticky;top:0;z-index:1500;direction:ltr;display:grid;grid-template-columns:88px minmax(0,1fr) 58px;align-items:center;gap:12px;width:100%;min-height:84px;margin:0 auto 18px;padding:6px 12px;background:transparent;box-shadow:none;overflow:hidden}
+.global-brandbar.no-cart{grid-template-columns:88px minmax(0,1fr)}
+.global-brand-logo{display:block;width:72px;height:72px;object-fit:contain;justify-self:start}
+.brandbar-window{min-width:0;overflow:hidden;direction:ltr}
+.brandbar-text{display:block;width:max-content;color:#171411;font-size:clamp(18px,2.7vw,32px);font-weight:900;line-height:1.35;white-space:nowrap;animation:brandbar-right-to-left 18s linear infinite}
+@keyframes brandbar-right-to-left{0%{transform:translateX(100%);opacity:0}12%{opacity:1}100%{transform:translateX(-100%);opacity:1}}
+.brandbar-cart{display:flex;align-items:center;justify-content:center;width:50px;height:46px;border:1px solid rgba(0,0,0,.2);border-radius:10px;background:#4caf50;color:#fff;font-size:20px;font-weight:800;cursor:pointer}
+.brandbar-cart span{font-size:15px;margin-inline-start:3px}
+@media(max-width:600px){.global-brandbar{grid-template-columns:62px minmax(0,1fr) 44px;gap:6px;min-height:68px;margin-bottom:14px;padding:4px 7px}.global-brandbar.no-cart{grid-template-columns:62px minmax(0,1fr)}.global-brand-logo{width:54px;height:54px}.brandbar-text{font-size:clamp(15px,4vw,20px)}.brandbar-cart{width:40px;height:40px;font-size:17px}.brandbar-cart span{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.brandbar-text{animation:none;transform:none;opacity:1;width:auto;white-space:normal;text-align:center}}
+</style>
 </head>
 <body>
+<div class="global-brandbar no-cart" aria-label="هوية برو أرت">  <img class="global-brand-logo" src="./logo-pro-art.png" alt="شعار برو أرت">
+  <div class="brandbar-window"><span class="brandbar-text">برو أرت أصل الحكاية.متقولش تابلو قول برو أرت</span></div></div>
+
   <main class="works-page">
     <header class="works-header"><h1>سابقة أعمالنا</h1><p>نماذج من لوحات وأعمال PRO ART</p></header>
     <section class="works-placeholder" aria-label="معرض الأعمال"><p>مساحة معرض الأعمال جاهزة. سنضيف صور الأعمال هنا لاحقًا.</p></section>

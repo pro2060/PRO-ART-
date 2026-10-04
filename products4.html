@@ -166,11 +166,25 @@
 .quick-actions a:hover{background:rgba(122,122,122,.55);transform:translateY(-1px)}
 .quick-actions a:focus-visible{outline:3px solid #000;outline-offset:2px}
 @media(max-width:600px){.quick-actions{margin:12px 12px 16px;gap:7px}.quick-actions a{flex:1 1 calc(50% - 7px);padding:8px;font-size:14px}}
+.global-brandbar{position:sticky;top:0;z-index:1500;direction:ltr;display:grid;grid-template-columns:88px minmax(0,1fr) 58px;align-items:center;gap:12px;width:100%;min-height:84px;margin:0 auto 18px;padding:6px 12px;background:transparent;box-shadow:none;overflow:hidden}
+.global-brandbar.no-cart{grid-template-columns:88px minmax(0,1fr)}
+.global-brand-logo{display:block;width:72px;height:72px;object-fit:contain;justify-self:start}
+.brandbar-window{min-width:0;overflow:hidden;direction:ltr}
+.brandbar-text{display:block;width:max-content;color:#171411;font-size:clamp(18px,2.7vw,32px);font-weight:900;line-height:1.35;white-space:nowrap;animation:brandbar-right-to-left 18s linear infinite}
+@keyframes brandbar-right-to-left{0%{transform:translateX(100%);opacity:0}12%{opacity:1}100%{transform:translateX(-100%);opacity:1}}
+.brandbar-cart{display:flex;align-items:center;justify-content:center;width:50px;height:46px;border:1px solid rgba(0,0,0,.2);border-radius:10px;background:#4caf50;color:#fff;font-size:20px;font-weight:800;cursor:pointer}
+.brandbar-cart span{font-size:15px;margin-inline-start:3px}
+@media(max-width:600px){.global-brandbar{grid-template-columns:62px minmax(0,1fr) 44px;gap:6px;min-height:68px;margin-bottom:14px;padding:4px 7px}.global-brandbar.no-cart{grid-template-columns:62px minmax(0,1fr)}.global-brand-logo{width:54px;height:54px}.brandbar-text{font-size:clamp(15px,4vw,20px)}.brandbar-cart{width:40px;height:40px;font-size:17px}.brandbar-cart span{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.brandbar-text{animation:none;transform:none;opacity:1;width:auto;white-space:normal;text-align:center}}
 </style>
 </head>
 <body>
+<div class="global-brandbar" aria-label="هوية برو أرت">
+  <img class="global-brand-logo" src="./logo-pro-art.png" alt="شعار برو أرت">
+  <div class="brandbar-window"><span class="brandbar-text">برو أرت أصل الحكاية.متقولش تابلو قول برو أرت</span></div><button class="brandbar-cart" type="button" onclick="openCart()" aria-label="فتح سلة التسوق">🛒 <span id="cartCount">0</span></button></div>
 
-<div class="cart-icon" onclick="openCart()">🛒 <span id="cartCount">0</span></div><div id="cartModal" class="cart-modal"><section class="cart-content"><button class="close-cart" onclick="closeCart()">إغلاق</button><h2>سلة التسوق</h2><div class="cart-toolbar"><span>إدارة محتويات السلة</span><button class="cart-empty-button" id="emptyCartBtn" type="button" onclick="emptyCart()">إفراغ السلة</button></div><div id="cartItems"></div><p class="total">الإجمالي: <strong id="totalPrice">0</strong> جنيه</p><button id="checkoutBtn" onclick="checkout()">إكمال الطلب</button></section></div>
+
+<div id="cartModal" class="cart-modal"><section class="cart-content"><button class="close-cart" onclick="closeCart()">إغلاق</button><h2>سلة التسوق</h2><div class="cart-toolbar"><span>إدارة محتويات السلة</span><button class="cart-empty-button" id="emptyCartBtn" type="button" onclick="emptyCart()">إفراغ السلة</button></div><div id="cartItems"></div><p class="total">الإجمالي: <strong id="totalPrice">0</strong> جنيه</p><button id="checkoutBtn" onclick="checkout()">إكمال الطلب</button></section></div>
 <header>
   <h1>منتجات PRO ART - الصفحة 4</h1>
   <p>اكتشف المزيد من لوحاتنا الفنية واختر المقاس والإطار المناسب.</p>
