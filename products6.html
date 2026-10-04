@@ -167,6 +167,13 @@
 .cart-item-controls .cart-remove:hover{background:#e9c2b5}
 @media(max-width:720px){.site-footer{margin-top:28px;padding:21px 16px 13px}.footer-main{grid-template-columns:1fr;gap:16px}.footer-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.footer-button{padding:9px 8px;font-size:14px}.footer-nav{gap:7px;padding:11px}.footer-nav a{min-height:34px;padding:6px 9px;font-size:13px}.cart-toolbar{align-items:flex-start;flex-direction:column}.works-bar{margin-bottom:12px}}
 
+.brand-marquee{width:min(100% - 24px,1200px);min-height:112px;margin:16px auto 22px;overflow:hidden;display:flex;align-items:center;border-radius:14px;background:#f4eee5}
+.brand-marquee-content{display:flex;align-items:center;gap:24px;width:max-content;padding-inline:30px;animation:brand-marquee-move 18s linear infinite,brand-marquee-fade 4s ease-in-out infinite alternate}
+.brand-marquee-content img{width:88px;height:88px;object-fit:contain;flex:none}
+.brand-marquee-content span{color:#171411;font-size:clamp(20px,3vw,34px);font-weight:900;white-space:nowrap}
+@keyframes brand-marquee-move{from{transform:translateX(100vw)}to{transform:translateX(-100%)}}
+@keyframes brand-marquee-fade{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.brand-marquee-content{animation:none;transform:none;opacity:1;margin:auto;white-space:normal}.brand-marquee-content span{white-space:normal;text-align:center}}
 </style>
 </head>
 <body>
@@ -176,6 +183,9 @@
   <h1>لوحات كانفس كبيرة 120×80 سم - الصفحة 6</h1>
   <p>لوحات كبيرة بمقاس 120×80 سم — اختر الإطار الخارجي إن رغبت.</p>
 </header>
+<section class="brand-marquee" aria-label="رسالة برو أرت">
+  <div class="brand-marquee-content"><img src="./logo-pro-art.png" alt="شعار برو أرت" loading="lazy"><span>برو أرت أصل الحكاية.متقولش تابلو قول برو أرت</span></div>
+</section>
 
 <div class="products" id="productsContainer">
   <!-- سيتم ملؤه بالجافاسكريبت -->
@@ -305,6 +315,7 @@
       <ul class="footer-contact-list">
         <li>البريد الإلكتروني: <a href="mailto:proart4decor@gmail.com">proart4decor@gmail.com</a></li>
         <li>رقم الهاتف: <a href="tel:01276593304">01276593304</a></li>
+        <li>العنوان: <a href="https://www.google.com/maps/place/PRO+ART+FOR+DECOR/@31.438184,31.8048412,17z/data=!3m1!4b1!4m6!3m5!1s0x14f9e51afd180481:0xff5c8b188cce7def!8m2!3d31.438184!4d31.8048412!16s%2Fg%2F11r5f990hq" target="_blank" rel="noopener">أمام أديداس بجوار صيدلية الجمل، منزل 63، الشارع الحربي، شط عزبة اللحم، دمياط</a></li>
       </ul>
       <div class="footer-actions">
         <a class="footer-button" href="https://wa.me/201276593304" target="_blank" rel="noopener">تواصل عبر واتساب</a>

@@ -278,11 +278,14 @@
 .cart-item-controls .cart-remove:hover{background:#e9c2b5}
 @media(max-width:720px){.site-footer{margin-top:28px;padding:21px 16px 13px}.footer-main{grid-template-columns:1fr;gap:16px}.footer-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.footer-button{padding:9px 8px;font-size:14px}.footer-nav{gap:7px;padding:11px}.footer-nav a{min-height:34px;padding:6px 9px;font-size:13px}.cart-toolbar{align-items:flex-start;flex-direction:column}.works-bar{margin-bottom:12px}}
 
+.quick-actions{max-width:1120px;margin:14px auto 18px;padding:10px 14px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;border-radius:12px;background:rgba(122,122,122,.3)}
+.quick-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:8px 17px;border:1px solid rgba(0,0,0,.22);border-radius:8px;background:rgba(122,122,122,.3);color:#000;text-decoration:none;font-weight:800;transition:background .18s,transform .18s}
+.quick-actions a:hover{background:rgba(122,122,122,.55);transform:translateY(-1px)}
+.quick-actions a:focus-visible{outline:3px solid #000;outline-offset:2px}
+@media(max-width:600px){.quick-actions{margin:12px 12px 16px;gap:7px}.quick-actions a{flex:1 1 calc(50% - 7px);padding:8px;font-size:14px}}
 </style>
 </head>
 <body>
-<div class="works-bar"><a href="./works.html">شاهد سابقة أعمالنا</a></div>
-
 <div class="cart-icon" onclick="openCart()">🛒 <span id="cartCount">0</span></div>
 
 
@@ -290,6 +293,12 @@
  <h1>PRO ART FOR DECOR</h1>
   <p>متجر تابلوهات فنية 01276593304 </p>
 </header>
+<nav class="quick-actions" aria-label="روابط سريعة">
+  <a href="./works.html">سابقة أعمالنا</a>
+  <a href="#contactSection">تواصل معنا</a>
+  <a href="https://wa.me/201276593304?text=%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%B7%D9%84%D8%A8%20%D9%85%D8%AE%D8%B5%D9%88%D8%B5%20%D9%85%D9%86%20PRO%20ART" target="_blank" rel="noopener">طلب مخصوص</a>
+  <a href="https://www.google.com/maps/place/PRO+ART+FOR+DECOR/@31.438184,31.8048412,17z/data=!3m1!4b1!4m6!3m5!1s0x14f9e51afd180481:0xff5c8b188cce7def!8m2!3d31.438184!4d31.8048412!16s%2Fg%2F11r5f990hq" target="_blank" rel="noopener">اعرض الخريطة</a>
+</nav>
 
 <section class="hero-banner" id="heroBanner" aria-label="لوحات PRO ART الفنية" tabindex="0">
   <div class="hero-slides" aria-hidden="true">
@@ -630,7 +639,7 @@
 
 
 
-<footer class="site-footer">
+<footer class="site-footer" id="contactSection">
   <div class="footer-main">
     <section>
       <div class="footer-brand">PRO ART</div>
@@ -639,6 +648,7 @@
       <ul class="footer-contact-list">
         <li>البريد الإلكتروني: <a href="mailto:proart4decor@gmail.com">proart4decor@gmail.com</a></li>
         <li>رقم الهاتف: <a href="tel:01276593304">01276593304</a></li>
+        <li>العنوان: <a href="https://www.google.com/maps/place/PRO+ART+FOR+DECOR/@31.438184,31.8048412,17z/data=!3m1!4b1!4m6!3m5!1s0x14f9e51afd180481:0xff5c8b188cce7def!8m2!3d31.438184!4d31.8048412!16s%2Fg%2F11r5f990hq" target="_blank" rel="noopener">أمام أديداس بجوار صيدلية الجمل، منزل 63، الشارع الحربي، شط عزبة اللحم، دمياط</a></li>
       </ul>
       <div class="footer-actions">
         <a class="footer-button" href="https://wa.me/201276593304" target="_blank" rel="noopener">تواصل عبر واتساب</a>
