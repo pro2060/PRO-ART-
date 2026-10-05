@@ -239,13 +239,7 @@
     .products .product.product-reveal.reveal-from-right { transform: translate3d(64px, 0, 0); }
     .products .product.product-reveal.is-visible { opacity: 1; transform: translate3d(0, 0, 0); }
     .products .product.product-reveal.is-visible:hover { transform: translateY(-5px); }
-    @media (prefers-reduced-motion: reduce) {
-      .products .product.product-reveal,
-      .products .product.product-reveal.reveal-from-left,
-      .products .product.product-reveal.reveal-from-right {
-        opacity: 1; transform: none; transition: none; will-change: auto;
-      }
-    }    .cart-item-summary{display:flex;align-items:center;gap:12px;margin-bottom:8px}.cart-item-image{display:block;width:72px;height:72px;flex:0 0 72px;object-fit:cover;border-radius:8px;background:#f4eee9}.cart-item-summary>div{min-width:0}
+    @media (prefers-reduced-motion: reduce) {.products .product.product-reveal,.products .product.product-reveal.reveal-from-left,.products .product.product-reveal.reveal-from-right{opacity:0;transform:none;transition:opacity 450ms ease;will-change:opacity}}    .cart-item-summary{display:flex;align-items:center;gap:12px;margin-bottom:8px}.cart-item-image{display:block;width:72px;height:72px;flex:0 0 72px;object-fit:cover;border-radius:8px;background:#f4eee9}.cart-item-summary>div{min-width:0}
 
 /* تذييل موحد بدرجات البني والبيج */
 .site-footer{max-width:1400px;margin:38px auto 0;padding:26px 28px 16px;border:1px solid #b79b7c;border-top:5px solid #5d4037;border-radius:18px 18px 0 0;background:#e9dcc9;color:#111;box-shadow:0 -5px 22px rgba(55,36,25,.12)}
@@ -286,7 +280,8 @@
 /* شريط هوية PRO ART الثابت أعلى كل الصفحات */
 .global-brandbar{position:fixed;inset:0 0 auto 0;z-index:1500;direction:ltr;display:grid;grid-template-columns:500px minmax(0,1fr) 62px;align-items:center;gap:14px;width:100%;height:200px;min-height:200px;margin:0;padding:5px 18px;background:#f26844;box-shadow:none;overflow:hidden}
 .global-brandbar.no-cart{grid-template-columns:500px minmax(0,1fr)}
-.global-brand-logo{display:block;width:189px;height:189px;object-fit:contain;justify-self:center;border:0;outline:none;box-shadow:none;filter:none}
+.global-brand-logo{display:block;width:189px;height:189px;object-fit:contain;justify-self:center;border:0;outline:none;box-shadow:none;filter:none;animation:brand-logo-float 4s ease-in-out infinite;transform-origin:center;}
+@keyframes brand-logo-float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-5px) scale(1.025)}}
 .brandbar-window{height:100%;min-width:0;display:flex;align-items:center;overflow:hidden;direction:ltr}
 .brandbar-text{display:block;width:max-content;color:#111;font-family:'(A) Arslan Wessam B',sans-serif;font-size:clamp(28px,3vw,48px);font-weight:400;line-height:1.35;white-space:nowrap;animation:brandbar-right-to-left 18s linear infinite}
 @keyframes brandbar-right-to-left{0%{transform:translateX(100%);opacity:0}12%{opacity:1}100%{transform:translateX(-100%);opacity:1}}
@@ -294,8 +289,8 @@
 .brandbar-cart span{font-size:15px;margin-inline-start:3px}
 body{padding-top:220px!important}
 body>header,.works-header,.topbar{background:transparent!important;box-shadow:none!important;border-radius:0!important}
-@media(max-width:700px){.global-brandbar{grid-template-columns:60px minmax(0,1fr) 42px;gap:6px;height:67px;min-height:67px;margin:0;padding:4px 8px}.global-brandbar.no-cart{grid-template-columns:60px minmax(0,1fr)}.global-brand-logo{width:55px;height:55px}.brandbar-text{font-size:clamp(16px,4vw,23px)}.brandbar-cart{width:38px;height:38px}body{padding-top:79px!important}}
-@media(prefers-reduced-motion:reduce){.brandbar-text{animation:none;transform:none;opacity:1;width:auto;white-space:normal;text-align:center}}
+@media(max-width:700px){.global-brandbar{grid-template-columns:60px minmax(0,1fr) 42px;gap:6px;height:67px;min-height:67px;margin:0;padding:4px 8px}.global-brandbar.no-cart{grid-template-columns:60px minmax(0,1fr)}.global-brand-logo{width:55px;height:55px;animation:brand-logo-float 4s ease-in-out infinite;transform-origin:center;}.brandbar-text{font-size:clamp(16px,4vw,23px)}.brandbar-cart{width:38px;height:38px}body{padding-top:79px!important}}
+@media(prefers-reduced-motion:reduce){.brandbar-text{animation:brandbar-right-to-left 32s linear infinite}}
 </style>
 </head>
 <body>
@@ -746,11 +741,7 @@ body>header,.works-header,.topbar{background:transparent!important;box-shadow:no
 
     if (!reduceMotion && 'IntersectionObserver' in window) {
       const observer = new IntersectionObserver((entries, currentObserver) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-visible');
-          currentObserver.unobserve(entry.target);
-        });
+        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); } else { entry.target.classList.remove('is-visible'); } });
       }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
       cards.forEach(card => observer.observe(card));
     }
