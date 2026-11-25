@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>شوف اللوحة في بيتك | PRO ART</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#14100d; --card:#1f1813; --mount:#0e0b09; --gold:#c9a46a; --gold-soft:#e2c999;
+  --line:#3a2d22; --text:#f3e9dc; --mute:#a8957f; --wa:#25d366;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Cairo',system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;line-height:1.6;padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+header{max-width:1180px;margin:0 auto;padding:18px 16px 6px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+header h1{font-size:clamp(1.35rem,4.5vw,2rem);font-weight:800;color:var(--gold-soft);line-height:1.25}
+header p{color:var(--mute);font-size:.9rem;margin-top:2px}
+header a{color:var(--gold);text-decoration:none;border:1px solid var(--line);padding:6px 14px;border-radius:999px;font-size:.88rem;white-space:nowrap}
+header a:hover{border-color:var(--gold)}
+
+.app{max-width:1180px;margin:0 auto;padding:10px 16px 0;display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+.app>*{min-width:0}
+@media(min-width:960px){.app{grid-template-columns:minmax(0,1.75fr) minmax(0,1fr);align-items:start}.stage{position:sticky;top:12px}}
+
+.canvas-wrap{position:relative;background:var(--mount);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+canvas{display:block;width:100%;height:auto;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.hint{position:absolute;inset-inline:12px;bottom:12px;background:rgba(20,16,13,.88);border:1px solid var(--line);color:var(--text);padding:8px 12px;border-radius:6px;font-size:.85rem;text-align:center;transition:opacity .4s}
+.hint.off{opacity:0;pointer-events:none}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.btn{border:1px solid var(--line);background:var(--card);padding:8px 14px;border-radius:6px;font-size:.9rem;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:var(--gold)}
+.btn.gold{border-color:var(--gold);color:var(--gold-soft)}
+
+.zoom{display:flex;align-items:center;gap:12px;margin-top:12px;color:var(--mute);font-size:.88rem}
+.zoom input{flex:1;accent-color:var(--gold)}
+.info{margin-top:6px;color:var(--mute);font-size:.82rem}
+
+.cal{margin-top:12px;background:var(--card);border:1px solid var(--gold);border-radius:6px;padding:12px 14px}
+.cal p{margin-bottom:8px;font-size:.92rem}
+.cal .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+.cal input[type=number]{width:96px;background:var(--mount);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+
+.scenes{display:flex;gap:10px;overflow-x:auto;margin-top:14px;padding-bottom:6px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.scene{flex:0 0 112px;text-align:center;font-size:.78rem;color:var(--mute)}
+.scene .im{display:block;width:112px;height:63px;border-radius:5px;border:2px solid transparent;background:var(--card) center/cover no-repeat;margin-bottom:4px}
+.scene[aria-pressed=true] .im{border-color:var(--gold)}
+.scene[aria-pressed=true]{color:var(--gold-soft)}
+.scene.up .im{display:grid;place-items:center;border:1.5px dashed var(--line);color:var(--gold);font-size:1.6rem}
+
+.panel{display:grid;gap:12px}
+.block{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px}
+.block h2{font-size:1rem;font-weight:600;color:var(--gold-soft);margin-bottom:10px}
+.paints{display:flex;gap:8px;flex-wrap:wrap}
+.paint{border:2px solid transparent;border-radius:4px;overflow:hidden;line-height:0;background:var(--mount)}
+.paint[aria-pressed=true]{border-color:var(--gold)}
+.paint canvas{width:58px;height:74px;touch-action:auto}
+.paints .btn{align-self:center}
+
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.chip{border:1px solid var(--line);background:var(--mount);border-radius:6px;padding:7px 4px;text-align:center;line-height:1.3}
+.chip b{display:block;font-weight:600;font-size:.95rem;direction:ltr}
+.chip small{color:var(--mute);font-size:.76rem}
+.chip[aria-pressed=true]{border-color:var(--gold);background:#2a2018}
+.chip[aria-pressed=true] small{color:var(--gold-soft)}
+.seg{display:flex;gap:8px;margin-top:10px}
+.seg .chip{flex:1}
+.seg.first{margin-top:0}
+.frames{grid-template-columns:repeat(2,1fr)}
+.frames .chip{display:flex;align-items:center;gap:10px;padding:8px 12px;text-align:start}
+.sw{width:22px;height:22px;border-radius:50%;border:2px solid #6d5b49;flex:none}
+.sw.none{background:linear-gradient(135deg,transparent 45%,#a8957f 46%,#a8957f 54%,transparent 55%)}
+
+.bar{position:fixed;inset-inline:0;bottom:0;background:rgba(20,16,13,.96);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));z-index:5;backdrop-filter:blur(6px)}
+.bar .in{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sum{font-size:.82rem;color:var(--mute);line-height:1.4}
+.sum strong{display:block;font-size:1.3rem;color:var(--gold-soft);font-weight:800}
+.order{background:var(--wa);color:#06220f;font-weight:800;border-radius:8px;padding:11px 22px;text-decoration:none;white-space:nowrap}
+.order:hover{filter:brightness(1.08)}
+.note{margin:14px auto 0;max-width:1180px;padding:0 16px;color:var(--mute);font-size:.8rem}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>شوف اللوحة في بيتك</h1>
+    <p>اختار اللوحة والمقاس والفريم، وشوفها على حيطتك قبل ما تطلب.</p>
+  </div>
+  <a href="./">الرجوع للموقع</a>
+</header>
+
+<main class="app">
+  <section class="stage" aria-label="معاينة الغرفة">
+    <div class="canvas-wrap">
+      <canvas id="cv" width="1672" height="941" aria-label="معاينة اللوحة على الحيطة"></canvas>
+      <div class="hint" id="hint">اسحب اللوحة لمكانها، واسحب الدايرة الدهبية في الركن لتكبيرها أو تصغيرها.</div>
+    </div>
+
+    <div class="toolbar">
+      <button class="btn" id="btnCal" type="button">ظبط المقياس</button>
+      <button class="btn" id="btnReset" type="button">رجّع اللوحة مكانها</button>
+      <button class="btn" id="btnSave" type="button">حفظ صورة المعاينة</button>
+    </div>
+
+    <div class="zoom">
+      <span>تكبير / تصغير</span>
+      <input id="zoom" type="range" min="25" max="300" value="100" aria-label="تكبير وتصغير اللوحة">
+    </div>
+    <div class="info" id="info"></div>
+
+    <div class="cal" id="cal" hidden>
+      <p id="calMsg"></p>
+      <div id="calForm" hidden>
+        <div class="row" id="calPresets"></div>
+        <div class="row">
+          <label>الطول بالسنتيمتر <input id="calCm" type="number" min="10" max="600" inputmode="numeric"></label>
+          <button class="btn gold" id="calOk" type="button">تأكيد</button>
+        </div>
+      </div>
+      <div class="row"><button class="btn" id="calCancel" type="button">إلغاء</button></div>
+    </div>
+
+    <div class="scenes" id="scenes" role="group" aria-label="اختار الغرفة"></div>
+  </section>
+
+  <aside class="panel">
+    <div class="block">
+      <h2>اللوحة</h2>
+      <div class="paints" id="paints"></div>
+      <div class="seg"><label class="btn" style="flex:1;justify-content:center;cursor:pointer">ارفع صورة لوحة من جهازك<input id="fileArt" type="file" accept="image/*" hidden></label></div>
+    </div>
+
+    <div class="block">
+      <h2>المقاس بالسنتيمتر</h2>
+      <div class="chips" id="sizes"></div>
+      <div class="seg" id="orient">
+        <button class="chip" type="button" data-o="p" aria-pressed="true">طولي</button>
+        <button class="chip" type="button" data-o="l" aria-pressed="false">عرضي</button>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>الخامة</h2>
+      <div class="seg first" id="mat">
+        <button class="chip" type="button" data-m="canvas" aria-pressed="true">كانفس</button>
+        <button class="chip" type="button" data-m="glitter" aria-pressed="false">جليتر</button>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>الفريم</h2>
+      <div class="chips frames" id="frames"></div>
+    </div>
+  </aside>
+</main>
+
+<p class="note">الصورة للتوضيح فقط، والألوان والمقاس الظاهر ممكن يختلفوا بدرجة بسيطة عن الواقع. صورة أوضتك بتفضل على جهازك ومش بتتبعت لأي مكان.</p>
+
+<div class="bar">
+  <div class="in">
+    <div class="sum" id="sum"></div>
+    <a class="order" id="order" href="#" target="_blank" rel="noopener">اطلب دلوقتي</a>
+  </div>
+</div>
+
+<script>
+/* ================= الإعدادات (عدّل هنا) ================= */
+const WA = '201276593304';
+
+/* لوحاتك الحقيقية: ضيف كل لوحة بالشكل ده (المسار نسبي لفولدر الموقع).
+   مثال: {name:'خط عربي ذهبي', src:'images/islamic-01.jpg'}                */
+const PAINTINGS = [
+  // {name:'اسم اللوحة', src:'images/اسم-الملف.jpg'},
+];
+
+/* جدول الأسعار: [جليتر بدون فريم، جليتر بفريم، كانفس بدون فريم، كانفس بفريم] */
+const PRICES = {
+  '30x40':[230,450,350,565],   '30x50':[290,545,420,675],   '40x50':[370,655,520,805],
+  '40x60':[430,740,605,915],   '50x80':[755,1165,950,1360], '60x80':[835,1285,1085,1540],
+  '70x100':[1380,1945,1580,2150], '80x120':[1635,2315,2015,2695], '100x100':[2005,2685,2195,2875]
+};
+const SIZES = [[30,40],[30,50],[40,50],[40,60],[50,80],[60,80],[70,100],[80,120],[100,100]];
+
+/* المشاهد: ppc = عدد البكسلات لكل 1 سم (متحسب من عرض الكنبة/السرير)،
+   cx = منتصف اللوحة أفقيًا، by = مكان الحرف السفلي للوحة (بالبكسل) فوق الكنبة/السرير */
+const SCENES = [
+  {id:'living-1', name:'ليفنج 1',   src:'scenes/living-1.jpg',  ppc:4.64, cx:836, by:515},
+  {id:'living-2', name:'ليفنج 2',   src:'scenes/living-2.jpg',  ppc:4.50, cx:861, by:505},
+  {id:'living-3', name:'ليفنج 3',   src:'scenes/living-3.jpg',  ppc:4.50, cx:837, by:520},
+  {id:'bed-1',    name:'أوضة نوم 1', src:'scenes/bedroom-1.jpg', ppc:4.85, cx:835, by:525},
+  {id:'bed-2',    name:'أوضة نوم 2', src:'scenes/bedroom-2.jpg', ppc:4.70, cx:855, by:470},
+  {id:'bed-3',    name:'أوضة نوم 3', src:'scenes/bedroom-3.jpg', ppc:4.70, cx:840, by:490}
+];
+
+const FRAMES = {
+  none: {label:'بدون فريم', c:null},
+  black:{label:'أسود',  c:'#2a2826'},
+  brown:{label:'بني',   c:'#5b4033'},
+  wood: {label:'خشبي',  c:'#c6995b'}
+};
+const FRAME_CM = 2;   // عرض وجه الفريم بالسنتيمتر
+
+/* ================= الحالة ================= */
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+const $ = id => document.getElementById(id);
+const S = {
+  scene:null, img:null, art:null, artName:'', artKind:'sample',
+  size:5, land:false, material:'canvas', frame:'black',
+  scale:1, cx:0, cy:0, moved:false, active:false, cal:null, mode:null
+};
+const imgCache = {};
+let paintings = [];
+
+/* ================= أدوات مساعدة ================= */
+function dims(){ const [w,h]=SIZES[S.size]; return S.land ? [h,w] : [w,h]; }
+function key(){ const [w,h]=SIZES[S.size]; return w+'x'+h; }
+function price(){ const i=(S.material==='canvas'?2:0)+(S.frame==='none'?0:1); return PRICES[key()][i]; }
+function geom(){
+  const [wc,hc]=dims(), p=S.scene.ppc*S.scale, w=wc*p, h=hc*p;
+  const ft = FRAMES[S.frame].c ? FRAME_CM*p : 0;
+  return {w,h,ft,p,L:S.cx-w/2,T:S.cy-h/2};
+}
+function srcSize(s){ return [s.naturalWidth||s.width, s.naturalHeight||s.height]; }
+function shade(hex,a){
+  const n=parseInt(hex.slice(1),16); let r=n>>16, g=(n>>8)&255, b=n&255;
+  const t=a<0?0:255, p=Math.abs(a);
+  r=Math.round((t-r)*p+r); g=Math.round((t-g)*p+g); b=Math.round((t-b)*p+b);
+  return `rgb(${r},${g},${b})`;
+}
+function drawCover(x,src,L,T,w,h){
+  const [sw,sh]=srcSize(src); const sr=sw/sh, dr=w/h;
+  let cw=sw, ch=sh, cx=0, cy=0;
+  if(sr>dr){ cw=sh*dr; cx=(sw-cw)/2; } else { ch=sw/dr; cy=(sh-ch)/2; }
+  x.drawImage(src,cx,cy,cw,ch,L,T,w,h);
+}
+function handleR(){ return 15*(cv.width/Math.max(1,cv.getBoundingClientRect().width)); }
+function place(){
+  const g=geom(); S.cx=S.scene.cx;
+  let cy=S.scene.by-g.h/2;
+  const topMin=g.ft+12; if(cy-g.h/2<topMin) cy=topMin+g.h/2;
+  S.cy=cy; S.moved=false;
+}
+function clamp(){ S.cx=Math.max(0,Math.min(cv.width,S.cx)); S.cy=Math.max(0,Math.min(cv.height,S.cy)); S.scale=Math.max(.25,Math.min(3,S.scale)); }
+
+/* ================= الرسم ================= */
+function drawFrame(x,L,T,w,h,ft,base){
+  const O={l:L-ft,t:T-ft,r:L+w+ft,b:T+h+ft}, I={l:L,t:T,r:L+w,b:T+h};
+  const poly=(pts,col)=>{ x.beginPath(); x.moveTo(pts[0][0],pts[0][1]); for(let i=1;i<pts.length;i++) x.lineTo(pts[i][0],pts[i][1]); x.closePath(); x.fillStyle=col; x.fill(); };
+  poly([[O.l,O.t],[O.r,O.t],[I.r,I.t],[I.l,I.t]], shade(base,.14));
+  poly([[O.l,O.t],[I.l,I.t],[I.l,I.b],[O.l,O.b]], shade(base,.05));
+  poly([[O.r,O.t],[O.r,O.b],[I.r,I.b],[I.r,I.t]], shade(base,-.16));
+  poly([[O.l,O.b],[O.r,O.b],[I.r,I.b],[I.l,I.b]], shade(base,-.26));
+  x.lineWidth=Math.max(1,ft*.07);
+  x.strokeStyle='rgba(255,255,255,.14)'; x.strokeRect(O.l+x.lineWidth/2,O.t+x.lineWidth/2,O.r-O.l-x.lineWidth,O.b-O.t-x.lineWidth);
+  x.strokeStyle='rgba(0,0,0,.4)'; x.strokeRect(I.l,I.t,w,h);
+}
+function innerShade(x,L,T,w,h,d){
+  const edge=(x0,y0,x1,y1,rx,ry,rw,rh,a)=>{ const g=x.createLinearGradient(x0,y0,x1,y1); g.addColorStop(0,`rgba(0,0,0,${a})`); g.addColorStop(1,'rgba(0,0,0,0)'); x.fillStyle=g; x.fillRect(rx,ry,rw,rh); };
+  edge(0,T,0,T+d,L,T,w,d,.38);
+  edge(L,0,L+d,0,L,T,d,h,.28);
+  edge(L+w,0,L+w-d,0,L+w-d,T,d,h,.14);
+  edge(0,T+h,0,T+h-d,L,T+h-d,w,d,.12);
+}
+function draw(opts){
+  opts=opts||{};
+  const x=ctx; x.clearRect(0,0,cv.width,cv.height);
+  if(!S.img||!S.art) return;
+  x.drawImage(S.img,0,0,cv.width,cv.height);
+  const g=geom(), f=FRAMES[S.frame], p=g.p;
+  const O={l:g.L-g.ft,t:g.T-g.ft,w:g.w+2*g.ft,h:g.h+2*g.ft};
+
+  /* ظل واقعي: ظل ناعم واسع + ظل قريب حاد (الإضاءة من الشباك الشمال) */
+  x.save(); x.shadowColor='rgba(45,28,12,.34)'; x.shadowBlur=3.2*p; x.shadowOffsetX=1.0*p; x.shadowOffsetY=2.2*p; x.fillStyle='#222'; x.fillRect(O.l,O.t,O.w,O.h); x.restore();
+  x.save(); x.shadowColor='rgba(0,0,0,.5)'; x.shadowBlur=.5*p; x.shadowOffsetX=.15*p; x.shadowOffsetY=.35*p; x.fillStyle='#222'; x.fillRect(O.l,O.t,O.w,O.h); x.restore();
+
+  /* اللوحة */
+  x.save(); x.beginPath(); x.rect(g.L,g.T,g.w,g.h); x.clip();
+  drawCover(x,S.art,g.L,g.T,g.w,g.h);
+  const lg=x.createLinearGradient(g.L,g.T,g.L+g.w,g.T+g.h);
+  lg.addColorStop(0,'rgba(255,244,225,.10)'); lg.addColorStop(.5,'rgba(255,244,225,0)'); lg.addColorStop(1,'rgba(20,10,0,.14)');
+  x.fillStyle=lg; x.fillRect(g.L,g.T,g.w,g.h);
+  if(f.c) innerShade(x,g.L,g.T,g.w,g.h,.9*p);
+  x.restore();
+
+  if(f.c){ drawFrame(x,g.L,g.T,g.w,g.h,g.ft,f.c); }
+  else{ /* سُمك الكانفس بدون فريم */
+    x.fillStyle='rgba(70,52,36,.55)'; x.fillRect(g.L+g.w,g.T+.4*p,.55*p,g.h);
+    x.fillStyle='rgba(50,36,24,.6)'; x.fillRect(g.L+.4*p,g.T+g.h,g.w,.55*p);
+    x.fillStyle='rgba(255,255,255,.22)'; x.fillRect(g.L,g.T,g.w,Math.max(1,.12*p));
+  }
+
+  /* معايرة المقياس */
+  if(S.cal && S.cal.pts.length){
+    const k=handleR()/15;
+    x.save(); x.strokeStyle='#c9a46a'; x.fillStyle='#c9a46a'; x.lineWidth=3*k; x.setLineDash([10*k,6*k]);
+    if(S.cal.pts.length===2){ x.beginPath(); x.moveTo(S.cal.pts[0].x,S.cal.pts[0].y); x.lineTo(S.cal.pts[1].x,S.cal.pts[1].y); x.stroke(); }
+    x.setLineDash([]);
+    S.cal.pts.forEach(q=>{ x.beginPath(); x.arc(q.x,q.y,8*k,0,7); x.fill(); x.strokeStyle='#14100d'; x.lineWidth=2*k; x.stroke(); });
+    x.restore();
+  }
+
+  if(opts.clean) return;
+  /* مقبض التكبير + بطاقة المقاس */
+  const r=handleR(), hx=O.l+O.w, hy=O.t+O.h;
+  x.save();
+  if(S.active){ x.setLineDash([8*r/15,6*r/15]); x.strokeStyle='rgba(201,164,106,.9)'; x.lineWidth=2*r/15; x.strokeRect(O.l,O.t,O.w,O.h); x.setLineDash([]); }
+  x.beginPath(); x.arc(hx,hy,r,0,7); x.fillStyle='#c9a46a'; x.fill(); x.lineWidth=2.5*r/15; x.strokeStyle='#14100d'; x.stroke();
+  x.strokeStyle='#14100d'; x.lineWidth=2*r/15; x.beginPath(); x.moveTo(hx-r*.38,hy+r*.38); x.lineTo(hx+r*.38,hy-r*.38); x.stroke();
+  if(S.active){
+    const [wc,hc]=dims(); const t=Math.round(wc*S.scale)+'×'+Math.round(hc*S.scale)+' سم';
+    x.font='600 '+(15*r/15*1.0)+'px Cairo, sans-serif'; x.direction='ltr'; x.textAlign='center';
+    const tw=x.measureText(t).width+22*r/15, th=28*r/15, tx=S.cx, ty=Math.min(cv.height-th-6,O.t+O.h+12*r/15);
+    x.fillStyle='rgba(20,16,13,.9)'; x.fillRect(tx-tw/2,ty,tw,th);
+    x.fillStyle='#e2c999'; x.textBaseline='middle'; x.fillText(t,tx,ty+th/2+1);
+  }
+  x.restore();
+}
+
+/* ================= المشاهد ================= */
+function sceneImage(sc){
+  return new Promise((res,rej)=>{
+    if(imgCache[sc.id]) return res(imgCache[sc.id]);
+    const im=new Image(); im.onload=()=>{imgCache[sc.id]=im; res(im);}; im.onerror=rej; im.src=sc.src;
+  });
+}
+function applyScene(sc,img){
+  S.scene=sc; S.img=img;
+  const w=img.naturalWidth||img.width, h=img.naturalHeight||img.height;
+  cv.width=w; cv.height=h; S.scale=1; place(); syncUI(); draw();
+}
+async function useScene(sc){
+  try{ const im=await sceneImage(sc); applyScene(sc,im); markScene(sc.id); }
+  catch(e){ showHint('الصورة '+sc.src+' مش موجودة. اتأكد إن فولدر scenes مرفوع جنب الصفحة.',true); }
+}
+function markScene(id){ document.querySelectorAll('.scene').forEach(b=>b.setAttribute('aria-pressed',b.dataset.id===id)); }
+function renderScenes(){
+  const box=$('scenes'); box.innerHTML='';
+  SCENES.forEach(sc=>{
+    const b=document.createElement('button'); b.type='button'; b.className='scene'; b.dataset.id=sc.id; b.setAttribute('aria-pressed','false');
+    b.innerHTML='<span class="im" style="background-image:url('+sc.src+')"></span>'+sc.name;
+    b.onclick=()=>useScene(sc); box.appendChild(b);
+  });
+  const up=document.createElement('label'); up.className='scene up'; up.setAttribute('role','button'); up.tabIndex=0;
+  up.innerHTML='<span class="im">+</span>صورة أوضتك<input id="fileRoom" type="file" accept="image/*" hidden>';
+  box.appendChild(up);
+  up.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); $('fileRoom').click(); }});
+  $('fileRoom').onchange=e=>{
+    const f=e.target.files[0]; if(!f) return;
+    const url=URL.createObjectURL(f), im=new Image();
+    im.onload=()=>{
+      const sc=Math.min(1,1600/im.naturalWidth), off=document.createElement('canvas');
+      off.width=Math.round(im.naturalWidth*sc); off.height=Math.round(im.naturalHeight*sc);
+      off.getContext('2d').drawImage(im,0,0,off.width,off.height); URL.revokeObjectURL(url);
+      const scene={id:'mine',name:'صورة أوضتك',ppc:off.width/350,cx:off.width/2,by:off.height*.42};
+      imgCache.mine=off; applyScene(scene,off); markScene('mine'); startCal(true);
+    };
+    im.onerror=()=>showHint('مقدرتش أفتح الصورة دي. جرّب صورة تانية.',true);
+    im.src=url; e.target.value='';
+  };
+}
+
+/* ================= معايرة المقياس ================= */
+const PRESETS=[['كنبة 3 مقاعد',210],['كنبة مقعدين',160],['سرير',160],['سرير كبير',180],['باب',90]];
+function startCal(fromUpload){
+  S.cal={pts:[]}; $('cal').hidden=false; $('calForm').hidden=true;
+  $('calMsg').textContent=(fromUpload?'عشان اللوحة تظهر بمقاسها الحقيقي: ':'')+'اضغط على أول طرف في حاجة إنت عارف عرضها (كنبة، سرير، باب).';
+  cv.style.cursor='crosshair'; draw();
+}
+function stopCal(){ S.cal=null; $('cal').hidden=true; cv.style.cursor=''; draw(); }
+function addCalPoint(pt){
+  if(!S.cal||S.cal.pts.length>=2) return;
+  S.cal.pts.push(pt);
+  if(S.cal.pts.length===1) $('calMsg').textContent='دلوقتي اضغط على الطرف التاني.';
+  else{ $('calMsg').textContent='اكتب طول الخط ده بالسنتيمتر، أو اختار من القايمة.'; $('calForm').hidden=false; $('calCm').focus({preventScroll:true}); }
+  draw();
+}
+$('calPresets').innerHTML=''; PRESETS.forEach(([n,v])=>{ const b=document.createElement('button'); b.type='button'; b.className='btn'; b.textContent=n+' ('+v+')'; b.onclick=()=>{$('calCm').value=v;}; $('calPresets').appendChild(b); });
+$('calOk').onclick=()=>{
+  const cm=parseFloat($('calCm').value), q=S.cal&&S.cal.pts;
+  if(!q||q.length<2||!(cm>=10)){ $('calMsg').textContent='اكتب طول صحيح بالسنتيمتر (10 أو أكتر).'; return; }
+  const d=Math.hypot(q[1].x-q[0].x,q[1].y-q[0].y); if(d<8){ $('calMsg').textContent='النقطتين قريبين جدًا. جرّب تاني.'; startCal(); return; }
+  S.scene.ppc=d/cm; S.scale=1; const keep=S.moved; stopCal(); if(!keep) place(); syncUI(); draw();
+};
+$('calCancel').onclick=stopCal; $('btnCal').onclick=()=>startCal(false);
+
+/* ================= اللوحات ================= */
+function makeSample(k){
+  const W=800,H=1000,c=document.createElement('canvas'); c.width=W; c.height=H; const g=c.getContext('2d');
+  let s=k*977+13; const r=()=>{ s=(s*16807)%2147483647; return s/2147483647; };
+  if(k===0){
+    const bg=g.createLinearGradient(0,0,0,H); bg.addColorStop(0,'#10403d'); bg.addColorStop(1,'#071f22'); g.fillStyle=bg; g.fillRect(0,0,W,H);
+    for(let i=0;i<10;i++){ const y=H*(.12+i*.085); g.beginPath(); g.moveTo(-20,y); g.bezierCurveTo(W*.3,y-140*r(),W*.65,y+170*r(),W+20,y-50*r()); g.strokeStyle='rgba(201,164,106,'+(.22+r()*.5)+')'; g.lineWidth=2+i*.9; g.stroke(); }
+    const rg=g.createRadialGradient(W*.66,H*.27,6,W*.66,H*.27,130); rg.addColorStop(0,'#f1d9a6'); rg.addColorStop(1,'rgba(201,164,106,0)'); g.fillStyle=rg; g.beginPath(); g.arc(W*.66,H*.27,130,0,7); g.fill();
+  }else if(k===1){
+    g.fillStyle='#eadfcf'; g.fillRect(0,0,W,H);
+    [['#b5653f',150,430,560],['#d49a6a',330,300,700],['#7a4a34',520,200,820]].forEach(([col,cx,w,top],i)=>{
+      const xx=100+i*230, ww=210; g.fillStyle=col; g.beginPath(); g.moveTo(xx,H-90); g.lineTo(xx,top+ww/2); g.arc(xx+ww/2,top+ww/2,ww/2,Math.PI,0); g.lineTo(xx+ww,H-90); g.closePath(); g.fill();
+    });
+    g.fillStyle='#f6efe3'; g.beginPath(); g.arc(W*.5,H*.2,70,0,7); g.fill();
+    g.fillStyle='#3b2a20'; g.fillRect(70,H-90,W-140,5);
+  }else{
+    const sk=g.createLinearGradient(0,0,0,H*.55); sk.addColorStop(0,'#ecdcc6'); sk.addColorStop(1,'#d3b08a'); g.fillStyle=sk; g.fillRect(0,0,W,H);
+    g.fillStyle='#f7efe2'; g.beginPath(); g.arc(W*.5,H*.4,95,0,7); g.fill();
+    ['#2a4a63','#1f3b52','#173046','#102536'].forEach((col,i)=>{ g.fillStyle=col; g.fillRect(0,H*.55+i*H*.12,W,H*.12+2); });
+    for(let i=0;i<14;i++){ g.fillStyle='rgba(247,239,226,'+(.08+r()*.18)+')'; g.fillRect(W*.5-60-r()*140,H*.57+i*22,80+r()*180,3); }
+  }
+  return c;
+}
+const SAMPLE_NAMES=['نموذج: ذهبي على تيل','نموذج: أقواس ترابية','نموذج: غروب البحر'];
+function selectPainting(p){ S.art=p.el; S.artName=p.name; S.artKind=p.kind; document.querySelectorAll('.paint').forEach(b=>b.setAttribute('aria-pressed',b===p.btn)); syncUI(); draw(); }
+function addPainting(p,select){
+  const b=document.createElement('button'); b.type='button'; b.className='paint'; b.setAttribute('aria-pressed','false'); b.title=p.name;
+  const t=document.createElement('canvas'); t.width=116; t.height=148; drawCover(t.getContext('2d'),p.el,0,0,116,148); b.appendChild(t);
+  p.btn=b; b.onclick=()=>selectPainting(p); $('paints').appendChild(b); paintings.push(p); if(select) selectPainting(p);
+}
+function loadPainting(name,src,select){
+  const im=new Image(); im.onload=()=>addPainting({name,el:im,kind:'shop'},select); im.onerror=()=>console.warn('لوحة مش موجودة:',src); im.src=src;
+}
+$('fileArt').onchange=e=>{
+  const f=e.target.files[0]; if(!f) return; const url=URL.createObjectURL(f), im=new Image();
+  im.onload=()=>addPainting({name:'صورة من عندي',el:im,kind:'mine'},true); im.src=url; e.target.value='';
+};
+
+/* ================= واجهة المقاس والفريم ================= */
+function renderSizes(){
+  const box=$('sizes'); box.innerHTML='';
+  SIZES.forEach((s,i)=>{
+    const k=s[0]+'x'+s[1], idx=(S.material==='canvas'?2:0)+(S.frame==='none'?0:1);
+    const b=document.createElement('button'); b.type='button'; b.className='chip'; b.setAttribute('aria-pressed',i===S.size);
+    b.innerHTML='<b>'+s[0]+'×'+s[1]+'</b><small>'+PRICES[k][idx].toLocaleString('en-US')+' ج</small>';
+    b.onclick=()=>{ S.size=i; S.scale=1; if(!S.moved) place(); else clamp(); syncUI(); draw(); };
+    box.appendChild(b);
+  });
+}
+function renderFrames(){
+  const box=$('frames'); box.innerHTML='';
+  Object.keys(FRAMES).forEach(k=>{
+    const b=document.createElement('button'); b.type='button'; b.className='chip'; b.setAttribute('aria-pressed',k===S.frame);
+    b.innerHTML='<span class="sw '+(FRAMES[k].c?'':'none')+'" style="'+(FRAMES[k].c?'background:'+FRAMES[k].c:'')+'"></span>'+FRAMES[k].label;
+    b.onclick=()=>{ S.frame=k; if(!S.moved) place(); syncUI(); draw(); }; box.appendChild(b);
+  });
+}
+document.querySelectorAll('#orient .chip').forEach(b=>b.onclick=()=>{ S.land=b.dataset.o==='l'; S.scale=1; if(!S.moved) place(); else clamp(); syncUI(); draw(); });
+document.querySelectorAll('#mat .chip').forEach(b=>b.onclick=()=>{ S.material=b.dataset.m; syncUI(); });
+
+function orderText(){
+  const [w,h]=dims(), name = S.artKind==='mine' ? 'صورة من عندي (هبعتها على واتساب)' : S.artKind==='sample' ? 'لسه هحدد اللوحة معاكم' : S.artName;
+  return ['أهلًا PRO ART، عاوز أطلب لوحة بعد ما جرّبتها في صفحة "شوف اللوحة في بيتك":',
+    '- اللوحة: '+name, '- المقاس: '+w+'×'+h+' سم ('+(S.land?'عرضي':'طولي')+')',
+    '- الخامة: '+(S.material==='canvas'?'كانفس':'جليتر'), '- الفريم: '+FRAMES[S.frame].label,
+    '- السعر: '+price().toLocaleString('en-US')+' جنيه', '- الغرفة: '+S.scene.name,
+    'محتاج أتأكد من التفاصيل والسعر النهائي والشحن.'].join('\n');
+}
+function syncUI(){
+  if(!S.scene) return;
+  renderSizes(); renderFrames(); syncInfo();
+}
+function syncInfo(){
+  if(!S.scene) return;
+  document.querySelectorAll('#orient .chip').forEach(b=>b.setAttribute('aria-pressed',(b.dataset.o==='l')===S.land));
+  document.querySelectorAll('#mat .chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===S.material));
+  const [w,h]=dims();
+  $('sum').innerHTML='<strong>'+price().toLocaleString('en-US')+' جنيه</strong>'+w+'×'+h+' سم · '+(S.material==='canvas'?'كانفس':'جليتر')+' · '+FRAMES[S.frame].label;
+  $('order').href='https://wa.me/'+WA+'?text='+encodeURIComponent(orderText());
+  $('zoom').value=Math.round(S.scale*100);
+  const ew=Math.round(w*S.scale), eh=Math.round(h*S.scale);
+  $('info').textContent = S.scale===1 ? 'المقاس الظاهر: '+w+'×'+h+' سم' : 'المعاينة متكبّرة/متصغّرة ('+ew+'×'+eh+' سم). السعر على المقاس المختار: '+w+'×'+h+' سم.';
+}
+
+/* ================= السحب والتكبير ================= */
+function toCanvas(c){ const r=cv.getBoundingClientRect(); return {x:(c.clientX-r.left)*cv.width/r.width, y:(c.clientY-r.top)*cv.height/r.height}; }
+function hitArt(pt){ const g=geom(); return pt.x>=g.L-g.ft&&pt.x<=g.L+g.w+g.ft&&pt.y>=g.T-g.ft&&pt.y<=g.T+g.h+g.ft; }
+function hitHandle(pt){ const g=geom(); return Math.hypot(pt.x-(g.L+g.w+g.ft),pt.y-(g.T+g.h+g.ft))<=handleR()*1.9; }
+function beginAt(pt){
+  if(S.cal){ addCalPoint(pt); return false; }
+  if(hitHandle(pt)){ S.mode={t:'resize',d0:Math.hypot(pt.x-S.cx,pt.y-S.cy)||1,s0:S.scale}; }
+  else if(hitArt(pt)){ S.mode={t:'drag',dx:S.cx-pt.x,dy:S.cy-pt.y}; }
+  else return false;
+  S.active=true; dismissHint(); draw(); return true;
+}
+function moveTo(pt){
+  if(!S.mode) return;
+  if(S.mode.t==='drag'){ S.cx=pt.x+S.mode.dx; S.cy=pt.y+S.mode.dy; S.moved=true; }
+  else if(S.mode.t==='resize'){ S.scale=S.mode.s0*Math.hypot(pt.x-S.cx,pt.y-S.cy)/S.mode.d0; }
+  clamp(); syncInfo(); draw();
+}
+function endMode(){ if(S.mode||S.active){ S.mode=null; S.active=false; draw(); } }
+
+/* ماوس */
+cv.addEventListener('mousedown',e=>{ if(beginAt(toCanvas(e))) e.preventDefault(); });
+window.addEventListener('mousemove',e=>{
+  const pt=toCanvas(e);
+  if(S.mode){ moveTo(pt); return; }
+  if(e.target!==cv||!S.img) return;
+  cv.style.cursor = S.cal ? 'crosshair' : hitHandle(pt) ? 'nwse-resize' : hitArt(pt) ? 'grab' : 'default';
+});
+window.addEventListener('mouseup',endMode);
+cv.addEventListener('wheel',e=>{
+  if(S.cal||!hitArt(toCanvas(e))) return; e.preventDefault();
+  S.scale*=Math.exp(-e.deltaY*.0012); clamp(); syncInfo(); draw();
+},{passive:false});
+
+/* لمس: اللوحة بس هي اللي بتمسك الإصبع، وباقي الصورة بيسيب الصفحة تتحرك عادي */
+let pinch=null;
+cv.addEventListener('touchstart',e=>{
+  if(S.cal){ e.preventDefault(); if(e.changedTouches.length) addCalPoint(toCanvas(e.changedTouches[0])); return; }
+  if(e.touches.length===2){
+    const a=toCanvas(e.touches[0]), b=toCanvas(e.touches[1]);
+    if(hitArt(a)||hitArt(b)){ e.preventDefault(); pinch={d0:Math.hypot(a.x-b.x,a.y-b.y)||1,s0:S.scale}; S.mode=null; S.active=true; dismissHint(); draw(); }
+    return;
+  }
+  if(e.touches.length===1 && beginAt(toCanvas(e.touches[0]))) e.preventDefault();
+},{passive:false});
+cv.addEventListener('touchmove',e=>{
+  if(pinch&&e.touches.length===2){
+    e.preventDefault(); const a=toCanvas(e.touches[0]), b=toCanvas(e.touches[1]);
+    S.scale=pinch.s0*Math.hypot(a.x-b.x,a.y-b.y)/pinch.d0; clamp(); syncInfo(); draw(); return;
+  }
+  if(S.mode&&e.touches.length===1){ e.preventDefault(); moveTo(toCanvas(e.touches[0])); }
+},{passive:false});
+function touchDone(e){ if(!e.touches.length){ pinch=null; endMode(); } else if(pinch&&e.touches.length<2){ pinch=null; S.active=false; draw(); } }
+cv.addEventListener('touchend',touchDone); cv.addEventListener('touchcancel',touchDone);
+
+/* أزرار */
+$('zoom').addEventListener('input',e=>{ S.scale=e.target.value/100; clamp(); syncInfo(); draw(); });
+$('btnReset').onclick=()=>{ S.scale=1; place(); syncUI(); draw(); };
+$('btnSave').onclick=()=>{
+  try{
+    draw({clean:true});
+    cv.toBlob(b=>{ draw(); if(!b){ alert('تعذّر حفظ الصورة.'); return; }
+      const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='pro-art-preview.png'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),2000); },'image/png');
+  }catch(err){ draw(); alert('حفظ الصورة بيشتغل بعد ما الصفحة تتنشر على الموقع.'); }
+};
+window.addEventListener('resize',()=>draw());
+
+let hintTimer;
+function showHint(t,keep){ const h=$('hint'); h.textContent=t; h.classList.remove('off'); clearTimeout(hintTimer); if(!keep) hintTimer=setTimeout(dismissHint,7000); }
+function dismissHint(){ $('hint').classList.add('off'); }
+
+/* ================= تشغيل ================= */
+(function init(){
+  renderScenes();
+  [0,1,2].forEach(i=>addPainting({name:SAMPLE_NAMES[i],el:makeSample(i),kind:'sample'},i===0));
+  PAINTINGS.forEach(p=>loadPainting(p.name,p.src,false));
+  /* رابط من صفحة منتج: visualizer.html?img=images/xx.jpg&name=اسم اللوحة */
+  const q=new URLSearchParams(location.search), qi=q.get('img');
+  if(qi){ try{ const u=new URL(qi,location.href); if(u.origin===location.origin) loadPainting(q.get('name')||'لوحة من الموقع',u.href,true); }catch(e){} }
+  useScene(SCENES[0]);
+  hintTimer=setTimeout(dismissHint,9000);
+})();
+</script>
+</body>
+</html>
