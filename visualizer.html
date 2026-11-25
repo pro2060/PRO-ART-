@@ -194,12 +194,12 @@ const SIZES = [[30,40],[30,50],[40,50],[40,60],[50,80],[60,80],[70,100],[80,120]
 /* المشاهد: ppc = عدد البكسلات لكل 1 سم (متحسب من عرض الكنبة/السرير)،
    cx = منتصف اللوحة أفقيًا، by = مكان الحرف السفلي للوحة (بالبكسل) فوق الكنبة/السرير */
 const SCENES = [
-  {id:'living-1', name:'ليفنج 1',   src:'scenes/living-1.jpg',  ppc:4.64, cx:836, by:515},
-  {id:'living-2', name:'ليفنج 2',   src:'scenes/living-2.jpg',  ppc:4.50, cx:861, by:505},
-  {id:'living-3', name:'ليفنج 3',   src:'scenes/living-3.jpg',  ppc:4.50, cx:837, by:520},
-  {id:'bed-1',    name:'أوضة نوم 1', src:'scenes/bedroom-1.jpg', ppc:4.85, cx:835, by:525},
-  {id:'bed-2',    name:'أوضة نوم 2', src:'scenes/bedroom-2.jpg', ppc:4.70, cx:855, by:470},
-  {id:'bed-3',    name:'أوضة نوم 3', src:'scenes/bedroom-3.jpg', ppc:4.70, cx:840, by:490}
+  {id:'living-1', name:'ليفنج 1',   src:'scenes/living-1.jpg',  ppc:4.64, cx:836, by:515, wall:[.09,.035,.92,.565]},
+  {id:'living-2', name:'ليفنج 2',   src:'scenes/living-2.jpg',  ppc:4.50, cx:861, by:505, wall:[.15,.035,.88,.545]},
+  {id:'living-3', name:'ليفنج 3',   src:'scenes/living-3.jpg',  ppc:4.50, cx:837, by:520, wall:[.10,.035,.91,.555]},
+  {id:'bed-1',    name:'أوضة نوم 1', src:'scenes/bedroom-1.jpg', ppc:4.85, cx:835, by:525, wall:[.11,.035,.89,.535]},
+  {id:'bed-2',    name:'أوضة نوم 2', src:'scenes/bedroom-2.jpg', ppc:4.70, cx:855, by:470, wall:[.11,.035,.89,.505]},
+  {id:'bed-3',    name:'أوضة نوم 3', src:'scenes/bedroom-3.jpg', ppc:4.70, cx:840, by:490, wall:[.11,.035,.89,.525]}
 ];
 
 const FRAMES = {
@@ -223,8 +223,26 @@ let paintings = [];
 
 /* ================= أدوات مساعدة ================= */
 function dims(){ const [w,h]=SIZES[S.size]; return S.land ? [h,w] : [w,h]; }
-function key(){ const [w,h]=SIZES[S.size]; return w+'x'+h; }
-function price(){ const i=(S.material==='canvas'?2:0)+(S.frame==='none'?0:1); return PRICES[key()][i]; }
+function actualDims(){ const [w,h]=dims(); return [Math.max(1,Math.round(w*S.scale)),Math.max(1,Math.round(h*S.scale))]; }
+/* نفس جدول وطريقة التسعير المستخدمة في حاسبة PRO ART: سعر ثابت للمقاسات المعروفة وتقدير بالمساحة للمقاسات الخاصة. */
+function calculatorQuote(w,h){
+  if(!(w>=20&&h>=20&&w<=200&&h<=200&&w*h<=15000)) return null;
+  const a=Math.min(w,h), b=Math.max(w,h), k=(S.material==='canvas'?2:0)+(S.frame==='none'?0:1), key=a+'x'+b;
+  if(PRICES[key]) return {value:PRICES[key][k],exact:true};
+  const keys=Object.keys(PRICES), areas=keys.map(s=>{const p=s.split('x');return Number(p[0])*Number(p[1]);});
+  let i=0; while(i<keys.length-2&&a*b>areas[i+1]) i++;
+  let value;
+  if(a*b>areas[areas.length-1]){
+    const n=keys.length-1, slope=(PRICES[keys[n]][k]-PRICES[keys[n-2]][k])/(areas[n]-areas[n-2]);
+    value=PRICES[keys[n]][k]+slope*(a*b-areas[n]);
+  } else {
+    const area=a*b,p0=areas[i],p1=areas[i+1],v0=PRICES[keys[i]][k],v1=PRICES[keys[i+1]][k];
+    value=Math.max(v0+(v1-v0)*(area-p0)/(p1-p0),25);
+  }
+  return {value:Math.round(value/5)*5,exact:false};
+}
+function priceDetails(){ const [w,h]=actualDims(); return calculatorQuote(w,h)||{value:0,exact:false}; }
+function price(){ return priceDetails().value; }
 function geom(){
   const [wc,hc]=dims(), p=S.scene.ppc*S.scale, w=wc*p, h=hc*p;
   const ft = FRAMES[S.frame].c ? FRAME_CM*p : 0;
@@ -248,9 +266,27 @@ function place(){
   const g=geom(); S.cx=S.scene.cx;
   let cy=S.scene.by-g.h/2;
   const topMin=g.ft+12; if(cy-g.h/2<topMin) cy=topMin+g.h/2;
-  S.cy=cy; S.moved=false;
+  S.cy=cy; S.moved=false; clamp();
 }
-function clamp(){ S.cx=Math.max(0,Math.min(cv.width,S.cx)); S.cy=Math.max(0,Math.min(cv.height,S.cy)); S.scale=Math.max(.25,Math.min(3,S.scale)); }
+function wallBounds(){
+  const w=S.scene&&S.scene.wall||[.03,.03,.97,.97];
+  return {left:cv.width*w[0],top:cv.height*w[1],right:cv.width*w[2],bottom:cv.height*w[3]};
+}
+function scaleLimits(){
+  const [w,h]=dims(), wall=wallBounds(), frame=FRAMES[S.frame].c?FRAME_CM:0, p=S.scene.ppc;
+  const min=Math.max(.25,20/w,20/h);
+  const max=Math.min(3,200/w,200/h,Math.sqrt(15000/(w*h)),
+    (wall.right-wall.left)/((w+2*frame)*p),
+    (wall.bottom-wall.top)/((h+2*frame)*p));
+  return [Math.min(min,max),Math.max(min,max)];
+}
+function clamp(){
+  const [minScale,maxScale]=scaleLimits();
+  S.scale=Math.max(minScale,Math.min(maxScale,S.scale));
+  const g=geom(), wall=wallBounds();
+  S.cx=Math.max(wall.left+g.ft+g.w/2,Math.min(wall.right-g.ft-g.w/2,S.cx));
+  S.cy=Math.max(wall.top+g.ft+g.h/2,Math.min(wall.bottom-g.ft-g.h/2,S.cy));
+}
 
 /* ================= الرسم ================= */
 function drawFrame(x,L,T,w,h,ft,base){
@@ -447,19 +483,20 @@ function renderFrames(){
   Object.keys(FRAMES).forEach(k=>{
     const b=document.createElement('button'); b.type='button'; b.className='chip'; b.setAttribute('aria-pressed',k===S.frame);
     b.innerHTML='<span class="sw '+(FRAMES[k].c?'':'none')+'" style="'+(FRAMES[k].c?'background:'+FRAMES[k].c:'')+'"></span>'+FRAMES[k].label;
-    b.onclick=()=>{ S.frame=k; if(!S.moved) place(); syncUI(); draw(); }; box.appendChild(b);
+    b.onclick=()=>{ S.frame=k; if(!S.moved) place(); else clamp(); syncUI(); draw(); }; box.appendChild(b);
   });
 }
 document.querySelectorAll('#orient .chip').forEach(b=>b.onclick=()=>{ S.land=b.dataset.o==='l'; S.scale=1; if(!S.moved) place(); else clamp(); syncUI(); draw(); });
 document.querySelectorAll('#mat .chip').forEach(b=>b.onclick=()=>{ S.material=b.dataset.m; syncUI(); });
 
 function orderText(){
-  const [w,h]=dims(), name = S.artKind==='mine' ? 'صورة من عندي (هبعتها على واتساب)' : S.artKind==='sample' ? 'لسه هحدد اللوحة معاكم' : S.artName;
+  const [w,h]=actualDims(), q=calculatorQuote(w,h), name = S.artKind==='mine' ? 'صورة من عندي (هبعتها على واتساب)' : S.artKind==='sample' ? 'لسه هحدد اللوحة معاكم' : S.artName;
+  const priceLine=q?'- السعر حسب حاسبة PRO ART: '+q.value.toLocaleString('en-US')+' جنيه'+(q.exact?'':' (تقديري للمقاس المخصص)'):'- السعر: يرجى التأكيد مع PRO ART';
   return ['أهلًا PRO ART، عاوز أطلب لوحة بعد ما جرّبتها في صفحة "شوف اللوحة في بيتك":',
-    '- اللوحة: '+name, '- المقاس: '+w+'×'+h+' سم ('+(S.land?'عرضي':'طولي')+')',
+    '- اللوحة: '+name, '- المقاس الفعلي: '+w+'×'+h+' سم ('+(S.land?'عرضي':'طولي')+')',
     '- الخامة: '+(S.material==='canvas'?'كانفس':'جليتر'), '- الفريم: '+FRAMES[S.frame].label,
-    '- السعر: '+price().toLocaleString('en-US')+' جنيه', '- الغرفة: '+S.scene.name,
-    'محتاج أتأكد من التفاصيل والسعر النهائي والشحن.'].join('\n');
+    priceLine, '- الغرفة: '+S.scene.name,
+    'محتاج أتأكد من التفاصيل والشحن.'].join('\n');
 }
 function syncUI(){
   if(!S.scene) return;
@@ -469,12 +506,12 @@ function syncInfo(){
   if(!S.scene) return;
   document.querySelectorAll('#orient .chip').forEach(b=>b.setAttribute('aria-pressed',(b.dataset.o==='l')===S.land));
   document.querySelectorAll('#mat .chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===S.material));
-  const [w,h]=dims();
-  $('sum').innerHTML='<strong>'+price().toLocaleString('en-US')+' جنيه</strong>'+w+'×'+h+' سم · '+(S.material==='canvas'?'كانفس':'جليتر')+' · '+FRAMES[S.frame].label;
+  const [w,h]=actualDims(), q=priceDetails(), [minScale,maxScale]=scaleLimits();
+  $('sum').innerHTML='<strong>'+q.value.toLocaleString('en-US')+' جنيه</strong>'+w+'×'+h+' سم · '+(S.material==='canvas'?'كانفس':'جليتر')+' · '+FRAMES[S.frame].label+(q.exact?'':' · تقديري');
   $('order').href='https://wa.me/'+WA+'?text='+encodeURIComponent(orderText());
+  $('zoom').min=Math.round(minScale*100); $('zoom').max=Math.round(maxScale*100);
   $('zoom').value=Math.round(S.scale*100);
-  const ew=Math.round(w*S.scale), eh=Math.round(h*S.scale);
-  $('info').textContent = S.scale===1 ? 'المقاس الظاهر: '+w+'×'+h+' سم' : 'المعاينة متكبّرة/متصغّرة ('+ew+'×'+eh+' سم). السعر على المقاس المختار: '+w+'×'+h+' سم.';
+  $('info').textContent='المقاس الفعلي: '+w+'×'+h+' سم · '+(q.exact?'السعر مطابق للمقاس في الحاسبة.':'سعر تقديري حسب حاسبة PRO ART للمقاس المخصص.');
 }
 
 /* ================= السحب والتكبير ================= */
