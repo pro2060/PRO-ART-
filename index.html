@@ -294,6 +294,7 @@ a.b,.b2b-link,.pbn,.pvk,.pvb,.pgr button,.pvt nav a,.ga,.cfab{transition:scale .
 }
 </style>
 
+<script defer src="./analytics-config.js"></script><script defer src="./analytics.js"></script>
 </head>
 <body>
 <header class="top">
@@ -475,7 +476,7 @@ if(sub>=10000){pct=20;why='خصم الطلبات الكبيرة 20%'}else if(FIR
 var dis=Math.round(sub*pct/100);return{sub:sub,hq:hq,gifts:Math.floor(hq/3),pct:pct,why:why,dis:dis,net:sub-dis}}
 function badge(){var n=cnt(),b=$('cbd');b.hidden=!n;b.textContent=n}
 function toast(m){var t=$('gt');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove('on')},3000)}
-PRO.add=function(it){var k=key(it),e=items.filter(function(i){return key(i)===k})[0];if(e)e.q=Math.min(e.q+1,20);else{it.q=1;items.push(it)}save();badge()};
+PRO.add=function(it){var k=key(it),e=items.filter(function(i){return key(i)===k})[0];var before=e?e.q:0;if(e)e.q=Math.min(e.q+1,20);else{it.q=1;items.push(it)}save();badge();if(before<20&&window.PAAnalytics)window.PAAnalytics.event('add',{id:it.id,value:unit(it),quantity:1})};
 PRO.first=function(){FIRST=true;save();draw();toast('اتفعّل خصم 10% على أول طلب ✓ هيظهر في سلتك')};
 function rows(){var L=$('cl');L.textContent='';
 if(!items.length)L.appendChild(el('p','cn','السلة فاضية — اختار لوحاتك من التصنيفات وضيفها هنا.'));
@@ -501,7 +502,7 @@ $('cfirst').addEventListener('click',function(){FIRST=!FIRST;save();draw()});
 document.addEventListener('click',function(e){var a=e.target.closest('[data-first]');if(a){e.preventDefault();PRO.first()}});
 function view(n){$('cv1').hidden=n!==1;$('cv2').hidden=n!==2;$('cart-t').textContent=n===1?'سلة الطلبات':'بيانات التوصيل';$('cready').hidden=true;var s=document.querySelector('#sh-cart .sp');if(s)s.scrollTop=0}
 $('cfab').addEventListener('click',function(){view(1);draw()});
-$('cgo').addEventListener('click',function(){view(2)});
+$('cgo').addEventListener('click',function(){view(2);if(items.length&&window.PAAnalytics)window.PAAnalytics.event('checkout',{value:calc().net,quantity:cnt()})});
 $('cback').addEventListener('click',function(){view(1)});
 ['القاهرة','الجيزة','الإسكندرية','القليوبية','الشرقية','الدقهلية','البحيرة','المنوفية','الغربية','كفر الشيخ','دمياط','بورسعيد','الإسماعيلية','السويس','شمال سيناء','جنوب سيناء','الفيوم','بني سويف','المنيا','أسيوط','سوهاج','قنا','الأقصر','أسوان','البحر الأحمر','الوادي الجديد','مطروح'].forEach(function(g){var o=el('option',0,g);o.value=g;$('cg').appendChild(o)});
 function nd(s){return String(s).replace(/[٠-٩]/g,function(d){return d.charCodeAt(0)-1632})}
