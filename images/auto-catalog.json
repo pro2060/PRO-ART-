@@ -11,20 +11,17 @@
     {
       "id": "auto-isl-003",
       "name": "فن إسلامي 003",
-      "img": "images/auto/isl/isl-003.jpg",
-      "isNew": true
+      "img": "images/auto/isl/isl-003.jpg"
     },
     {
       "id": "auto-isl-002",
       "name": "فن إسلامي 002",
-      "img": "images/auto/isl/isl-002.jpg",
-      "isNew": true
+      "img": "images/auto/isl/isl-002.jpg"
     },
     {
       "id": "auto-isl-001",
       "name": "فن إسلامي 001",
-      "img": "images/auto/isl/isl-001.jpg",
-      "isNew": true
+      "img": "images/auto/isl/isl-001.jpg"
     }
   ],
   "hand": [],
@@ -54,20 +51,17 @@
     {
       "id": "auto-wall-026",
       "name": "ورق حائط 026",
-      "img": "images/auto/wall/wall-026.jpg",
-      "isNew": true
+      "img": "images/auto/wall/wall-026.jpg"
     },
     {
       "id": "auto-wall-025",
       "name": "ورق حائط 025",
-      "img": "images/auto/wall/wall-025.jpg",
-      "isNew": true
+      "img": "images/auto/wall/wall-025.jpg"
     },
     {
       "id": "auto-wall-024",
       "name": "ورق حائط 024",
-      "img": "images/auto/wall/wall-024.jpg",
-      "isNew": true
+      "img": "images/auto/wall/wall-024.jpg"
     },
     {
       "id": "auto-wall-023",
@@ -185,6 +179,53 @@
       "img": "images/auto/wall/wall-001.jpg"
     }
   ],
-  "big": [],
+  "big": [
+    {
+      "id": "auto-big-008",
+      "name": "مقاسات كبيرة 008",
+      "img": "images/auto/big/big-008.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-big-007",
+      "name": "مقاسات كبيرة 007",
+      "img": "images/auto/big/big-007.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-big-006",
+      "name": "مقاسات كبيرة 006",
+      "img": "images/auto/big/big-006.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-big-005",
+      "name": "مقاسات كبيرة 005",
+      "img": "images/auto/big/big-005.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-big-004",
+      "name": "مقاسات كبيرة 004",
+      "img": "images/auto/big/big-004.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-big-003",
+      "name": "مقاسات كبيرة 003",
+      "img": "images/auto/big/big-003.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-big-002",
+      "name": "مقاسات كبيرة 002",
+      "img": "images/auto/big/big-002.jpg"
+    },
+    {
+      "id": "auto-big-001",
+      "name": "مقاسات كبيرة 001",
+      "img": "images/auto/big/big-001.jpg"
+    }
+  ],
   "our": []
 }
