@@ -333,7 +333,7 @@ a.b,.b2b-link,.pbn,.pvk,.pvb,.pgr button,.pvt nav a,.ga,.cfab{transition:scale .
 <section class="ofs" id="offers"><div class="ce">OFFERS</div><h2>عروض PRO ART</h2><p class="ofp">لأن اختيار لوحتك لحظة تستاهل تتحتفل بيها، جهزنالك مكافآت من أول طلب.</p><div class="ofg">
 <div class="ofc fl" id="flash"><div class="fl-pic"><span class="fl-tag">FLASH SALE</span><img id="fl-img" alt="" width="350" height="350"></div><div class="fl-body"><div class="ce">LIMITED OFFER</div><h3 class="fl-t">Flash Sale</h3><div class="fl-big"><b>50%</b><small>خصم</small></div><div class="fl-name" id="fl-name"></div><div class="fl-mq" aria-label="احصل بخصم 50% الان يتبقى قطعتان"><span id="fl-mq">احصل بخصم 50% الان يتبقى قطعتان</span></div><div class="fl-cd" role="timer" aria-label="الوقت المتبقي على انتهاء العرض"><div><b id="fl-h">00</b><i>ساعة</i></div><span>:</span><div><b id="fl-m">00</b><i>دقيقة</i></div><span>:</span><div><b id="fl-s">00</b><i>ثانية</i></div></div><a class="pbn" id="fl-wa" href="#" target="_blank" rel="noopener">اطلب العرض على واتساب</a></div></div>
 <div class="ofc"><b>10%</b><h3>أهلًا بيك معانا</h3><p>أول مرة تطلب من PRO ART؟ فعّل خصم 10% على أول طلب، وهيظهر تلقائيًا في سلتك.</p><button class="pbn" type="button" data-first>فعّل خصم أول طلب</button></div>
-<div class="ofc"><b>20%</b><h3>كبّر طلبك واستفيد</h3><p>أي طلب بقيمة 10,000 جنيه أو أكتر بياخد خصم 20% تلقائيًا على إجمالي اللوحات. مثالي للشقق الكاملة والمكاتب.</p></div>
+<div class="ofc"><b>20%</b><h3>كبّر طلبك واستفيد</h3><p>أي طلب يتجاوز 10,000 جنيه بياخد خصم 20% تلقائيًا على إجمالي الطلب. مثالي للشقق الكاملة والمكاتب.</p></div>
 <div class="ofc"><b>هدية</b><h3>3 هاند ميد = لوحة برنت هدية</h3><p>مع كل 3 لوحات هاند ميد، تاخد لوحة برنت مقاس 60×80 سم هدية منّا، وتختارها بنفسك من تشكيلتنا.</p></div></div>
 <p class="ofn">العروض مش بتتجمع على بعض: بيتطبق الخصم الأكبر، والهدية بتتضاف فوق أي خصم.</p></section>
 <section class="panel" id="order"><img class="pbg" alt="" style="object-position:35% center" id="img3"><div class="pshade"></div><div class="pcopy"><div class="pslogan">Made To<br>Your <em>Size.</em></div><p class="psub">قولّنا المقاس والإطار ونصنعها لك.</p><a class="pbtn" href="https://wa.me/?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%B7%D9%84%D8%A8%20%D9%84%D9%88%D8%AD%D8%A9%20%D9%85%D8%AE%D8%B5%D9%88%D8%B5%D8%A9">اطلب على واتساب</a></div></section>
@@ -436,14 +436,16 @@ b.appendChild(fs);
 var note=el('p','wall-note','للذاتي اللصق: أقصى عرض للقطعة 150 سم، وما زاد يُقسَّم التصميم إلى أكثر من قطعة.');note.hidden=true;b.appendChild(note);
 var price=el('div','wall-price','أدخل العرض والطول لإظهار السعر'),foot=el('p','wall-note','السعر بدون تركيب؛ الشحن يُحسب حسب المحافظة.');
 b.appendChild(price);b.appendChild(foot);
+var add=el('button','ga','أضف للسلة');add.type='button';add.disabled=true;
 var order=el('button','ga','طلب تصميم مخصوص');order.type='button';order.disabled=true;
 function update(){var wv=parseFloat(width.value),hv=parseFloat(height.value),self=fs.querySelector(':checked').value==='self',rate=self?290:330,valid=Number.isFinite(wv)&&Number.isFinite(hv)&&wv>0&&hv>0;
-note.hidden=!self;order.disabled=!valid;
+note.hidden=!self;order.disabled=!valid;add.disabled=!valid;
 if(!valid){price.textContent='أدخل العرض والطول لإظهار السعر';return}
 var area=wv*hv/10000,total=Math.round(area*rate*100)/100;
 price.textContent=area.toFixed(2)+' م² × '+rate+' ج/م² = '+total.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2})+' جنيه';
 order.onclick=function(){var msg='طلب تصميم ورق حائط مخصوص — '+(p.name||'')+'\nالمقاس: عرض '+wv+' × طول '+hv+' سم\nالنوع: '+(self?'ذاتي اللصق':'غير ذاتي اللصق')+' — '+rate+' جنيه/م²\nالمساحة: '+area.toFixed(2)+' م²\nالسعر: '+total+' جنيه (بدون تركيب، والشحن يُحسب حسب المحافظة)'+(self&&wv>150?'\nتنبيه: عرض أكبر من 150 سم، وسيُقسّم التصميم إلى أكثر من قطعة.':'');window.open(PRO.wa(msg),'_blank','noopener')}}
-width.addEventListener('input',update);height.addEventListener('input',update);fs.addEventListener('change',update);update();b.appendChild(order);c.appendChild(b);return c}
+add.addEventListener('click',function(){var wv=parseFloat(width.value),hv=parseFloat(height.value),self=fs.querySelector(':checked').value==='self';PRO.addWallpaper({id:p.id,name:p.name,kind:'wallpaper',w:wv,h:hv,self:self?1:0});add.textContent='اتضاف للسلة ✓';setTimeout(function(){add.textContent='أضف للسلة'},1800)});
+width.addEventListener('input',update);height.addEventListener('input',update);fs.addEventListener('change',update);update();b.appendChild(add);b.appendChild(order);c.appendChild(b);return c}
 function card(p){if(cur==='wall')return wallpaperCard(p);var hm=cur==='hand',L=hm?SH:S,c=el('article','gc'),w=el('div','gi'),im=el('img');im.src=p.img;im.alt=p.name;im.loading='lazy';w.appendChild(im);c.appendChild(w);
 var b=el('div','gb');b.appendChild(el('h3',0,p.name));if(p.description)b.appendChild(el('p','gdesc',p.description));if(hm)b.appendChild(el('span','cn','هاند ميد — متاح من 70×100 فأكبر'));
 var sz=el('select','gz');sz.setAttribute('aria-label','المقاس');L.forEach(function(s){var o=el('option',0,s.replace('x','×')+' سم');o.value=s;sz.appendChild(o)});sz.value=hm?'70x100':'60x80';
@@ -484,23 +486,24 @@ PRO.cat=CAT;addEventListener('hashchange',route);loadAutoCatalog().then(route);
 (function(){
 var K='proart_cart',KF='proart_first',PR=PRO.PR,items=[],IPA='proartenbd@instapay',msg='',FIRST=false,GS=[];
 try{items=JSON.parse(localStorage.getItem(K)||'[]');FIRST=localStorage.getItem(KF)==='1'}catch(e){}
-items=(Array.isArray(items)?items:[]).filter(function(i){return i&&typeof i.id==='string'&&PR[i.s]&&(i.t==='g'||i.t==='c')&&(i.f==='1'||i.f==='0')&&i.q>=1&&(!i.hm||PRO.HM[i.s])}).map(function(i){i.q=Math.min(Math.floor(i.q),20);i.hm=i.hm?1:0;return i});
+items=(Array.isArray(items)?items:[]).filter(function(i){if(!i||typeof i.id!=='string'||i.q<1)return false;if(i.kind==='wallpaper')return Number.isFinite(+i.w)&&Number.isFinite(+i.h)&&i.w>0&&i.h>0&&(i.self===0||i.self===1);return PR[i.s]&&(i.t==='g'||i.t==='c')&&(i.f==='1'||i.f==='0')&&(!i.hm||PRO.HM[i.s])}).map(function(i){i.q=Math.min(Math.floor(i.q),20);if(i.kind!=='wallpaper')i.hm=i.hm?1:0;return i});
 function save(){try{localStorage.setItem(K,JSON.stringify(items));localStorage.setItem(KF,FIRST?'1':'0')}catch(e){}}
 function $(i){return document.getElementById(i)}
 function el(n,c,x){var e=document.createElement(n);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
-function unit(i){return PRO.price(i.s,i.t,i.f,!!i.hm)}
+function unit(i){if(i.kind==='wallpaper'){var rate=i.self?290:330;return Math.round(i.w*i.h/10000*rate*100)/100}return PRO.price(i.s,i.t,i.f,!!i.hm)}
 function fmt(n){return n.toLocaleString('en-US')+' جنيه'}
 function cnt(){return items.reduce(function(a,i){return a+i.q},0)}
-function key(i){return[i.id,i.s,i.t,i.f,i.c,i.hm].join('|')}
+function key(i){return i.kind==='wallpaper'?[i.id,'wallpaper',i.w,i.h,i.self].join('|'):[i.id,i.s,i.t,i.f,i.c,i.hm].join('|')}
 function all(){var C=PRO.cat||{},o=[];for(var k in C){if(k==='hand'||k==='our')continue;C[k].forEach(function(p){o.push(p)})}return o}
 function find(id){var C=PRO.cat||{};for(var k in C){var L=C[k];for(var j=0;j<L.length;j++)if(L[j].id===id)return L[j]}return null}
-function desc(i){return i.s.replace('x','×')+' سم · '+(i.t==='g'?'جليتر':'كانفس')+(i.hm?' · هاند ميد':'')+' · '+(i.f==='1'?'بفريم ('+i.c+')':'بدون فريم')}
+function desc(i){if(i.kind==='wallpaper'){var area=i.w*i.h/10000,rate=i.self?290:330;return'ورق حائط · عرض '+i.w+' × طول '+i.h+' سم · '+(i.self?'ذاتي اللصق':'غير ذاتي اللصق')+' · '+area.toFixed(2)+' م² × '+rate+' ج/م² · بدون تركيب'}return i.s.replace('x','×')+' سم · '+(i.t==='g'?'جليتر':'كانفس')+(i.hm?' · هاند ميد':'')+' · '+(i.f==='1'?'بفريم ('+i.c+')':'بدون فريم')}
 function calc(){var sub=items.reduce(function(a,i){return a+unit(i)*i.q},0),hq=items.reduce(function(a,i){return a+(i.hm?i.q:0)},0),pct=0,why='';
-if(sub>=10000){pct=20;why='خصم الطلبات الكبيرة 20%'}else if(FIRST){pct=10;why='خصم أول طلب 10%'}
+if(sub>10000){pct=20;why='خصم الطلبات الكبيرة 20%'}else if(FIRST){pct=10;why='خصم أول طلب 10%'}
 var dis=Math.round(sub*pct/100);return{sub:sub,hq:hq,gifts:Math.floor(hq/3),pct:pct,why:why,dis:dis,net:sub-dis}}
 function badge(){var n=cnt(),b=$('cbd');b.hidden=!n;b.textContent=n}
 function toast(m){var t=$('gt');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove('on')},3000)}
 PRO.add=function(it){var k=key(it),e=items.filter(function(i){return key(i)===k})[0];var before=e?e.q:0;if(e)e.q=Math.min(e.q+1,20);else{it.q=1;items.push(it)}save();badge();if(before<20&&window.PAAnalytics)window.PAAnalytics.event('add',{id:it.id,value:unit(it),quantity:1})};
+PRO.addWallpaper=function(it){var k=key(it),e=items.filter(function(i){return key(i)===k})[0],before=e?e.q:0;if(e)e.q=Math.min(e.q+1,20);else{it.q=1;items.push(it)}save();badge();if(window.PAAnalytics)window.PAAnalytics.event('add',{id:it.id,value:unit(it),quantity:1})};
 PRO.first=function(){FIRST=true;save();draw();toast('اتفعّل خصم 10% على أول طلب ✓ هيظهر في سلتك')};
 function rows(){var L=$('cl');L.textContent='';
 if(!items.length)L.appendChild(el('p','cn','السلة فاضية — اختار لوحاتك من التصنيفات وضيفها هنا.'));
@@ -519,7 +522,7 @@ var s=el('select');s.setAttribute('aria-label','اختار لوحة الهدية
 all().forEach(function(p){var o=el('option',0,p.name);o.value=p.id;s.appendChild(o)});s.value=GS[k]||'';s.addEventListener('change',function(){GS[k]=s.value});w.appendChild(s);G.appendChild(w)})(k)}
 function draw(){rows();var c=calc();$('ct').textContent=fmt(c.sub);
 $('cdr').hidden=!c.dis;$('cnr').hidden=!c.dis;if(c.dis){$('cdw').textContent=c.why;$('cdv').textContent='− '+fmt(c.dis);$('cnet').textContent=fmt(c.net)}
-var n=[];if(c.hq%3&&c.hq>0)n.push('ضيف '+(3-c.hq%3)+' لوحة هاند ميد كمان وخد لوحة برنت 60×80 هدية.');if(c.sub<10000&&c.sub>=7000)n.push('ضيف '+fmt(10000-c.sub)+' كمان وخد خصم 20% على الطلب كله.');if(FIRST&&c.pct===20)n.push('اتطبق خصم 20% لأنه الأكبر من خصم أول طلب.');
+var n=[];if(c.hq%3&&c.hq>0)n.push('ضيف '+(3-c.hq%3)+' لوحة هاند ميد كمان وخد لوحة برنت 60×80 هدية.');if(c.sub<=10000&&c.sub>=7000)n.push('ضيف '+fmt(Math.round((10000.01-c.sub)*100)/100)+' كمان لتعدّي 10,000 جنيه وتحصل على خصم 20% على إجمالي الطلب.');if(FIRST&&c.pct===20)n.push('اتطبق خصم 20% لأن إجمالي الطلب تعدّى 10,000 جنيه.');
 $('cnu').textContent=n.join(' ');var fb=$('cfirst');fb.setAttribute('aria-pressed',String(FIRST));fb.textContent=FIRST?'✓ خصم أول طلب مفعّل (اضغط للإلغاء)':'ده أول طلب ليّ — فعّل خصم 10%';
 gifts(c.gifts);$('cgo').hidden=!items.length;$('cv1t').hidden=!items.length;$('cfirst').hidden=!items.length;badge()}
 $('cfirst').addEventListener('click',function(){FIRST=!FIRST;save();draw()});
@@ -541,7 +544,7 @@ if(ad.length<10){bad('اكتب العنوان بالتفصيل (المنطقة �
 var t=new Date(),ref='PA-'+String(t.getFullYear()).slice(2)+('0'+(t.getMonth()+1)).slice(-2)+('0'+t.getDate()).slice(-2)+'-'+Math.floor(1000+Math.random()*9000),c=calc();
 var L=['طلب جديد من موقع PRO-ART','رقم الطلب: '+ref,'','الاسم: '+nm,'الموبايل: '+ph,'المحافظة: '+gv,'العنوان: '+ad];if(nt)L.push('ملاحظات: '+nt);
 L.push('','الطلبات:');items.forEach(function(i,k){L.push((k+1)+') '+i.name+' — '+desc(i)+' — الكمية '+i.q+' — '+fmt(unit(i)*i.q))});
-L.push('','إجمالي اللوحات: '+fmt(c.sub));if(c.dis)L.push(c.why+': − '+fmt(c.dis)+(c.pct===10?' (بنتأكد من الرقم إنه أول طلب)':''));
+L.push('','إجمالي المنتجات: '+fmt(c.sub));if(c.dis)L.push(c.why+': − '+fmt(c.dis)+(c.pct===10?' (بنتأكد من الرقم إنه أول طلب)':''));
 for(var k=0;k<c.gifts;k++){var gp=GS[k]?find(GS[k]):null;L.push('هدية '+(k+1)+': لوحة برنت 60×80 سم — '+(gp?gp.name:'الاختيار معاك على واتساب'))}
 L.push('الإجمالي بعد الخصم: '+fmt(c.net)+' (بدون الشحن)');msg=L.join('\n');
 $('csend').href=PRO.wa(msg);$('cmail').href='mailto:proart4decor@gmail.com?subject='+encodeURIComponent('طلب جديد '+ref)+'&body='+encodeURIComponent(msg);
