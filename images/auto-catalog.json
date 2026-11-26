@@ -36,7 +36,14 @@
       "isNew": true
     }
   ],
-  "wall": [],
+  "wall": [
+    {
+      "id": "auto-wall-001",
+      "name": "ورق جليتر بملمس الذهب",
+      "img": "images/auto/wall/wall-001.jpg",
+      "isNew": true
+    }
+  ],
   "big": [],
   "our": []
 }
