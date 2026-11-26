@@ -3,8 +3,7 @@
     {
       "id": "auto-parts-001",
       "name": "سيت ٣ قطع 001",
-      "img": "images/auto/parts/parts-001.jpg",
-      "isNew": true
+      "img": "images/auto/parts/parts-001.jpg"
     }
   ],
   "abs": [],
@@ -26,8 +25,7 @@
     {
       "id": "auto-print-002",
       "name": "دوائر بتدرجات الازرق مع الذهبى",
-      "img": "images/auto/print/print-002.jpg",
-      "isNew": true
+      "img": "images/auto/print/print-002.jpg"
     },
     {
       "id": "auto-print-001",
@@ -37,6 +35,18 @@
     }
   ],
   "wall": [
+    {
+      "id": "auto-wall-003",
+      "name": "ورق حائط 003",
+      "img": "images/auto/wall/wall-003.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-wall-002",
+      "name": "ورق حائط 002",
+      "img": "images/auto/wall/wall-002.jpg",
+      "isNew": true
+    },
     {
       "id": "auto-wall-001",
       "name": "ورق جليتر بملمس الذهب",
