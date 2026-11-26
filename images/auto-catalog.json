@@ -33,40 +33,130 @@
   ],
   "wall": [
     {
+      "id": "auto-wall-026",
+      "name": "ورق حائط 026",
+      "img": "images/auto/wall/wall-026.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-wall-025",
+      "name": "ورق حائط 025",
+      "img": "images/auto/wall/wall-025.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-wall-024",
+      "name": "ورق حائط 024",
+      "img": "images/auto/wall/wall-024.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-wall-023",
+      "name": "ورق حائط 023",
+      "img": "images/auto/wall/wall-023.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-wall-022",
+      "name": "ورق حائط 022",
+      "img": "images/auto/wall/wall-022.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-wall-021",
+      "name": "ورق حائط 021",
+      "img": "images/auto/wall/wall-021.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-wall-020",
+      "name": "ورق حائط 020",
+      "img": "images/auto/wall/wall-020.jpg"
+    },
+    {
+      "id": "auto-wall-019",
+      "name": "ورق حائط 019",
+      "img": "images/auto/wall/wall-019.jpg"
+    },
+    {
+      "id": "auto-wall-018",
+      "name": "ورق حائط 018",
+      "img": "images/auto/wall/wall-018.jpg"
+    },
+    {
+      "id": "auto-wall-017",
+      "name": "ورق حائط 017",
+      "img": "images/auto/wall/wall-017.jpg"
+    },
+    {
+      "id": "auto-wall-016",
+      "name": "ورق حائط 016",
+      "img": "images/auto/wall/wall-016.jpg"
+    },
+    {
+      "id": "auto-wall-015",
+      "name": "ورق حائط 015",
+      "img": "images/auto/wall/wall-015.jpg"
+    },
+    {
+      "id": "auto-wall-014",
+      "name": "ورق حائط 014",
+      "img": "images/auto/wall/wall-014.jpg"
+    },
+    {
+      "id": "auto-wall-013",
+      "name": "ورق حائط 013",
+      "img": "images/auto/wall/wall-013.jpg"
+    },
+    {
+      "id": "auto-wall-012",
+      "name": "ورق حائط 012",
+      "img": "images/auto/wall/wall-012.jpg"
+    },
+    {
+      "id": "auto-wall-011",
+      "name": "ورق حائط 011",
+      "img": "images/auto/wall/wall-011.jpg"
+    },
+    {
+      "id": "auto-wall-010",
+      "name": "ورق حائط 010",
+      "img": "images/auto/wall/wall-010.jpg"
+    },
+    {
+      "id": "auto-wall-009",
+      "name": "ورق حائط 009",
+      "img": "images/auto/wall/wall-009.jpg"
+    },
+    {
       "id": "auto-wall-008",
       "name": "ورق حائط 008",
-      "img": "images/auto/wall/wall-008.jpg",
-      "isNew": true
+      "img": "images/auto/wall/wall-008.jpg"
     },
     {
       "id": "auto-wall-007",
       "name": "ورق حائط 007",
-      "img": "images/auto/wall/wall-007.jpg",
-      "isNew": true
+      "img": "images/auto/wall/wall-007.jpg"
     },
     {
       "id": "auto-wall-006",
       "name": "ورق حائط 006",
-      "img": "images/auto/wall/wall-006.jpg",
-      "isNew": true
+      "img": "images/auto/wall/wall-006.jpg"
     },
     {
       "id": "auto-wall-005",
       "name": "ورق حائط 005",
-      "img": "images/auto/wall/wall-005.jpg",
-      "isNew": true
+      "img": "images/auto/wall/wall-005.jpg"
     },
     {
       "id": "auto-wall-004",
       "name": "ورق حائط 004",
-      "img": "images/auto/wall/wall-004.jpg",
-      "isNew": true
+      "img": "images/auto/wall/wall-004.jpg"
     },
     {
       "id": "auto-wall-003",
       "name": "ورق حائط 003",
-      "img": "images/auto/wall/wall-003.jpg",
-      "isNew": true
+      "img": "images/auto/wall/wall-003.jpg"
     },
     {
       "id": "auto-wall-002",
