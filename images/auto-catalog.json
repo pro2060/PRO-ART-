@@ -171,6 +171,30 @@
   ],
   "big": [
     {
+      "id": "auto-big-012",
+      "name": "مقاسات كبيرة 012",
+      "img": "images/auto/big/big-012.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-big-011",
+      "name": "مقاسات كبيرة 011",
+      "img": "images/auto/big/big-011.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-big-010",
+      "name": "مقاسات كبيرة 010",
+      "img": "images/auto/big/big-010.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-big-009",
+      "name": "مقاسات كبيرة 009",
+      "img": "images/auto/big/big-009.jpg",
+      "isNew": true
+    },
+    {
       "id": "auto-big-008",
       "name": "مقاسات كبيرة 008",
       "img": "images/auto/big/big-008.jpg",
@@ -185,26 +209,22 @@
     {
       "id": "auto-big-006",
       "name": "مقاسات كبيرة 006",
-      "img": "images/auto/big/big-006.jpg",
-      "isNew": true
+      "img": "images/auto/big/big-006.jpg"
     },
     {
       "id": "auto-big-005",
       "name": "مقاسات كبيرة 005",
-      "img": "images/auto/big/big-005.jpg",
-      "isNew": true
+      "img": "images/auto/big/big-005.jpg"
     },
     {
       "id": "auto-big-004",
       "name": "مقاسات كبيرة 004",
-      "img": "images/auto/big/big-004.jpg",
-      "isNew": true
+      "img": "images/auto/big/big-004.jpg"
     },
     {
       "id": "auto-big-003",
       "name": "مقاسات كبيرة 003",
-      "img": "images/auto/big/big-003.jpg",
-      "isNew": true
+      "img": "images/auto/big/big-003.jpg"
     },
     {
       "id": "auto-big-002",
