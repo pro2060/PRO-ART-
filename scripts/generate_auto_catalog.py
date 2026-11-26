@@ -43,6 +43,8 @@ for section, (prefix, label) in CATEGORIES.items():
                 "img": image_path,
             })
     items.sort(key=lambda item: int(item["id"].rsplit("-", 1)[1]), reverse=True)
+    if items:
+        items[0]["isNew"] = True
     catalog[section] = items
 
 OUTPUT.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
