@@ -452,8 +452,9 @@ if(!c){if(document.body.classList.contains('pv-on')){document.body.classList.rem
 cur=c[0];page=1;q.value='';q.style.display=cur==='our'?'none':'';document.getElementById('pvc').textContent=c[1];document.getElementById('pvn').textContent=c[2];
 [].forEach.call(nav.children,function(a){a.classList.toggle('on',a.dataset.k===cur)});
 document.body.classList.add('pv-on');window.scrollTo({top:0,left:0,behavior:'instant'});render()}
+function loadAutoCatalog(){return fetch('images/auto-catalog.json?'+Date.now()).then(function(r){if(!r.ok)throw new Error('catalog unavailable');return r.json()}).then(function(data){Object.keys(data).forEach(function(k){if(!Array.isArray(CAT[k])||!Array.isArray(data[k]))return;CAT[k]=data[k].concat(CAT[k])})}).catch(function(){})}
 q.addEventListener('input',function(){page=1;render()});
-PRO.cat=CAT;addEventListener('hashchange',route);route();
+PRO.cat=CAT;addEventListener('hashchange',route);loadAutoCatalog().then(route);
 })();
 </script>
 <script>

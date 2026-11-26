@@ -1,0 +1,43 @@
+name: Build automatic image catalog
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "images/auto/**"
+      - "scripts/generate_auto_catalog.py"
+      - ".github/workflows/auto-catalog.yml"
+      - "index.html"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: auto-catalog-main
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Use latest main
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+      - name: Generate image catalog
+        run: python3 scripts/generate_auto_catalog.py
+      - name: Save catalog when changed
+        run: |
+          if git diff --quiet -- images/auto-catalog.json; then
+            echo "Catalog is already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images/auto-catalog.json
+          git commit -m "Update automatic image catalog"
+          git push origin HEAD:main
