@@ -106,7 +106,7 @@ a.b{padding:13px 26px;border-radius:999px;font-weight:500;text-decoration:none;f
 .gi{margin:10px;border:1px solid rgba(201,164,106,.25);border-radius:4px;overflow:hidden;aspect-ratio:1/1;background:#0e0b09;transition:border-color .3s}
 .gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
 .gc:hover .gi img{transform:scale(1.03)}
-.gb{padding:0 12px 14px;display:flex;flex-direction:column;gap:10px;text-align:right}
+.gb{padding:0 12px 14px;display:flex;flex-direction:column;gap:10px;text-align:right}.wall-dim-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.wall-field{display:flex;flex-direction:column;gap:5px;color:var(--muted);font-size:13px}.wall-field .gz{width:100%;min-width:0;direction:ltr;text-align:center;font:500 17px Tajawal,sans-serif}.wall-types label{flex:1 1 auto}.wall-types label span{font-size:12px;padding:7px 9px}.wall-price{min-height:24px;color:var(--gold);font-size:15px;font-weight:500}.wall-note{margin:0;color:var(--muted);font-size:11px;line-height:1.4}.wall-note[hidden]{display:none}.ga:disabled{opacity:.5;cursor:not-allowed}
 .gb h3{margin:0;font:500 15px/1.5 Tajawal,sans-serif;color:var(--cream);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .gs,.gf{border:0;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .gs label span{display:block;padding:6px 10px;border:1px solid rgba(201,164,106,.45);border-radius:999px;font-size:13px;color:var(--muted);cursor:pointer;direction:ltr}
@@ -422,7 +422,29 @@ if(IPA){document.getElementById('pay').hidden=false;document.getElementById('ipa
 g=document.getElementById('gg'),t=document.getElementById('gt'),nav=document.getElementById('pvv'),q=document.getElementById('pvs'),em=document.getElementById('pve'),pg=document.getElementById('pvp'),tm,cur='print',page=1,io;
 function el(n,c,x){var e=document.createElement(n);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
 C.forEach(function(c){var a=el('a',0,c[2]);a.href='#cat-'+c[0];a.dataset.k=c[0];nav.appendChild(a)});
-function card(p){var hm=cur==='hand',L=hm?SH:S,c=el('article','gc'),w=el('div','gi'),im=el('img');im.src=p.img;im.alt=p.name;im.loading='lazy';w.appendChild(im);c.appendChild(w);
+function wallpaperCard(p){
+var c=el('article','gc'),w=el('div','gi'),im=el('img'),b=el('div','gb');
+im.src=p.img;im.alt=p.name;im.loading='lazy';w.appendChild(im);c.appendChild(w);b.appendChild(el('h3',0,p.name));
+if(p.description)b.appendChild(el('p','gdesc',p.description));
+var dims=el('div','wall-dim-grid');
+function dim(label,placeholder){var l=el('label','wall-field');l.appendChild(el('span',0,label));var i=el('input','gz');i.type='number';i.min='1';i.step='any';i.inputMode='decimal';i.placeholder=placeholder;i.setAttribute('aria-label',label);l.appendChild(i);dims.appendChild(l);return i}
+var width=dim('العرض (سم)','مثال 300'),height=dim('الطول (سم)','مثال 250');
+b.appendChild(dims);
+var fs=el('fieldset','gs wall-types'),lg=el('legend');lg.style.cssText='position:absolute;opacity:0';lg.textContent='نوع ورق الحائط';fs.appendChild(lg);
+[['no','غير ذاتي اللصق · 330 ج/م²'],['self','ذاتي اللصق · 290 ج/م²']].forEach(function(o,i){var l=el('label'),r=el('input');r.type='radio';r.name='walltype'+p.id;r.value=o[0];r.checked=!i;l.appendChild(r);l.appendChild(el('span',0,o[1]));fs.appendChild(l)});
+b.appendChild(fs);
+var note=el('p','wall-note','للذاتي اللصق: أقصى عرض للقطعة 150 سم، وما زاد يُقسَّم التصميم إلى أكثر من قطعة.');note.hidden=true;b.appendChild(note);
+var price=el('div','wall-price','أدخل العرض والطول لإظهار السعر'),foot=el('p','wall-note','السعر بدون تركيب؛ الشحن يُحسب حسب المحافظة.');
+b.appendChild(price);b.appendChild(foot);
+var order=el('button','ga','طلب تصميم مخصوص');order.type='button';order.disabled=true;
+function update(){var wv=parseFloat(width.value),hv=parseFloat(height.value),self=fs.querySelector(':checked').value==='self',rate=self?290:330,valid=Number.isFinite(wv)&&Number.isFinite(hv)&&wv>0&&hv>0;
+note.hidden=!self;order.disabled=!valid;
+if(!valid){price.textContent='أدخل العرض والطول لإظهار السعر';return}
+var area=wv*hv/10000,total=Math.round(area*rate*100)/100;
+price.textContent=area.toFixed(2)+' م² × '+rate+' ج/م² = '+total.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2})+' جنيه';
+order.onclick=function(){var msg='طلب تصميم ورق حائط مخصوص — '+(p.name||'')+'\nالمقاس: عرض '+wv+' × طول '+hv+' سم\nالنوع: '+(self?'ذاتي اللصق':'غير ذاتي اللصق')+' — '+rate+' جنيه/م²\nالمساحة: '+area.toFixed(2)+' م²\nالسعر: '+total+' جنيه (بدون تركيب، والشحن يُحسب حسب المحافظة)'+(self&&wv>150?'\nتنبيه: عرض أكبر من 150 سم، وسيُقسّم التصميم إلى أكثر من قطعة.':'');window.open(PRO.wa(msg),'_blank','noopener')}}
+width.addEventListener('input',update);height.addEventListener('input',update);fs.addEventListener('change',update);update();b.appendChild(order);c.appendChild(b);return c}
+function card(p){if(cur==='wall')return wallpaperCard(p);var hm=cur==='hand',L=hm?SH:S,c=el('article','gc'),w=el('div','gi'),im=el('img');im.src=p.img;im.alt=p.name;im.loading='lazy';w.appendChild(im);c.appendChild(w);
 var b=el('div','gb');b.appendChild(el('h3',0,p.name));if(p.description)b.appendChild(el('p','gdesc',p.description));if(hm)b.appendChild(el('span','cn','هاند ميد — متاح من 70×100 فأكبر'));
 var sz=el('select','gz');sz.setAttribute('aria-label','المقاس');L.forEach(function(s){var o=el('option',0,s.replace('x','×')+' سم');o.value=s;sz.appendChild(o)});sz.value=hm?'70x100':'60x80';
 function seg(n,opts){var fs=el('fieldset','gs'),lg=el('legend');lg.style.cssText='position:absolute;opacity:0';lg.textContent=n;fs.appendChild(lg);opts.forEach(function(o,i){var lb=el('label'),r=el('input');r.type='radio';r.name=n+p.id;r.value=o[0];r.checked=!i;lb.appendChild(r);lb.appendChild(el('span',0,o[1]));fs.appendChild(lb)});return fs}
