@@ -9,7 +9,13 @@
   "abs": [],
   "isl": [],
   "hand": [],
-  "print": [],
+  "print": [
+    {
+      "id": "auto-print-002",
+      "name": "لوحات مطبوعة 002",
+      "img": "images/auto/print/print-002.jpg"
+    }
+  ],
   "wall": [],
   "big": [],
   "our": []
