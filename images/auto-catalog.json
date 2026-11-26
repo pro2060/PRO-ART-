@@ -29,9 +29,8 @@
     },
     {
       "id": "auto-print-001",
-      "name": "لوحه وجه تجريديه",
-      "img": "images/auto/print/print-001.jpg",
-      "description": "فن تكعيبى لوجه رجل يظهر احد الجوانب بالوان البيج والرمادى"
+      "name": "لوحه وجه تجريديه بالوان البيج والرمادى",
+      "img": "images/auto/print/print-001.jpg"
     }
   ],
   "wall": [],
