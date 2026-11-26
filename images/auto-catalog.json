@@ -14,6 +14,11 @@
       "id": "auto-print-002",
       "name": "لوحات مطبوعة 002",
       "img": "images/auto/print/print-002.jpg"
+    },
+    {
+      "id": "auto-print-001",
+      "name": "لوحات مطبوعة 001",
+      "img": "images/auto/print/print-001.jpg"
     }
   ],
   "wall": [],
