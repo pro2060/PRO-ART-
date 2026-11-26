@@ -230,6 +230,49 @@ a.b{padding:13px 26px;border-radius:999px;font-weight:500;text-decoration:none;f
 .gift{margin-top:12px;padding:12px;border-radius:12px;border:1px dashed var(--gold);background:#14100d;display:flex;flex-direction:column;gap:8px;font-size:16px}
 .gift b{color:var(--gold)}.gift select{padding:10px;border-radius:10px;border:1px solid rgba(201,164,106,.45);background:#1f1813;color:var(--cream);font:16px Tajawal,sans-serif}
 .b2b-link{display:inline-block;background:#c9a46a;color:#1a120d;padding:14px 28px;border-radius:999px;font:700 17px Tajawal,sans-serif;text-decoration:none;margin-top:16px}.b2b-section{padding:48px 6vw;text-align:center;background:linear-gradient(135deg,#302117,#17100c);border-block:1px solid #c9a46a55}.b2b-section h2{color:#f3e9dc;font-size:clamp(27px,4vw,42px);margin:0 0 12px}.b2b-section p{max-width:680px;margin:0 auto 16px;color:#cdbfae}</style>
+
+<style id="pa-motion-v1">
+/* PRO ART MOTION 2026-11-26 — visual enhancement only */
+:root{--pa-ease:cubic-bezier(.2,.75,.25,1)}
+#collections,.pvt{scroll-margin-top:calc(112px + env(safe-area-inset-top,0px))}
+.tile{transition:opacity .65s var(--pa-ease),transform .65s var(--pa-ease),box-shadow .35s,border-color .35s}
+.tile img,.wk img{transition:transform .65s var(--pa-ease)}
+.tile .tl{transition:translate .4s var(--pa-ease)}
+.tile::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;opacity:0;border-radius:inherit;background:radial-gradient(circle at var(--pa-x,50%) var(--pa-y,50%),rgba(249,220,166,.19),transparent 56%);transition:opacity .3s}
+.wk{transition:transform .45s var(--pa-ease),border-color .35s,box-shadow .35s}
+.gc .gi img{transition:transform .65s var(--pa-ease)}
+:where(a.b,.b2b-link,.pbn,.pvk,.pvb,.pgr button,.pvt nav a,.ga,.pbtn,.cfab){-webkit-tap-highlight-color:transparent}
+a.b,.b2b-link,.pbn,.pvk,.pvb,.pgr button,.pvt nav a,.ga,.cfab{transition:scale .18s var(--pa-ease),translate .25s var(--pa-ease),box-shadow .25s,filter .25s,background-color .25s,color .25s,border-color .25s}
+:is(a.b,.b2b-link,.pbn,.pvk,.pvb,.pgr button,.pvt nav a,.ga,.pbtn,.cfab):not(:disabled):active{scale:.96;translate:0 1px}
+:is(a.b,.b2b-link,.pbn,.pvk,.pvb,.pgr button,.pvt nav a,.ga,.pbtn,.cfab,.tile,.wk):focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+@media(prefers-reduced-motion:no-preference){
+  html{scroll-behavior:smooth}
+  .panel.in .pslogan{animation-duration:1.05s}
+  .panel.in .psub{transition:opacity .45s .35s}
+  .panel.in .pbtn{transition:opacity .45s .55s,transform .45s .55s var(--pa-ease),filter .25s,scale .18s,translate .25s,box-shadow .25s}
+  .sh:not([hidden]){animation:pa-overlay .22s ease both}
+  .sh:not([hidden]) .sp{animation:pa-sheet .32s var(--pa-ease) both}
+  .pa-route-in{animation:pa-route .38s var(--pa-ease) both}
+}
+@keyframes pa-overlay{from{opacity:.35}to{opacity:1}}
+@keyframes pa-sheet{from{opacity:.6;transform:translateY(16px) scale(.99)}to{opacity:1;transform:none}}
+@keyframes pa-route{from{opacity:.65;translate:0 12px}to{opacity:1;translate:0 0}}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .tile.in:hover,.wk:hover{border-color:var(--gold);box-shadow:0 14px 28px rgba(0,0,0,.36);transform:perspective(1000px) translateY(-4px) rotateX(var(--pa-rx,0deg)) rotateY(var(--pa-ry,0deg))}
+  .tile.in:hover::after{opacity:1}
+  .tile.in:hover img{transform:scale(1.055)}
+  .tile.in:hover .tl{translate:0 -3px}
+  .wk:hover img,.gc:hover .gi img{transform:scale(1.055)}
+  :is(a.b,.b2b-link,.pbn,.pvk,.pgr button,.pvt nav a,.ga,.pbtn,.cfab):not(:disabled):hover{translate:0 -2px;filter:brightness(1.07);box-shadow:0 5px 17px rgba(0,0,0,.22)}
+}
+@media(prefers-reduced-motion:reduce){
+  #collections,.pvt{scroll-margin-top:calc(112px + env(safe-area-inset-top,0px))}
+  .tile,.tile img,.tile .tl,.wk,.wk img,.gc .gi img,a.b,.b2b-link,.pbn,.pvk,.pvb,.pgr button,.pvt nav a,.ga,.cfab,.pbtn{transition:none!important;animation:none!important}
+  :is(a.b,.b2b-link,.pbn,.pvk,.pvb,.pgr button,.pvt nav a,.ga,.pbtn,.cfab):active{scale:none;translate:none}
+  .tile.in:hover,.wk:hover,.wk:hover img,.gc:hover .gi img{transform:none}
+}
+</style>
+
 </head>
 <body>
 <header class="top">
@@ -347,7 +390,7 @@ cwa.href=wa((q.exact?'أريد لوحة ':'أريد طلب مخصوص — لوح
 SZ.forEach(function(s){var b=document.createElement('button');b.type='button';b.textContent=s.replace('x','×');b.addEventListener('click',function(){var p=s.split('x');cw.value=p[0];chh.value=p[1];render()});cz.appendChild(b)});
 render();
 document.getElementById('iwa').href=wa('عندي سؤال عن الطلب');
-[].forEach.call(document.querySelectorAll('a.b.o,#order .pbtn'),function(a){a.href=wa('أريد طلب لوحة مخصوصة')});
+[].forEach.call(document.querySelectorAll('a.b.o[href^="https://wa.me/"],#order .pbtn'),function(a){a.href=wa('أريد طلب لوحة مخصوصة')});
 if(IPA){document.getElementById('pay').hidden=false;document.getElementById('ipa').textContent=IPA;document.getElementById('ipl').href=IPL;document.getElementById('ipc').addEventListener('click',function(){var b=this;if(navigator.clipboard)navigator.clipboard.writeText(IPA).then(function(){b.textContent='تم النسخ ✓'},function(){})})}
 })();
 </script>
@@ -386,7 +429,7 @@ function route(){var h=location.hash.replace('#',''),m=/^cat-(\w+)$/.exec(h),c=m
 if(!c){if(document.body.classList.contains('pv-on')){document.body.classList.remove('pv-on');var s=document.getElementById('collections');if(s)s.scrollIntoView()}return}
 cur=c[0];page=1;q.value='';q.style.display=cur==='our'?'none':'';document.getElementById('pvc').textContent=c[1];document.getElementById('pvn').textContent=c[2];
 [].forEach.call(nav.children,function(a){a.classList.toggle('on',a.dataset.k===cur)});
-document.body.classList.add('pv-on');window.scrollTo(0,0);render()}
+document.body.classList.add('pv-on');window.scrollTo({top:0,left:0,behavior:'instant'});render()}
 q.addEventListener('input',function(){page=1;render()});
 PRO.cat=CAT;addEventListener('hashchange',route);route();
 })();
@@ -483,5 +526,50 @@ tx.style.setProperty('--fl-from',from+'px');tx.style.setProperty('--fl-to',to+'p
 sway();addEventListener('resize',sway);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(sway);
 })();
 </script>
+
+<script id="pa-motion-js">
+(function(){
+  'use strict';
+  var fine=matchMedia('(hover:hover) and (pointer:fine)'), reduced=matchMedia('(prefers-reduced-motion:reduce)');
+  var active=null,frame=0,point=null;
+  function reset(){
+    if(frame){cancelAnimationFrame(frame);frame=0}
+    if(active){['--pa-rx','--pa-ry','--pa-x','--pa-y'].forEach(function(k){active.style.removeProperty(k)});active=null}
+    point=null;
+  }
+  function paint(){
+    frame=0;if(!active||!point||!active.isConnected)return;
+    var b=active.getBoundingClientRect();
+    if(!b.width||!b.height)return;
+    var x=Math.max(0,Math.min(1,(point.x-b.left)/b.width)),y=Math.max(0,Math.min(1,(point.y-b.top)/b.height));
+    active.style.setProperty('--pa-rx',((.5-y)*5).toFixed(2)+'deg');
+    active.style.setProperty('--pa-ry',((x-.5)*5).toFixed(2)+'deg');
+    active.style.setProperty('--pa-x',(x*100).toFixed(1)+'%');
+    active.style.setProperty('--pa-y',(y*100).toFixed(1)+'%');
+  }
+  document.addEventListener('pointermove',function(e){
+    if(e.pointerType!=='mouse'||!fine.matches||reduced.matches){reset();return}
+    var c=e.target.closest&&e.target.closest('.tile.in,.wk');
+    if(c!==active){reset();active=c}
+    if(!active)return;
+    point={x:e.clientX,y:e.clientY};if(!frame)frame=requestAnimationFrame(paint);
+  },{passive:true});
+  document.addEventListener('pointerout',function(e){
+    if(active&&active.contains(e.target)&&(!e.relatedTarget||!active.contains(e.relatedTarget)))reset();
+  },{passive:true});
+  window.addEventListener('blur',reset);window.addEventListener('pagehide',reset);
+  function routeMotion(){
+    reset();if(reduced.matches)return;
+    var isGallery=document.body.classList.contains('pv-on');
+    var targets=isGallery?document.querySelectorAll('#pv .pvh,#pv .pvg'):document.querySelectorAll('#collections .ch');
+    targets.forEach(function(n){
+      n.classList.remove('pa-route-in');void n.offsetWidth;n.classList.add('pa-route-in');
+    });
+  }
+  window.addEventListener('hashchange',routeMotion);
+  if(reduced.addEventListener)reduced.addEventListener('change',reset);
+})();
+</script>
+
 </body>
 </html>
