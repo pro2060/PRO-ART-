@@ -7,7 +7,26 @@
     }
   ],
   "abs": [],
-  "isl": [],
+  "isl": [
+    {
+      "id": "auto-isl-003",
+      "name": "فن إسلامي 003",
+      "img": "images/auto/isl/isl-003.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-isl-002",
+      "name": "فن إسلامي 002",
+      "img": "images/auto/isl/isl-002.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-isl-001",
+      "name": "فن إسلامي 001",
+      "img": "images/auto/isl/isl-001.jpg",
+      "isNew": true
+    }
+  ],
   "hand": [],
   "print": [
     {
@@ -53,20 +72,17 @@
     {
       "id": "auto-wall-023",
       "name": "ورق حائط 023",
-      "img": "images/auto/wall/wall-023.jpg",
-      "isNew": true
+      "img": "images/auto/wall/wall-023.jpg"
     },
     {
       "id": "auto-wall-022",
       "name": "ورق حائط 022",
-      "img": "images/auto/wall/wall-022.jpg",
-      "isNew": true
+      "img": "images/auto/wall/wall-022.jpg"
     },
     {
       "id": "auto-wall-021",
       "name": "ورق حائط 021",
-      "img": "images/auto/wall/wall-021.jpg",
-      "isNew": true
+      "img": "images/auto/wall/wall-021.jpg"
     },
     {
       "id": "auto-wall-020",
