@@ -37,11 +37,23 @@ for section, (prefix, label) in CATEGORIES.items():
                 raise SystemExit(f"Duplicate sequence number in {folder}: {number:03d}")
             seen.add(number)
             image_path = path.relative_to(ROOT).as_posix()
-            items.append({
+            title = f"{label} {number:03d}"
+            description = ""
+            details_file = folder / f"{path.stem}.txt"
+            if details_file.is_file():
+                lines = [line.strip() for line in details_file.read_text(encoding="utf-8-sig").splitlines()]
+                lines = [line for line in lines if line]
+                if lines:
+                    title = lines[0]
+                    description = " ".join(lines[1:])
+            item = {
                 "id": f"auto-{section}-{number:03d}",
-                "name": f"{label} {number:03d}",
+                "name": title,
                 "img": image_path,
-            })
+            }
+            if description:
+                item["description"] = description
+            items.append(item)
     items.sort(key=lambda item: int(item["id"].rsplit("-", 1)[1]), reverse=True)
     if items:
         items[0]["isNew"] = True
