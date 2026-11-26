@@ -496,7 +496,7 @@ function cnt(){return items.reduce(function(a,i){return a+i.q},0)}
 function key(i){return i.kind==='wallpaper'?[i.id,'wallpaper',i.w,i.h,i.self].join('|'):[i.id,i.s,i.t,i.f,i.c,i.hm].join('|')}
 function all(){var C=PRO.cat||{},o=[];for(var k in C){if(k==='hand'||k==='our')continue;C[k].forEach(function(p){o.push(p)})}return o}
 function find(id){var C=PRO.cat||{};for(var k in C){var L=C[k];for(var j=0;j<L.length;j++)if(L[j].id===id)return L[j]}return null}
-function desc(i){if(i.kind==='wallpaper'){var area=i.w*i.h/10000,rate=i.self?290:330;return'ورق حائط · عرض '+i.w+' × طول '+i.h+' سم · '+(i.self?'ذاتي اللصق':'غير ذاتي اللصق')+' · '+area.toFixed(2)+' م² × '+rate+' ج/م² · بدون تركيب'}return i.s.replace('x','×')+' سم · '+(i.t==='g'?'جليتر':'كانفس')+(i.hm?' · هاند ميد':'')+' · '+(i.f==='1'?'بفريم ('+i.c+')':'بدون فريم')}
+function desc(i){if(i.kind==='wallpaper'){var area=i.w*i.h/10000,rate=i.self?290:330;return'ورق حائط · عرض '+i.w+' × طول '+i.h+' سم · '+(i.self?'ذاتي اللصق':'غير ذاتي اللصق')+' · '+area.toFixed(2)+' م² × '+rate+' ج/م² · بدون تركيب'+(i.self&&i.w>150?' · يُقسَّم لأكثر من قطعة لأن العرض فوق 150 سم':'')}return i.s.replace('x','×')+' سم · '+(i.t==='g'?'جليتر':'كانفس')+(i.hm?' · هاند ميد':'')+' · '+(i.f==='1'?'بفريم ('+i.c+')':'بدون فريم')}
 function calc(){var sub=items.reduce(function(a,i){return a+unit(i)*i.q},0),hq=items.reduce(function(a,i){return a+(i.hm?i.q:0)},0),pct=0,why='';
 if(sub>10000){pct=20;why='خصم الطلبات الكبيرة 20%'}else if(FIRST){pct=10;why='خصم أول طلب 10%'}
 var dis=Math.round(sub*pct/100);return{sub:sub,hq:hq,gifts:Math.floor(hq/3),pct:pct,why:why,dis:dis,net:sub-dis}}
