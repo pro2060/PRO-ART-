@@ -11,6 +11,16 @@
   "hand": [],
   "print": [
     {
+      "id": "auto-print-004",
+      "name": "لوحات مطبوعة 004",
+      "img": "images/auto/print/print-004.jpg"
+    },
+    {
+      "id": "auto-print-003",
+      "name": "لوحات مطبوعة 003",
+      "img": "images/auto/print/print-003.jpg"
+    },
+    {
       "id": "auto-print-002",
       "name": "لوحات مطبوعة 002",
       "img": "images/auto/print/print-002.jpg"
