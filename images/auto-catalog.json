@@ -20,17 +20,20 @@
     {
       "id": "auto-print-003",
       "name": "لوحات مطبوعة 003",
-      "img": "images/auto/print/print-003.jpg"
+      "img": "images/auto/print/print-003.jpg",
+      "isNew": true
     },
     {
       "id": "auto-print-002",
       "name": "لوحات مطبوعة 002",
-      "img": "images/auto/print/print-002.jpg"
+      "img": "images/auto/print/print-002.jpg",
+      "isNew": true
     },
     {
       "id": "auto-print-001",
       "name": "لوحه وجه تجريديه بالوان البيج والرمادى",
-      "img": "images/auto/print/print-001.jpg"
+      "img": "images/auto/print/print-001.jpg",
+      "isNew": true
     }
   ],
   "wall": [],
