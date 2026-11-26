@@ -1,5 +1,11 @@
 {
-  "parts": [],
+  "parts": [
+    {
+      "id": "auto-parts-001",
+      "name": "سيت ٣ قطع 001",
+      "img": "images/auto/parts/parts-001.jpg"
+    }
+  ],
   "abs": [],
   "isl": [],
   "hand": [],
