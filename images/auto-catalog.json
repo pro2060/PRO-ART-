@@ -13,19 +13,19 @@
   "print": [
     {
       "id": "auto-print-004",
-      "name": "لوحات مطبوعة 004",
+      "name": "فتاه مع خلفية برتقاليه متدرجه",
       "img": "images/auto/print/print-004.jpg",
       "isNew": true
     },
     {
       "id": "auto-print-003",
-      "name": "لوحات مطبوعة 003",
+      "name": "رجل على التله",
       "img": "images/auto/print/print-003.jpg",
       "isNew": true
     },
     {
       "id": "auto-print-002",
-      "name": "لوحات مطبوعة 002",
+      "name": "دوائر بتدرجات الازرق مع الذهبى",
       "img": "images/auto/print/print-002.jpg",
       "isNew": true
     },
