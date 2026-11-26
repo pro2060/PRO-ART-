@@ -2,6 +2,7 @@
 """Build a catalog from image files uploaded to the category folders."""
 import json
 import re
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,6 +19,26 @@ CATEGORIES = {
     "our": ("our", "من أعمال PRO ART"),
 }
 EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".avif"}
+
+# Git history gives a stable global upload order across all category folders.
+history = subprocess.run(
+    ["git", "log", "--format=@@%ct", "--name-only", "--", "images/auto"],
+    cwd=ROOT,
+    check=True,
+    capture_output=True,
+    text=True,
+).stdout
+upload_times = {}
+commit_time = 0
+for raw_line in history.splitlines():
+    line = raw_line.strip()
+    if line.startswith("@@"):
+        try:
+            commit_time = int(line[2:])
+        except ValueError:
+            commit_time = 0
+    elif line.startswith("images/auto/") and Path(line).suffix.lower() in EXTENSIONS:
+        upload_times.setdefault(line, commit_time)
 
 catalog = {}
 for section, (prefix, label) in CATEGORIES.items():
@@ -55,8 +76,16 @@ for section, (prefix, label) in CATEGORIES.items():
                 item["description"] = description
             items.append(item)
     items.sort(key=lambda item: int(item["id"].rsplit("-", 1)[1]), reverse=True)
-    if items:
-        items[0]["isNew"] = True
     catalog[section] = items
+
+# Keep the badge on the six most recently uploaded images across all sections.
+all_images = [
+    (upload_times.get(item["img"], 0), item["img"], item)
+    for section_items in catalog.values()
+    for item in section_items
+]
+all_images.sort(key=lambda entry: (entry[0], entry[1]), reverse=True)
+for _, _, item in all_images[:6]:
+    item["isNew"] = True
 
 OUTPUT.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
