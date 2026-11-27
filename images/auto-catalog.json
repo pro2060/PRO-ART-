@@ -49,6 +49,122 @@
   ],
   "wall": [
     {
+      "id": "auto-wall-048",
+      "name": "ورق حائط 048",
+      "img": "images/auto/wall/wall-048.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-wall-047",
+      "name": "ورق حائط 047",
+      "img": "images/auto/wall/wall-047.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-wall-046",
+      "name": "ورق حائط 046",
+      "img": "images/auto/wall/wall-046.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-wall-045",
+      "name": "ورق حائط 045",
+      "img": "images/auto/wall/wall-045.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-wall-044",
+      "name": "ورق حائط 044",
+      "img": "images/auto/wall/wall-044.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-wall-043",
+      "name": "ورق حائط 043",
+      "img": "images/auto/wall/wall-043.jpg",
+      "isNew": true
+    },
+    {
+      "id": "auto-wall-042",
+      "name": "ورق حائط 042",
+      "img": "images/auto/wall/wall-042.jpg"
+    },
+    {
+      "id": "auto-wall-041",
+      "name": "ورق حائط 041",
+      "img": "images/auto/wall/wall-041.jpg"
+    },
+    {
+      "id": "auto-wall-040",
+      "name": "ورق حائط 040",
+      "img": "images/auto/wall/wall-040.jpg"
+    },
+    {
+      "id": "auto-wall-039",
+      "name": "ورق حائط 039",
+      "img": "images/auto/wall/wall-039.jpg"
+    },
+    {
+      "id": "auto-wall-038",
+      "name": "ورق حائط 038",
+      "img": "images/auto/wall/wall-038.jpg"
+    },
+    {
+      "id": "auto-wall-037",
+      "name": "ورق حائط 037",
+      "img": "images/auto/wall/wall-037.jpg"
+    },
+    {
+      "id": "auto-wall-036",
+      "name": "ورق حائط 036",
+      "img": "images/auto/wall/wall-036.jpg"
+    },
+    {
+      "id": "auto-wall-035",
+      "name": "ورق حائط 035",
+      "img": "images/auto/wall/wall-035.jpg"
+    },
+    {
+      "id": "auto-wall-034",
+      "name": "ورق حائط 034",
+      "img": "images/auto/wall/wall-034.jpg"
+    },
+    {
+      "id": "auto-wall-033",
+      "name": "ورق حائط 033",
+      "img": "images/auto/wall/wall-033.jpg"
+    },
+    {
+      "id": "auto-wall-032",
+      "name": "ورق حائط 032",
+      "img": "images/auto/wall/wall-032.jpg"
+    },
+    {
+      "id": "auto-wall-031",
+      "name": "ورق حائط 031",
+      "img": "images/auto/wall/wall-031.jpg"
+    },
+    {
+      "id": "auto-wall-030",
+      "name": "ورق حائط 030",
+      "img": "images/auto/wall/wall-030.jpg"
+    },
+    {
+      "id": "auto-wall-029",
+      "name": "ورق حائط 029",
+      "img": "images/auto/wall/wall-029.jpg"
+    },
+    {
+      "id": "auto-wall-028",
+      "name": "ورق حائط 028",
+      "img": "images/auto/wall/wall-028.jpg"
+    },
+    {
+      "id": "auto-wall-027",
+      "name": "ورق حائط 027",
+      "img": "images/auto/wall/wall-027.jpg"
+    },
+    {
       "id": "auto-wall-026",
       "name": "ورق حائط 026",
       "img": "images/auto/wall/wall-026.jpg"
@@ -173,38 +289,32 @@
     {
       "id": "auto-big-021",
       "name": "مقاسات كبيرة 021",
-      "img": "images/auto/big/big-021.jpg",
-      "isNew": true
+      "img": "images/auto/big/big-021.jpg"
     },
     {
       "id": "auto-big-020",
       "name": "مقاسات كبيرة 020",
-      "img": "images/auto/big/big-020.jpg",
-      "isNew": true
+      "img": "images/auto/big/big-020.jpg"
     },
     {
       "id": "auto-big-019",
       "name": "مقاسات كبيرة 019",
-      "img": "images/auto/big/big-019.jpg",
-      "isNew": true
+      "img": "images/auto/big/big-019.jpg"
     },
     {
       "id": "auto-big-018",
       "name": "مقاسات كبيرة 018",
-      "img": "images/auto/big/big-018.jpg",
-      "isNew": true
+      "img": "images/auto/big/big-018.jpg"
     },
     {
       "id": "auto-big-017",
       "name": "مقاسات كبيرة 017",
-      "img": "images/auto/big/big-017.jpg",
-      "isNew": true
+      "img": "images/auto/big/big-017.jpg"
     },
     {
       "id": "auto-big-016",
       "name": "مقاسات كبيرة 016",
-      "img": "images/auto/big/big-016.jpg",
-      "isNew": true
+      "img": "images/auto/big/big-016.jpg"
     },
     {
       "id": "auto-big-015",
